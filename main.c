@@ -12,6 +12,23 @@ double average(int num, ...)
 	return (sum/num);
 }
 
+void printstr_(int count, ...)
+{
+	va_list a_list;
+	int		i;
+	char	*s;
+
+	i = 0;
+	va_start(a_list, count);
+	while (i < count)
+	{
+		s = va_arg(a_list, char*);
+		ft_putendl(s);
+		free(s);
+		i++;
+	}
+	va_end(a_list);
+}
 
 int main(void)
 {
@@ -20,6 +37,7 @@ int main(void)
 
 	int p = printf("average:%i\n", a); //11 characters in fotmat string
 	printf("%i\n", p);
+	printstr_(2, "oll", "loool");
 	//printf("hello: %s\n", "hector");
 	return (0);
 }
