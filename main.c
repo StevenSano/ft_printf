@@ -16,15 +16,12 @@ void printstr_(int count, ...)
 {
 	va_list a_list;
 	int		i;
-	char	*s;
 
 	i = 0;
 	va_start(a_list, count);
 	while (i < count)
 	{
-		s = va_arg(a_list, char*);
-		ft_putendl(s);
-		free(s);
+		ft_putendl(va_arg(a_list, char*));
 		i++;
 	}
 	va_end(a_list);
@@ -32,12 +29,12 @@ void printstr_(int count, ...)
 
 int main(void)
 {
-
+	char *s = "average:%i\n";
 	int a = average(2, 10, 10);
 
-	int p = printf("average:%i\n", a); //11 characters in fotmat string
+	int p = printf(s, a); //11 characters in fotmat string
 	printf("%i\n", p);
-	printstr_(2, "oll", "loool");
+	printstr_(4, "a0", "a1", "a2", "a3");
 	//printf("hello: %s\n", "hector");
 	return (0);
 }
