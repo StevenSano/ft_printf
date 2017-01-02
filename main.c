@@ -29,12 +29,14 @@ void printstr_(int count, ...)
 
 int main(void)
 {
-	char *s = "average:%i\n";
-	int a = average(2, 10, 10);
+//	char *s = "a%s\t";
+	/*int a = average(2, 10, 10);
 
 	int p = printf(s, a); //11 characters in fotmat string
 	printf("%i\n", p);
-	printstr_(4, "a0", "a1", "a2", "a3");
+	printstr_(4, "a0", "a1", "a2", "a3");*/
 	//printf("hello: %s\n", "hector");
+	int pf = printf("lo\t%c", 'x');
+	printf("\nlength:%i\n", pf);
 	return (0);
 }

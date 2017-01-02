@@ -10,6 +10,7 @@
 #include "../libft/libft.h"
 
 
-//int printf(char *format, ...);
+int ft_printf(char *format, ...);
+
 
 # endif
