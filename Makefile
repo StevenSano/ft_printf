@@ -1,5 +1,6 @@
 
+FLAGS	= gcc -Wall -Wextra -Werror
+SRC		= src/ft_printf.c
 
 all:
-	gcc -Wall -Wextra -Werror  main.c includes/ft_printf.h  libft/libft.a	
-
+	$(FLAGS) main.c $(SRC) includes/ft_printf.h  libft/libft.a
