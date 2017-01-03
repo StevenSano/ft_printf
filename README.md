@@ -10,7 +10,7 @@ https://www.gnu.org/software/libc/manual/html_node/Variadic-Functions.html
 
 * Array of function pointer
 
-http://www.java2s.com/Code/C/Function/Arrayoffunctionpointer.html
+http://www.java2s.com/Code/C/Function/Arrayoffunctionpointer.htm
 
 * va_start, var_edn, va_arg
 
