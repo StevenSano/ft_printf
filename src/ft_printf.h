@@ -6,7 +6,7 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/08 01:06:14 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/01/12 02:05:45 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/01/18 10:50:49 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,53 @@
 # include "../libft/libft.h"
 # include <stdarg.h>
 
+#define	LENGTH_MOD ""
+#define MAIN_FLAGS "sSpdDioOuUxXcC"
 
+#define INT_MAX 2147483647
 #define F '%'
-#define BUFPF 1024
+
+typedef union type_of
+{
+	unsigned char 	c;
+	char	*s;
+}			TYPE_OF;
+
+
+typedef struct	fmt
+{
+	char		hash;
+	char		zero;
+	char		sp;
+	char		neg;
+	char		pos;
+	int			min_width;
+	int			precision;
+	char		*length_mod;
+	char		con_spec;
+	TYPE_OF 	arg_type;
+}				FMT;
 
 int		ft_printf(const char *format, ...);
 
 /*
-** flags c s i 
+** %[flag][min width][precision][length modifier][conversion specifier]
+** flags & c
 */
-void	flag_c(va_list args, int *fin_size);
-void	flag_s(va_list args, int *fin_size);
+
+void	flag_mod(int *fin_size);
+void 	flag_c(va_list args, char *fmt, int *fin_size);
+void	flag_s(va_list args, char *fmt, int *fin_size);
 void	flag_i(va_list args, int *fin_size);
 
+size_t	ft_digitInStr(char **fmt); //fids first ints in a str
+size_t	isMainFlag(char	c);
+
+void	ft_printWhtSp(FMT *f, size_t wht_sp, size_t arg_len);
+/*
+**ft_setAssets.c
+*/
+struct fmt *set(void);
+void get_conversion(FMT *f, va_list args);
+void print_conversion(FMT *f);
 #endif
