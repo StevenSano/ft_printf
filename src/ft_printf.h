@@ -18,10 +18,6 @@
 # include "../libft/libft.h"
 # include <stdarg.h>
 
-#define	LENGTH_MOD ""
-#define MAIN_FLAGS "sSpdDioOuUxXcC"
-
-#define INT_MAX 2147483647
 #define F '%'
 
 typedef union type_of
@@ -42,7 +38,7 @@ typedef struct	fmt
 	int			precision;
 	char		*length_mod;
 	char		con_spec;
-	TYPE_OF 	arg_type;
+	TYPE_OF 	arg;
 }				FMT;
 
 int		ft_printf(const char *format, ...);
@@ -56,15 +52,17 @@ void	flag_mod(int *fin_size);
 void 	flag_c(va_list args, char *fmt, int *fin_size);
 void	flag_s(va_list args, char *fmt, int *fin_size);
 void	flag_i(va_list args, int *fin_size);
-
+/*
+**	ft_whitesp.c
+*/
 size_t	ft_digitInStr(char **fmt); //fids first ints in a str
-size_t	isMainFlag(char	c);
-
-void	ft_printWhtSp(FMT *f, size_t wht_sp, size_t arg_len);
+void	ft_print(FMT *f);
 /*
 **ft_setAssets.c
 */
+void print_set(FMT *f);
 struct fmt *set(void);
 void get_conversion(FMT *f, va_list args);
 void print_conversion(FMT *f);
+
 #endif

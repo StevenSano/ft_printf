@@ -17,35 +17,32 @@ void			flag_mod(int *fin_size)
 	ft_putchar(F);
 	*fin_size += 1;
 }
-
+/*
+**	refactor for new engine
+**
+*/
 void flag_c(va_list args, char *fmt, int *fin_size)
 {
-	size_t wht_sp;
-	char	*fmtCp;
 	FMT		*f;
 
-	fmtCp = fmt;
-	wht_sp = 0;
 	f = set();
 	while (*fmt)
 	{
 		if (*fmt == '-')
-			f->neg = '-';
-		if (ft_isdigit(*fmt) && *fmt != '0')
+			f->neg = 1;
+		if (ft_isdigit(*fmt) && *fmt != '0') //add f->prescision 1 for len?
 			f->min_width = ft_digitInStr(&fmt);
-		if ((*fmt == 'l' && *(fmt + 1) == 'c') || *fmt == 'C')
-		{
+		if (*fmt == 'l' && *(fmt + 1) == 'c') //|| *fmt == 'C')
 			ft_strcpy(f->length_mod, "l");
-			//f->con = "wint_t";
-		}
-		if ((*fmt == 'c') && (*fmt != 'l'))
+		if ((*fmt == 'c') && (*fmt - 1) != 'l') //*(fmt - 1)
 		{
 			ft_strcpy(&f->con_spec, "c");
 			get_conversion(f, args);
 		}
 		fmt++;
 	}
-	ft_printWhtSp(f, f->min_width, 1);
-	*fin_size += f->min_width;
+	f->precision = 1;
+	ft_print(f);
+	*fin_size += f->min_width ? f->min_width : 1;
 	free((void*)f);
 }

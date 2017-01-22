@@ -38,55 +38,28 @@ size_t		ft_digitInStr(char **fmt)
 	return (i);
 }
 
-size_t isMainFlag(char c)
+static void	ft_putWhtSp(FMT *f)
 {
-	char *mainFlags;
+	int min_width;
 
-	mainFlags = MAIN_FLAGS;
-	while (*mainFlags)
-	{
-		if (c == *mainFlags)
-			return (1);
-		mainFlags++;
-	}
-		return (0);
-}
-
-
-
-//only for char and maybe char*
-static void	ft_putWhtSp(size_t wht_sp, size_t arg_len)
-{
-	wht_sp -= arg_len;
-	while (wht_sp)
+	min_width = f->min_width - f->precision;
+	while (min_width > 0)
 	{
 		ft_putchar(' ');
-		wht_sp--;
+		min_width--;
 	}
-
 }
 
-void	ft_printWhtSp(FMT *f, size_t wht_sp, size_t arg_len)
+void	ft_print(FMT *f)
 {
-	char *s;
-
-	s = &f->con_spec;
-	if(f->neg == '-')
+	if(f->neg)
 	{
-		//if (f->length_mod)
-		//	ft_putendl(f->con);//wide character to multibyte va_arg(args, wint_t)
-		//else
 		print_conversion(f);
-		ft_putWhtSp(wht_sp, arg_len);
+		ft_putWhtSp(f);
 	}
 	else
 	{
-		ft_putWhtSp(wht_sp, arg_len);
-		//if (f->length_mod)
-		//	ft_putendl(f->length_mod);//wide character to multibyte va_arg(args, wint_t)
-		//else
-		//ft_putstr(f->arg_type.c);//printf("%s\n", "here\n");exit(1);
+		ft_putWhtSp(f);
 		print_conversion(f);
 	}
-
 }

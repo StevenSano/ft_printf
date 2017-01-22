@@ -49,7 +49,6 @@ static int		assets(va_list args, const char *format)
 	{
 		if (*format != F)
 		{
-
 			ft_putchar(*format);
 			fin_size++;
 		}
@@ -88,12 +87,15 @@ int main(void)
 //	i = ft_printf("str:%s\n%s\n", "ABcd","lol"); //
 //i = ft_printf("%%int:%i\tdec:%d\n", 42, -420);
 //	printf("%4c strlen:%i\n", '^', i);
+	//int i;//, f;
+
+	//i = ft_printf("**%s**\n", "HSV");//, 'i',"love code");// printf("\n%i\n", i);
+	//f =    printf("**%2s**\n", "HSV"); printf("\n%i\n", f);
 	int i, f;
-	i = ft_printf("%-10c**\n", 'A'); printf("\n%i\n", i);
-	f =    printf("%-10c**\n", 'A'); printf("\n%i\n", f);
-
-	//i = ft_printf("%10c%20.3s\n", 'A', "***"); printf("\n%i\n", i);
-	//f =    printf("%10c%20.3s\n", 'A', "***"); printf("\n%i\n", f);
-
+	const char *s = "**%3c**%10s**\n";
+	i = ft_printf(s, 'A', "ssss"); printf("\n|len:%i|\n\n", i);
+	f =    printf(s, 'A', "ssss"); printf("\n|len:%i|\n\n", f);
+	//i = ft_printf("**%4.33s**\n**|%-4.1s|**\n", "HSV", "ABC");printf("\n|len:%i|\n\n", i);
+	//f =    printf("**%4.33s**\n**|%-4.1s|**\n", "HSV", "ABC");printf("\n|len:%i|\n\n", f);
 	return (0);
 }

@@ -12,24 +12,41 @@
 
 #include "ft_printf.h"
 
+static int	check_prec(int precision, int slen)
+{
+	if (!precision || precision > slen)
+		precision = slen;
+	return (precision);
+}
+
+
+/*
+**	create a new function that holds all checks
+**	and pass through ft_striter()
+*/
 void			flag_s(va_list args, char *fmt, int *fin_size)
 {
 	FMT 		*f;
-	char		*tmp;
 
 	f = set();
 	while (*fmt)
 	{
 		if (*fmt == '-')
-			f->neg = '-';
+			f->neg = 1;
 		if (ft_isdigit(*fmt))
-			f->min_width = ft_digitInStr(&fmt);//printf("%i\n", f->min_width);printf("%c\n", *fmt);
-		if (*fmt == '.' && ft_isdigit(*(fmt + 1)))
-			f->precision = ft_digitInStr(&fmt);//printf("%i\n", f->precision);exit(1);
+			f->min_width = ft_digitInStr(&fmt);
+		if (*fmt == '.' && ft_isdigit(*(fmt + 1))) //ft_putchar(*fmt);exit(1);
+			f->precision = ft_digitInStr(&fmt);
+		if (*fmt == 's' && *(fmt - 1) != 'l')
+		{
+			ft_strcpy(&f->con_spec, "s");
+			get_conversion(f, args);
+		}
 		fmt++;
 	}
-	//ft_printWhtSp(f, 0, ft_strlen(f->type_of));
-	tmp = va_arg(args, char*);
-	*fin_size += ft_strlen(tmp);
-	ft_putstr(tmp);
+	f->precision = check_prec(f->precision, (int)ft_strlen(f->arg.s));
+	ft_print(f);
+	*fin_size += (f->min_width && f->min_width > f->precision) ?
+	f->min_width : f->precision;
+	free((void*)f);
 }
