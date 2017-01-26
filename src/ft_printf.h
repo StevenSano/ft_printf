@@ -17,13 +17,17 @@
 
 # include "../libft/libft.h"
 # include <stdarg.h>
+#include <wchar.h>
 
 #define F '%'
 
 typedef union type_of
 {
 	unsigned char 	c;
-	char	*s;
+	wint_t			wit;
+	char			*s;
+	wchar_t			*wct;
+	int				i;
 }			TYPE_OF;
 
 
@@ -47,22 +51,26 @@ int		ft_printf(const char *format, ...);
 ** %[flag][min width][precision][length modifier][conversion specifier]
 ** flags & c
 */
-
 void	flag_mod(int *fin_size);
 void 	flag_c(va_list args, char *fmt, int *fin_size);
 void	flag_s(va_list args, char *fmt, int *fin_size);
-void	flag_i(va_list args, int *fin_size);
+/*
+**	ft_flagi.c
+*/
+void	flag_i(va_list args, char *fmt, int *fin_size);
+void 	print_len_mod(int arg_i, char *length_mod);
 /*
 **	ft_whitesp.c
 */
 size_t	ft_digitInStr(char **fmt); //fids first ints in a str
+void 	ft_putWhtSp(FMT *f);
 void	ft_print(FMT *f);
 /*
 **ft_setAssets.c
 */
-void print_set(FMT *f);
-struct fmt *set(void);
-void get_conversion(FMT *f, va_list args);
-void print_conversion(FMT *f);
+void 	print_set(FMT *f);
+struct 	fmt *set(void);
+void 	get_conversion(FMT *f, va_list args);
+void 	print_conversion(FMT *f);
 
 #endif

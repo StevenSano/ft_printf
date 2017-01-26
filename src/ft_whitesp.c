@@ -34,24 +34,27 @@ size_t		ft_digitInStr(char **fmt)
 	i_str = ft_strndup((*fmt) - i, i);
 	i = (size_t)ft_atoi(i_str);
 	free((void*)i_str);
-//	printf("%lu\n", wht_sp);
 	return (i);
 }
 
-static void	ft_putWhtSp(FMT *f)
+void	ft_putWhtSp(FMT *f)
 {
 	int min_width;
 
 	min_width = f->min_width - f->precision;
 	while (min_width > 0)
 	{
-		ft_putchar(' ');
+		if (f->zero && !f->neg)
+			ft_putchar('0');
+		else
+			ft_putchar(' ');
 		min_width--;
 	}
 }
 
 void	ft_print(FMT *f)
 {
+
 	if(f->neg)
 	{
 		print_conversion(f);

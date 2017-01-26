@@ -31,7 +31,12 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 		}
 		else if (**fmt == 's' || **fmt == 'S')
 		{
-			flag_s(args, ft_strndup((*fmt) - flags_len, flags_len + 1), fin_size); // remodify for str
+			flag_s(args, ft_strndup((*fmt) - flags_len, flags_len + 1), fin_size);
+			break;
+		}
+		else if (**fmt == 'i' || **fmt == 'd')
+		{
+			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len + 1), fin_size);
 			break;
 		}
 		(*fmt)++;
@@ -75,27 +80,4 @@ int ft_printf(const char *format, ...)
 	asset = assets(args, format);
 	va_end(args);
 	return (asset);
-}
-
-int main(void)
-{
-//	char *s = "this is i\n";
-//	int i = (int)(ft_strchr(s, '%') - s);
-//	char *str = ft_strndup(s, i);
-//	i = ft_printf("%%\nchar:%c\nthis is a new str:%s\nmore text\n", 'T', "love");
-//	ft_printf("int:i\nunsigned:%D\n", 42, -420247);
-//	i = ft_printf("str:%s\n%s\n", "ABcd","lol"); //
-//i = ft_printf("%%int:%i\tdec:%d\n", 42, -420);
-//	printf("%4c strlen:%i\n", '^', i);
-	//int i;//, f;
-
-	//i = ft_printf("**%s**\n", "HSV");//, 'i',"love code");// printf("\n%i\n", i);
-	//f =    printf("**%2s**\n", "HSV"); printf("\n%i\n", f);
-	int i, f;
-	const char *s = "**%3c**%10s**\n";
-	i = ft_printf(s, 'A', "ssss"); printf("\n|len:%i|\n\n", i);
-	f =    printf(s, 'A', "ssss"); printf("\n|len:%i|\n\n", f);
-	//i = ft_printf("**%4.33s**\n**|%-4.1s|**\n", "HSV", "ABC");printf("\n|len:%i|\n\n", i);
-	//f =    printf("**%4.33s**\n**|%-4.1s|**\n", "HSV", "ABC");printf("\n|len:%i|\n\n", f);
-	return (0);
 }

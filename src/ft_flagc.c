@@ -17,10 +17,7 @@ void			flag_mod(int *fin_size)
 	ft_putchar(F);
 	*fin_size += 1;
 }
-/*
-**	refactor for new engine
-**
-*/
+
 void flag_c(va_list args, char *fmt, int *fin_size)
 {
 	FMT		*f;
@@ -30,13 +27,14 @@ void flag_c(va_list args, char *fmt, int *fin_size)
 	{
 		if (*fmt == '-')
 			f->neg = 1;
-		if (ft_isdigit(*fmt) && *fmt != '0') //add f->prescision 1 for len?
+		if (ft_isdigit(*fmt) && *fmt != '0')
 			f->min_width = ft_digitInStr(&fmt);
-		if (*fmt == 'l' && *(fmt + 1) == 'c') //|| *fmt == 'C')
-			ft_strcpy(f->length_mod, "l");
-		if ((*fmt == 'c') && (*fmt - 1) != 'l') //*(fmt - 1)
+		if (*fmt == 'c' || *fmt == 'C')
 		{
-			ft_strcpy(&f->con_spec, "c");
+			if (*fmt == 'C' || *(fmt - 1) == 'l')
+				ft_strcpy(&f->con_spec, "C");	//add condition to check if within ascii
+			else
+				ft_strcpy(&f->con_spec, "c");
 			get_conversion(f, args);
 		}
 		fmt++;

@@ -19,7 +19,6 @@ struct fmt *set(void)
 		return (0);
 	if(!(f->length_mod = ft_strnew(2)))
 		return (0);
-
 	f->hash = 0;
 	f->zero = 0;
 	f->sp = 0;
@@ -38,21 +37,29 @@ void	get_conversion(FMT *f, va_list args)
 
 	if (f->con_spec == 'c')
 		f->arg.c = va_arg(args, int);
+	if (f->con_spec == 'C')
+		f->arg.wit = va_arg(args, wint_t); //use unsigned int instead
 	if (f->con_spec == 's')
 		f->arg.s = va_arg(args, char*);
-
-	//printf("%s\n", f->arg.s);exit(1);//send to another function to handle printing strings
-	//printf("%c\n", f->arg_type.c);exit(1);
+	if (f->con_spec == 'S')
+		f->arg.wct = va_arg(args, wchar_t*); //
+	if (f->con_spec == 'i')
+		f->arg.i = va_arg(args, int);
 }
 
 void print_conversion(FMT *f)
 {
 	if (f->con_spec == 'c')
 		ft_putchar(f->arg.c);
+	if (f->con_spec == 'C')
+		ft_putchar(f->arg.wit);
 	if (f->con_spec == 's')
 		ft_putstr(ft_strndup(f->arg.s, f->precision));
+	if (f->con_spec == 'S')
+		ft_putstr(ft_strndup((char*)f->arg.wct, f->precision)); //convert wide char to mbchar
+	if (f->con_spec == 'i')
+		print_len_mod(f->arg.i, f->length_mod); //make function that prints all length mod
 }
-
 
 void print_set(FMT *f)
 {

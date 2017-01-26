@@ -13,14 +13,16 @@
 
 FLAGS = gcc -Wall -Wextra -Werror
 LIB = libft/libft.a
+
 SRC = ft_printf.c \
 	  src/ft_flagc.c \
 	  src/ft_flags.c \
+	  src/ft_flagi.c \
 	  src/ft_whitesp.c \
 	  src/ft_setAssets.c \
 
 all:
-	$(FLAGS) $(SRC) $(LIB)
+	$(FLAGS) main.c $(SRC) $(LIB)
 
 clean:
 	rm -rf ./a.out

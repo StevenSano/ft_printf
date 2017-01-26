@@ -33,20 +33,23 @@ void			flag_s(va_list args, char *fmt, int *fin_size)
 	{
 		if (*fmt == '-')
 			f->neg = 1;
-		if (ft_isdigit(*fmt))
+		if (ft_isdigit(*fmt) && *fmt != '0')
 			f->min_width = ft_digitInStr(&fmt);
-		if (*fmt == '.' && ft_isdigit(*(fmt + 1))) //ft_putchar(*fmt);exit(1);
+		if (*fmt == '.' && ft_isdigit(*(fmt + 1)))
 			f->precision = ft_digitInStr(&fmt);
-		if (*fmt == 's' && *(fmt - 1) != 'l')
+		if (*fmt == 's' || *fmt == 'S')
 		{
-			ft_strcpy(&f->con_spec, "s");
+			if (*fmt == 'S' || *(fmt - 1) == 'l')
+			{	ft_strcpy(&f->con_spec, "S");	//add condition to check if within ascii
+			}
+			else
+				ft_strcpy(&f->con_spec, "s");
 			get_conversion(f, args);
 		}
 		fmt++;
 	}
 	f->precision = check_prec(f->precision, (int)ft_strlen(f->arg.s));
 	ft_print(f);
-	*fin_size += (f->min_width && f->min_width > f->precision) ?
-	f->min_width : f->precision;
+	*fin_size += (f->min_width && f->min_width > f->precision) ? f->min_width : f->precision;
 	free((void*)f);
 }
