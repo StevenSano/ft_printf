@@ -51,5 +51,5 @@ void			flag_s(va_list args, char *fmt, int *fin_size)
 	f->precision = check_prec(f->precision, (int)ft_strlen(f->arg.s));
 	ft_print(f);
 	*fin_size += (f->min_width && f->min_width > f->precision) ? f->min_width : f->precision;
-	free((void*)f);
+	//free((void*)f);
 }

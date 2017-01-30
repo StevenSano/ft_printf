@@ -42,5 +42,5 @@ void flag_c(va_list args, char *fmt, int *fin_size)
 	f->precision = 1;
 	ft_print(f);
 	*fin_size += f->min_width ? f->min_width : 1;
-	free((void*)f);
+	//free((void*)f);
 }

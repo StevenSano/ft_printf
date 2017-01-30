@@ -44,7 +44,7 @@ void	get_conversion(FMT *f, va_list args)
 	if (f->con_spec == 'S')
 		f->arg.wct = va_arg(args, wchar_t*); //
 	if (f->con_spec == 'i')
-		f->arg.i = va_arg(args, int);
+		f->arg.i = va_arg(args, intmax_t);
 }
 
 void print_conversion(FMT *f)
@@ -64,7 +64,7 @@ void print_conversion(FMT *f)
 void print_set(FMT *f)
 {
 
-	printf("\n%i\n%i\n%i\n%i\n%i\n%i\n%i\n%s\n%c\n",
+	printf("\n#: %i\n0: %i\nsp: %i\n-: %i\npos: %i\nmin_width: %i\nprecission: %i\nlength modifier: %s\ncon_specifier: %c\n",
 	f->hash,
 	f->zero,
 	f->sp,

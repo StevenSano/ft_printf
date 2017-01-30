@@ -74,20 +74,23 @@ void			flag_i(va_list args, char *fmt, int *fin_size)
 	{
 		if (*fmt == '-')
 			f->neg = 1;
-		if (*fmt == '0')
+		else if (*fmt == '+')
+			f->pos = 1;
+		else if (*fmt == '0')
 			f->zero = 1;
-		if (ft_isdigit(*fmt) && *(fmt - 1) != '.' && *fmt)
+		else if (ft_isdigit(*fmt) && *(fmt - 1) != '.' && *fmt)
 			f->min_width = ft_digitInStr(&fmt);
-		if (*fmt == 'h' && *(fmt + 1) == 'h')
+		else if (*fmt == 'h' && *(fmt + 1) == 'h')
 			f->length_mod = "hh"; //signed char
-		if (*fmt == 'h' && *(fmt + 1) != 'h')
+		else if (*fmt == 'h' && *(fmt + 1) != 'h')
 			f->length_mod = "h"; //short
 		fmt++;
 	}
 	ft_strcpy(&f->con_spec, "i");
 	get_conversion(f, args);
 	f->precision = get_len(f->arg.i);
+	//print_set(f);exit(1);
 	print_id(f);
 	*fin_size += (f->min_width) ? f->min_width : f->precision;
-	free((void*)f);
+	//free((void*)f);
 }

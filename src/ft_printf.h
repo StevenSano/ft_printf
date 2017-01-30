@@ -18,6 +18,7 @@
 # include "../libft/libft.h"
 # include <stdarg.h>
 #include <wchar.h>
+#include <stdint.h> // for intmax_t
 
 #define F '%'
 
@@ -27,7 +28,7 @@ typedef union type_of
 	wint_t			wit;
 	char			*s;
 	wchar_t			*wct;
-	int				i;
+	intmax_t		i;
 }			TYPE_OF;
 
 
