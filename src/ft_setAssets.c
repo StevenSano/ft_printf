@@ -44,7 +44,7 @@ void	get_conversion(FMT *f, va_list args)
 	if (f->con_spec == 'S')
 		f->arg.wct = va_arg(args, wchar_t*); //
 	if (f->con_spec == 'i')
-		f->arg.i = va_arg(args, intmax_t);
+		f->arg.i = i_prec(f->length_mod,va_arg(args, intmax_t));
 }
 
 void print_conversion(FMT *f)

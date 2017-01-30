@@ -65,6 +65,23 @@ static void 	print_id(FMT *f)
 	}
 }
 
+intmax_t i_prec(char *length_mod, intmax_t nb)
+{
+	if (!ft_strcmp(length_mod, "hh"))
+		nb = (signed char)nb;
+	else if (!ft_strcmp(length_mod, "hh"))
+		nb = (short)nb;
+	else if (!ft_strcmp(length_mod, "l"))
+		nb = (long)nb;
+	else if (!ft_strcmp(length_mod, "ll"))
+		nb = (long long)nb;
+	else if (!ft_strcmp(length_mod, "j"))
+		nb = (size_t)nb;
+	else
+		nb = (int)nb;
+	return (nb);
+}
+
 void			flag_i(va_list args, char *fmt, int *fin_size)
 {
 	FMT			*f;
