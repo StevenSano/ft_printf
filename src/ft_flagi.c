@@ -57,6 +57,15 @@ static void 	print_id(FMT *f)
 			ft_putnbr(f->arg.i);
 		}
 	}
+	else if (f->pos && f->arg.i >= 0)
+	{
+		//	either convert number to string for output or
+		//	make function put_intmax_t(intmax_t nb)
+		ft_putchar('+');
+		ft_putWhtSp(f);
+		ft_putnbr(f->arg.i);
+
+	}
 	else
 	{
 

@@ -54,7 +54,6 @@ void	ft_putWhtSp(FMT *f)
 
 void	ft_print(FMT *f)
 {
-
 	if(f->neg)
 	{
 		print_conversion(f);

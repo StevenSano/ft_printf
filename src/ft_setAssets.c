@@ -37,13 +37,13 @@ void	get_conversion(FMT *f, va_list args)
 
 	if (f->con_spec == 'c')
 		f->arg.c = va_arg(args, int);
-	if (f->con_spec == 'C')
+	else if (f->con_spec == 'C')
 		f->arg.wit = va_arg(args, wint_t); //use unsigned int instead
-	if (f->con_spec == 's')
+	else if (f->con_spec == 's')
 		f->arg.s = va_arg(args, char*);
-	if (f->con_spec == 'S')
+	else if (f->con_spec == 'S')
 		f->arg.wct = va_arg(args, wchar_t*); //
-	if (f->con_spec == 'i')
+	else if (f->con_spec == 'i')
 		f->arg.i = i_prec(f->length_mod,va_arg(args, intmax_t));
 }
 
