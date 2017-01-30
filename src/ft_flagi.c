@@ -61,9 +61,11 @@ static void 	print_id(FMT *f)
 	{
 		//	either convert number to string for output or
 		//	make function put_intmax_t(intmax_t nb)
-		ft_putchar('+');
-		ft_putWhtSp(f);
-		ft_putnbr(f->arg.i);
+		//f->precision++;
+		//ft_putchar('+');
+		//ft_putWhtSp(f);
+		//ft_putnbr(f->arg.i);
+		ft_putendl("test");
 
 	}
 	else

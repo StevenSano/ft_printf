@@ -42,9 +42,10 @@ void	ft_putWhtSp(FMT *f)
 	int min_width;
 
 	min_width = f->min_width - f->precision;
+	//min_width = f->pos ? min_width - 1 : min_width;
 	while (min_width > 0)
 	{
-		if ((f->pos || f->zero) && !f->neg)
+		if (f->zero && !f->neg)
 			ft_putchar('0');
 		else
 			ft_putchar(' ');
