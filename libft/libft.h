@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <stdint.h>
 
 # define IFTRUE(x, y) if(x) return (y)
 # define BUFF_SIZE 32
@@ -93,5 +94,6 @@ int				ft_islower(int c);
 int				ft_isspace(int c);
 void			ft_swap(int *a, int *b);
 char			*ft_strndup(const char *s1, size_t n);
+char			*ft_intmax_ttoa(intmax_t n);
 
 #endif
