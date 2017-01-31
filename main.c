@@ -5,7 +5,7 @@
 void test_int(intmax_t imt)
 {
 	//int i, f;
-	char *s = "hh: %03hhi\nh: %+5hi\n";
+	char *s = "hh: %+010hhi\nh: %+hi\n";
 	signed char hh = (signed char)imt;
 	short h = (short)imt;
 	//long l = (long)imt;

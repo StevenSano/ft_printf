@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+/*
 static	int		get_len(int n)
 {
 	int			len;
@@ -28,7 +28,7 @@ static	int		get_len(int n)
 		len++;
 	}
 	return (len);
-}
+}*/
 
 void print_len_mod(int arg_i, char *length_mod)
 {
@@ -60,12 +60,13 @@ static void 	print_id(FMT *f)
 	else if (f->pos && f->arg.i >= 0)
 	{
 		//	either convert number to string for output or
-		//	make function put_intmax_t(intmax_t nb)
+		//	make function put_intmax_t(intmax_t nb) or
 		//f->precision++;
 		//ft_putchar('+');
 		//ft_putWhtSp(f);
 		//ft_putnbr(f->arg.i);
-		ft_putendl("test");
+		puts("here!");
+		ft_putendl(ft_intmax_ttoa(f->arg.i));
 
 	}
 	else
@@ -116,9 +117,9 @@ void			flag_i(va_list args, char *fmt, int *fin_size)
 	}
 	ft_strcpy(&f->con_spec, "i");
 	get_conversion(f, args);
-	f->precision = get_len(f->arg.i);
-	//print_set(f);exit(1);
-	print_id(f);
+	f->precision = (int)ft_strlen(ft_intmax_ttoa(f->arg.i));
+	print_set(f);
+	print_id(f);exit(1);
 	*fin_size += (f->min_width) ? f->min_width : f->precision;
 	//free((void*)f);
 }

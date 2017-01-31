@@ -64,7 +64,7 @@ void print_conversion(FMT *f)
 void print_set(FMT *f)
 {
 
-	printf("\n#: %i\n0: %i\nsp: %i\n-: %i\npos: %i\nmin_width: %i\nprecission: %i\nlength modifier: %s\ncon_specifier: %c\n",
+	printf("\n#: %i\n0: %i\nsp: %i\n-: %i\n+: %i\nmin_width: %i\nprecission: %i\nlength modifier: %s\ncon_specifier: %c\n",
 	f->hash,
 	f->zero,
 	f->sp,
