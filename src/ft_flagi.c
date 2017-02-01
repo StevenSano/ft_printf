@@ -11,35 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-/*
-static	int		get_len(int n)
-{
-	int			len;
-
-	len = 0;
-	if (n <= 0)
-	{
-		n *= -1;
-		len++;
-	}
-	while (n > 0)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
-}*/
-
-void print_len_mod(int arg_i, char *length_mod)
-{
-	if (!ft_strcmp(length_mod, ""))
-		ft_putnbr(arg_i);
-	else if (!ft_strcmp(length_mod, "h"))
-		ft_putnbr((short)arg_i);
-	else if (!ft_strcmp(length_mod, "hh"))
-		ft_putnbr((signed char)arg_i);
-
-}
 
 static void 	print_id(FMT *f)
 {
@@ -65,32 +36,38 @@ static void 	print_id(FMT *f)
 		//ft_putchar('+');
 		//ft_putWhtSp(f);
 		//ft_putnbr(f->arg.i);
-		puts("here!");
-		ft_putendl(ft_intmax_ttoa(f->arg.i));
+
+		ft_putstr(ft_intmax_ttoa(f->arg.i));
 
 	}
 	else
 	{
-
 		ft_print(f);
+		//ft_putstr(ft_intmax_ttoa(i_prec(f , f->arg.i)));
 
 	}
 }
 
-intmax_t i_prec(char *length_mod, intmax_t nb)
+intmax_t i_prec(char *length_mod, va_list args)
 {
+	intmax_t nb;
+
+	nb = va_arg(args, intmax_t);
 	if (!ft_strcmp(length_mod, "hh"))
 		nb = (signed char)nb;
-	else if (!ft_strcmp(length_mod, "hh"))
+	else if (!ft_strcmp(length_mod, "h"))
 		nb = (short)nb;
 	else if (!ft_strcmp(length_mod, "l"))
 		nb = (long)nb;
 	else if (!ft_strcmp(length_mod, "ll"))
 		nb = (long long)nb;
 	else if (!ft_strcmp(length_mod, "j"))
+		;
+	else if (!ft_strcmp(length_mod, "z"))
 		nb = (size_t)nb;
 	else
 		nb = (int)nb;
+//	f->precision = ft_intmax_tlen(nb);
 	return (nb);
 }
 
@@ -109,17 +86,22 @@ void			flag_i(va_list args, char *fmt, int *fin_size)
 			f->zero = 1;
 		else if (ft_isdigit(*fmt) && *(fmt - 1) != '.' && *fmt)
 			f->min_width = ft_digitInStr(&fmt);
-		else if (*fmt == 'h' && *(fmt + 1) == 'h')
-			f->length_mod = "hh"; //signed char
+		else if (*fmt == 'h' && *(fmt++) == 'h')
+			f->length_mod = "hh";
 		else if (*fmt == 'h' && *(fmt + 1) != 'h')
-			f->length_mod = "h"; //short
+			f->length_mod = "h";
+		else if (*fmt == 'l' && *(fmt++) == 'l')
+			f->length_mod = "ll";
+		else if (*fmt == 'l' && *(fmt + 1) != 'l')
+			f->length_mod = "l";
 		fmt++;
 	}
 	ft_strcpy(&f->con_spec, "i");
 	get_conversion(f, args);
-	f->precision = (int)ft_strlen(ft_intmax_ttoa(f->arg.i));
+	f->precision = ft_intmax_tlen(f->arg.i);
+
 	print_set(f);
-	print_id(f);exit(1);
+	print_id(f);
 	*fin_size += (f->min_width) ? f->min_width : f->precision;
-	//free((void*)f);
+	free((void*)f);
 }

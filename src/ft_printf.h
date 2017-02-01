@@ -58,9 +58,8 @@ void	flag_s(va_list args, char *fmt, int *fin_size);
 /*
 **	ft_flagi.c
 */
-intmax_t 	i_prec(char *length_mod, intmax_t nb);
+intmax_t 	i_prec(char *length_mod, va_list args);
 void		flag_i(va_list args, char *fmt, int *fin_size);
-void 		print_len_mod(int arg_i, char *length_mod);
 /*
 **	ft_whitesp.c
 */

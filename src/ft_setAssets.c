@@ -44,7 +44,7 @@ void	get_conversion(FMT *f, va_list args)
 	else if (f->con_spec == 'S')
 		f->arg.wct = va_arg(args, wchar_t*); //
 	else if (f->con_spec == 'i')
-		f->arg.i = i_prec(f->length_mod,va_arg(args, intmax_t));
+		f->arg.i = i_prec(f->length_mod, args);
 }
 
 void print_conversion(FMT *f)
@@ -58,13 +58,13 @@ void print_conversion(FMT *f)
 	if (f->con_spec == 'S')
 		ft_putstr(ft_strndup((char*)f->arg.wct, f->precision)); //convert wide char to mbchar
 	if (f->con_spec == 'i')
-		print_len_mod(f->arg.i, f->length_mod); //make function that prints all length mod
+		ft_putstr(ft_intmax_ttoa(f->arg.i));
 }
 
 void print_set(FMT *f)
 {
 
-	printf("\n#: %i\n0: %i\nsp: %i\n-: %i\n+: %i\nmin_width: %i\nprecission: %i\nlength modifier: %s\ncon_specifier: %c\n",
+	printf("\n #: %i\n 0: %i\nsp: %i\n -: %i\n +: %i\nmin_width: %i\nprecission: %i\nlength modifier: %s\ncon_specifier: %c\n",
 	f->hash,
 	f->zero,
 	f->sp,

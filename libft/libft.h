@@ -95,5 +95,6 @@ int				ft_isspace(int c);
 void			ft_swap(int *a, int *b);
 char			*ft_strndup(const char *s1, size_t n);
 char			*ft_intmax_ttoa(intmax_t n);
+int 			ft_intmax_tlen(intmax_t n);
 
 #endif
