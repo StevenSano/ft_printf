@@ -15,10 +15,8 @@ struct fmt *set(void)
 {
 	FMT *f;
 
-	if(!(f = (FMT*)malloc(sizeof(f))))
-		return (0);
-	if(!(f->length_mod = ft_strnew(2)))
-		return (0);
+	IFTRUE(!(f = (FMT*)malloc(sizeof(f))), 0);
+	IFTRUE(!(f->length_mod = ft_strnew(2)), 0);
 	f->hash = 0;
 	f->zero = 0;
 	f->sp = 0;
@@ -26,9 +24,9 @@ struct fmt *set(void)
 	f->pos = 0;
 	f->min_width = 0;
 	f->precision = 0;
-	f->length_mod = "";
+	f->length_mod = "00";
 	f->con_spec = '\0';
-	//arg = TYPE_OF. //use for specifying type ex: char* , int long long
+	f->arg_len = 0;
 	return (f);
 }
 
@@ -64,7 +62,7 @@ void print_conversion(FMT *f)
 void print_set(FMT *f)
 {
 
-	printf("\n #: %i\n 0: %i\nsp: %i\n -: %i\n +: %i\nmin_width: %i\nprecission: %i\nlength modifier: %s\ncon_specifier: %c\n",
+	printf("\n #: %i\n 0: %i\nsp: %i\n -: %i\n +: %i\nmin_width: %i\nprecission: %i\nlength modifier: %s\ncon_specifier: %c\narg_len: %i\n",
 	f->hash,
 	f->zero,
 	f->sp,
@@ -73,7 +71,8 @@ void print_set(FMT *f)
 	f->min_width,
 	f->precision,
 	f->length_mod,
-	f->con_spec
+	f->con_spec,
+	f->arg_len
 	);
 	//f->arg.
 }

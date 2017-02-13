@@ -10,21 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
-
+NAME  = ft_printf
 FLAGS = gcc -Wall -Wextra -Werror
-LIB = libft/libft.a
+LIB   = libft/libft.a
 
 SRC = ft_printf.c \
 	  src/ft_flagc.c \
 	  src/ft_flags.c \
 	  src/ft_flagi.c \
+	  src/ft_flagi_ut.c \
 	  src/ft_whitesp.c \
 	  src/ft_setAssets.c \
 
 all:
-	$(FLAGS) main.c $(SRC) $(LIB)
+	$(FLAGS) -g main.c $(SRC) $(LIB) -o $(NAME)
 
 clean:
-	rm -rf ./a.out
+	rm -rf $(NAME)
 
 .PHONY: all, clean

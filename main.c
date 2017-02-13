@@ -1,39 +1,46 @@
 #include "src/ft_printf.h"
 
-
-
-void test_int(intmax_t imt)
+void test_id(char *s, intmax_t m)
 {
-	//int i, f;
-	char *s = "j: %ji\n";
-	intmax_t hh;
-	hh = imt;
-	//long l = (long)imt;
-	//long long ll = (long long)imt;
-	//size_t z = (size_t)imt;
-	int i = ft_printf(s, hh);printf("\n|len:%i|\n\n", i);
-	int f =    printf(s, hh);printf("\n|len:%i|\n\n", f);
+	int i = ft_printf(s, m, m, m, m, m, m, m, m, m, m, m, m);
+	int f =    printf(s, m, m, m, m, m, m, m, m, m, m, m, m);
+	printf("|len:%i|\t|len:%i|\n", i, f);
 }
-
-#include <stdio.h>/*
-int main(int ac, char **av)
-{
-	if (ac != 2)
-	{
-		printf("Argument count != 2!\n");
-		return (0);
-	}
-
-	test_int((intmax_t)atoi(av[1]));
-	return (0);
-}*/
 
 int main(void)
 {
-	intmax_t i = -128;
-	ft_printf("%hhi\n", (signed char)i);
-	   printf("%hhi\n", (signed char)i);
+	char *s;
+	intmax_t m;// = 9223372036854775807;
+	//pass cases
+	//s = "%29ji\n";
+	//s = "%-30ji\n";
+	//s = "%030ji\n";
+	//s = "%+030ji\n";
+	//s = "%+30ji\n";
+	//s = "1.%+3.5ji\n";
+	//s = "1.%+6.5ji\n";
+	//s = "1.%+05.4ji\n2.%+05ji\n3.%+03.5ji\n";
+	//s = "1.%+-1ji\n2.%-5ji\n3.%+05ji\n4.%-+05ji\n";//
+	//s = "%+-30ji\n";
+	//s = "%-+030ji\n";
+	//s = "%+-30.29ji\n";
+	//s = "%-+22.22ji\n";
+	//s = "%+-ji\n";
+	//s = "%i\n%i\n%i\n";//%lli\n%lli\n";
+	//s = "1.%+-4.2i\n";
+	//s = "1.%+-05.1ji\n2.%-+ji\n3.%-+ji\n";
+	//s = "**%lli**\t**%-i**\t**%+i**\t**%0hhi**\t**%0-+i**\t**%-+ji**\t**%0+lli**\t**%0-i**\n";
 
-	//test_int(i);
+	//wrong cases
+	//s = "1.%-+0i\n2.%-5ji\n3.%+05ji\n
+	//s = "4.%20i**\n";	//error on: m = -1233;
+	//s = "5.%-20i**\n";	//error on: m = -1233;
+	//s = "6.%+-11.10i**";
+	//s = "**%7i**\n";
+
+	m = 128;
+	//**%07i**\t**%-+i**\t**%-+9i**\n";
+	s = "**%.9i**\n"; //**%+-05i**\t**%-+05i**\t**%+05i**\n";
+	test_id(s, m);
 	return (0);
 }

@@ -44,6 +44,7 @@ typedef struct	fmt
 	char		*length_mod;
 	char		con_spec;
 	TYPE_OF 	arg;
+	int			arg_len;
 }				FMT;
 
 int		ft_printf(const char *format, ...);
@@ -61,13 +62,17 @@ void	flag_s(va_list args, char *fmt, int *fin_size);
 intmax_t 	i_prec(char *length_mod, va_list args);
 void		flag_i(va_list args, char *fmt, int *fin_size);
 /*
-**	ft_whitesp.c
+**	ft_flagi_ut.c
+*/
+void 	print_widthPrec(FMT *f);
+/*
+**	ft_whitesp.c«»
 */
 size_t	ft_digitInStr(char **fmt); //fids first ints in a str
 void 	ft_putWhtSp(FMT *f);
 void	ft_print(FMT *f);
 /*
-**ft_setAssets.c
+**	ft_setAssets.c
 */
 void 	print_set(FMT *f);
 struct 	fmt *set(void);

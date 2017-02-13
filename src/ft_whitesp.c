@@ -15,7 +15,7 @@
 size_t		ft_digitInStr(char **fmt)
 {
 	char	*i_str;
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (**fmt)
@@ -32,7 +32,7 @@ size_t		ft_digitInStr(char **fmt)
 		(*fmt)++;
 	}
 	i_str = ft_strndup((*fmt) - i, i);
-	i = (size_t)ft_atoi(i_str);
+	i = ft_atoi(i_str);
 	free((void*)i_str);
 	return (i);
 }
@@ -41,21 +41,34 @@ void	ft_putWhtSp(FMT *f)
 {
 	int min_width;
 
-	min_width = f->min_width - f->precision;
-	while (min_width > 0)
+	min_width = f->min_width -  f->arg_len;
+	min_width -= (f->pos) ? 1 : 0;
+	if (f->zero)
 	{
-		if (f->zero && !f->neg)
-			ft_putchar('0');
-		else
+		if (f->con_spec == 'i' && f->pos && !f->neg && f->arg.i >= 0)
+			ft_putchar('+');
+		while (min_width-- > 0)
+			if (f->con_spec == 'i' && f->neg && f->arg.i > 0)
+				ft_putchar(' ');
+			else
+				ft_putchar('0');
+	}
+	else
+	{
+		while (min_width-- > 0)
 			ft_putchar(' ');
-		min_width--;
+		if (f->pos && !f->neg && f->arg.i >= 0)
+			ft_putchar('+');
 	}
 }
 
 void	ft_print(FMT *f)
 {
+
 	if(f->neg)
 	{
+		if (f->con_spec == 'i' && f->pos && f->arg.i >= 0)
+			ft_putchar('+');
 		print_conversion(f);
 		ft_putWhtSp(f);
 	}

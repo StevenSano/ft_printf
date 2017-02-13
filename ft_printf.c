@@ -15,7 +15,9 @@
 static void	get_asset(const char **fmt, va_list args, int *fin_size)
 {
 	size_t  flags_len;
+	char	*s;
 
+	s = NULL;
 	flags_len = 0;
 	while (**fmt)
 	{
@@ -36,7 +38,8 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 		}
 		else if (**fmt == 'i' || **fmt == 'd')
 		{
-			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len + 1), fin_size);
+			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
+			flag_i(args, s, fin_size);
 			break;
 		}
 		(*fmt)++;
@@ -47,7 +50,7 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 
 static int		assets(va_list args, const char *format)
 {
-	int		 fin_size;
+	int			fin_size;
 
 	fin_size = 0;
 	while (*format)
