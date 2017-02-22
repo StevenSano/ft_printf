@@ -45,7 +45,10 @@ typedef struct	fmt
 	char		con_spec;
 	TYPE_OF 	arg;
 	int			arg_len;
+	//int			str_len;
 }				FMT;
+
+void check_exit(char *s);
 
 int		ft_printf(const char *format, ...);
 
@@ -59,12 +62,23 @@ void	flag_s(va_list args, char *fmt, int *fin_size);
 /*
 **	ft_flagi.c
 */
-intmax_t 	i_prec(char *length_mod, va_list args);
-void		flag_i(va_list args, char *fmt, int *fin_size);
+void 		flag_i(va_list args, char *fmt, int *fin_size);
+void 		setForPrint(char *fmt, FMT *f);
+intmax_t	i_prec(char *length_mod, va_list args);
+void 		print_setlen(FMT *f, int *fin_size);
+void 		print_id(FMT *f);
 /*
 **	ft_flagi_ut.c
 */
+
 void 	print_widthPrec(FMT *f);
+
+/*
+**	flag_u.c
+*/
+void 			flag_u(va_list args, char *fmt, int *fin_size);
+intmax_t		u_prec(char *length_mod, va_list args);
+
 /*
 **	ft_whitesp.c«»
 */

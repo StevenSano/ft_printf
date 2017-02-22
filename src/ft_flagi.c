@@ -34,7 +34,7 @@ intmax_t		i_prec(char *length_mod, va_list args)
 	return (nb);
  }
 
-static void 	setForPrint(char *fmt, FMT *f)
+void 	setForPrint(char *fmt, FMT *f)
 {
 	while (*fmt)
 	{
@@ -52,10 +52,10 @@ static void 	setForPrint(char *fmt, FMT *f)
 			f->length_mod = "j";
 		fmt++;
 	}
-	f->con_spec = 'i';
+
 }
 
-static void 	print_id(FMT *f)
+void 	print_id(FMT *f)
 {
 	print_widthPrec(f);
 	if (f->arg.i < 0)
@@ -73,32 +73,41 @@ static void 	print_id(FMT *f)
 			if(f->zero)
 			{
 				ft_putchar('-');
-				f->min_width -= 1;
+				f->precision += 1;
 			}
 			ft_putWhtSp(f);
 			ft_putstr(ft_intmax_ttoa(f->zero ? f->arg.i * -1 : f->arg.i));
 		}
+		f->min_width -= 1;
 	}
 	else
 		ft_print(f);
 }
 
-static void 	print_setlen(FMT *f, int *fin_size)
+void 	print_setlen(FMT *f, int *fin_size)
 {
-	if (!f->precision || (!f->min_width && !f->precision)) //|| (!f->min_width || !f->precision))
+	if (f->min_width == 0 && f->precision == 0)
 	{
-		//puts("1.here");//exit(22);
+		//f->arg_len = ft_intmax_tlen(f->arg.i);
 		*fin_size += (f->pos && f->arg.i > -1) ?
 		ft_intmax_tlen(f->arg.i) + 1 : ft_intmax_tlen(f->arg.i);
-		if (f->pos && f->arg.i >= 0)
+		if (f->pos && f->arg.i >= 0) //make macro to return single value
 			ft_putchar('+');
 		print_conversion(f);
 	}
 	else
 	{
-		//puts("2.here");//exit(22);
+		//puts("here");
+		//add a counter to the structure and pass it to every while loop that prints
+		//also create function to hold while loops.
 		f->arg_len = ft_intmax_tlen(f->arg.i);
 		print_id(f);
+		if (f->min_width <= f->arg_len)
+			f->min_width = (f->pos && f->arg.i >= 0) ?
+			f->arg_len + 1 : f->arg_len;
+		if (f->precision <= f->arg_len)
+			f->precision = (f->pos && f->arg.i >= 0) ?
+			f->arg_len + 1 : f->arg_len;
 		*fin_size += (!f->precision) ? f->min_width : f->precision;
 	}
 }
@@ -109,7 +118,8 @@ void			flag_i(va_list args, char *fmt, int *fin_size)
 
 	f = set();
 	setForPrint(fmt, f);
-	while (*fmt++)
+	f->con_spec = 'i';
+	while (*fmt)
 	{
 		if (ft_isdigit(*fmt) && *fmt != '0')
 		{
@@ -118,8 +128,9 @@ void			flag_i(va_list args, char *fmt, int *fin_size)
 			else
 				f->min_width = ft_digitInStr(&fmt);
 		}
+		fmt++;
 	}
 	get_conversion(f, args);
 	print_setlen(f, fin_size);
-	//free(f);
+	free(f);
 }

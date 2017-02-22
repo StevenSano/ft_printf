@@ -16,7 +16,9 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 {
 	size_t  flags_len;
 	char	*s;
-
+/*
+**	You have to manage the following conversions: sSpdDioOuUxXcC
+*/
 	s = NULL;
 	flags_len = 0;
 	while (**fmt)
@@ -40,6 +42,13 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 		{
 			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
 			flag_i(args, s, fin_size);
+			break;
+		}
+		else if (**fmt == 'u')
+		{
+
+			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
+			flag_u(args, s, fin_size);
 			break;
 		}
 		(*fmt)++;

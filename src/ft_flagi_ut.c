@@ -12,6 +12,49 @@
 
 #include "ft_printf.h"
 
+/*void while_put(int width, char sz, int *str_len)
+{
+	while (width-- > 0)
+	{
+		ft_putchar(sz);
+		str_len++;
+	}
+}
+*/
+static void check_neg(int min_width, FMT *f)
+{
+	if (f->min_width > f->precision)
+	{
+		min_width = (f->precision  <= f->arg_len) ?
+		f->min_width - f->arg_len : f->min_width - f->precision;
+		min_width -= (f->pos || f->arg.i < 0) ? 1 : 0;
+		while (min_width-- > 0)
+			ft_putchar(' ');
+		if (f->pos && f->arg.i >= 0)
+			ft_putchar('+');
+	}
+	f->zero = 1;
+	f->min_width = (f->pos || f->arg.i < 0) ? 1 : 0;
+	if (f->arg.i < 0 && !f->min_width)
+		f->precision++;
+	f->min_width += f->precision;
+}
+
+static void min_greater_prec(int min_width, FMT *f)
+{
+	min_width = (f->precision <= f->arg_len) ?
+	0 : f->precision - f->arg_len;
+	f->min_width -= f->pos ? min_width + 1 : min_width;
+	if ((f->pos || f->arg.i < 0) && f->arg.i < 0)
+	{
+		ft_putchar('-');
+		f->min_width -= 1;
+	}
+	while (min_width-- > 0)
+		ft_putchar('0');
+	f->pos = 0;
+}
+
 void 	print_widthPrec(FMT *f)
 {
 	int min_width;
@@ -20,43 +63,18 @@ void 	print_widthPrec(FMT *f)
 	if (f->precision > 0)
 	{
 		if (!f->neg)
+			check_neg(min_width, f);
+		else
 		{
-			if (f->min_width > f->precision)
-			{
-				min_width = (f->precision  <= f->arg_len) ?
-				f->min_width - f->arg_len : f->min_width - f->precision;
-				min_width -= (f->pos || f->arg.i < 0) ? 1 : 0;
-				while (min_width-- > 0)
-					ft_putchar(' ');
-				if (f->pos && f->arg.i >= 0)
-					ft_putchar('+');
-			}
-			f->zero = 1;
-			f->min_width = (f->pos || f->arg.i < 0) ? 1 : 0;
-			f->min_width += f->precision;
-		}else{
-
 			if (f->pos && f->arg.i >= 0)
-				ft_putchar('+');
-			if (f->min_width > f->precision)
 			{
-				min_width = (f->precision <= f->arg_len) ?
-				0 : f->precision - f->arg_len;
-				f->min_width -= f->pos ? min_width + 1 : min_width;
-				if ((f->pos || f->arg.i < 0) && f->arg.i < 0)
-				{
-					//printf("%i\n", min_width);exit(3);
-					ft_putchar('-');
-					f->min_width -= 1;
-				}
-				while (min_width-- > 0)
-					ft_putchar('0');
-				f->pos = 0;
-				//print_set(f);
+					ft_putchar('+');
+					//f->precision += 1;
 			}
+			if (f->min_width > f->precision)
+				min_greater_prec(min_width, f);
 			else
 			{
-				//f->min_width = f->pos ? 0 : 1;
 				f->min_width = f->precision;
 				f->zero = 1;
 				f->pos = 0;
@@ -65,3 +83,18 @@ void 	print_widthPrec(FMT *f)
 		}
 	}
 }
+
+
+/*
+min_width = (f->precision <= f->arg_len) ?
+0 : f->precision - f->arg_len;
+f->min_width -= f->pos ? min_width + 1 : min_width;
+if ((f->pos || f->arg.i < 0) && f->arg.i < 0)
+{
+	ft_putchar('-');
+	f->min_width -= 1;
+}
+while (min_width-- > 0)
+	ft_putchar('0');
+f->pos = 0;
+*/
