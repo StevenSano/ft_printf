@@ -83,6 +83,7 @@ SRC		= ft_strlen.c \
 		  ft_putnstr.c \
 		  ft_intmax_ttoa.c \
 		  ft_intmax_tlen.c \
+		  ft_itoa_base.c \
 
 OBJ		= $(SRC:.c=.o)
 

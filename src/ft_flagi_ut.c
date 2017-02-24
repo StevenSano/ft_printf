@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
 /*void while_put(int width, char sz, int *str_len)
 {
@@ -40,21 +40,6 @@ static void check_neg(int min_width, FMT *f)
 	f->min_width += f->precision;
 }
 
-static void min_greater_prec(int min_width, FMT *f)
-{
-	min_width = (f->precision <= f->arg_len) ?
-	0 : f->precision - f->arg_len;
-	f->min_width -= f->pos ? min_width + 1 : min_width;
-	if ((f->pos || f->arg.i < 0) && f->arg.i < 0)
-	{
-		ft_putchar('-');
-		f->min_width -= 1;
-	}
-	while (min_width-- > 0)
-		ft_putchar('0');
-	f->pos = 0;
-}
-
 void 	print_widthPrec(FMT *f)
 {
 	int min_width;
@@ -67,12 +52,21 @@ void 	print_widthPrec(FMT *f)
 		else
 		{
 			if (f->pos && f->arg.i >= 0)
-			{
-					ft_putchar('+');
-					//f->precision += 1;
-			}
+				ft_putchar('+');
 			if (f->min_width > f->precision)
-				min_greater_prec(min_width, f);
+			{
+				min_width = (f->precision <= f->arg_len) ?
+				0 : f->precision - f->arg_len;
+				f->min_width -= f->pos ? min_width + 1 : min_width;
+				if ((f->pos || f->arg.i < 0) && f->arg.i < 0)
+				{
+					ft_putchar('-');
+					f->min_width -= 1;
+				}
+				while (min_width-- > 0)
+					ft_putchar('0');
+				f->pos = 0;
+			}
 			else
 			{
 				f->min_width = f->precision;
@@ -83,18 +77,3 @@ void 	print_widthPrec(FMT *f)
 		}
 	}
 }
-
-
-/*
-min_width = (f->precision <= f->arg_len) ?
-0 : f->precision - f->arg_len;
-f->min_width -= f->pos ? min_width + 1 : min_width;
-if ((f->pos || f->arg.i < 0) && f->arg.i < 0)
-{
-	ft_putchar('-');
-	f->min_width -= 1;
-}
-while (min_width-- > 0)
-	ft_putchar('0');
-f->pos = 0;
-*/

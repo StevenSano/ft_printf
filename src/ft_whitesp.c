@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
 size_t		ft_digitInStr(char **fmt)
 {
@@ -41,7 +41,7 @@ void	ft_putWhtSp(FMT *f)
 {
 	int min_width;
 	min_width = f->min_width -  f->arg_len;
-	min_width -=  (f->pos || (f->arg.i < 0)) ? 1 : 0;
+	min_width -= (f->pos ||  f->arg.i < 0) ? 1 : 0;
 	if (f->zero)
 	{
 		if (f->con_spec == 'i' && f->pos && !f->neg && f->arg.i >= 0)

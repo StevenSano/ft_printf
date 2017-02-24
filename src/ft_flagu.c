@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+\/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   flag_u.c                                           :+:      :+:    :+:   */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
 
 //for this flag we can just use flag_i
@@ -27,6 +27,8 @@
 			then conversion
 			nb == 4294967295 - 9  = 4294967286
 			nb == 4294967295 - 96 = 4294967200
+
+			4294967295 == UINT_MAX
 */
 intmax_t		u_prec(char *length_mod, va_list args)
 {
@@ -61,5 +63,5 @@ void flag_u(va_list args, char *fmt, int *fin_size)
 	}
 	get_conversion(f, args);
 	print_setlen(f, fin_size);
-	free(f);
+	//free(f);
 }

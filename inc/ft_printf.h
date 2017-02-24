@@ -12,13 +12,15 @@
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-
+//**this**//
 # include <stdio.h>
+//**this**//
 
-# include "../libft/libft.h"
-# include <stdarg.h>
-#include <wchar.h>
-#include <stdint.h> // for intmax_t
+
+# include	"../libft/libft.h"
+# include	<stdarg.h>
+# include	<wchar.h>
+# include	<stdint.h> // for intmax_t
 
 #define F '%'
 
@@ -62,23 +64,12 @@ void	flag_s(va_list args, char *fmt, int *fin_size);
 /*
 **	ft_flagi.c
 */
-void 		flag_i(va_list args, char *fmt, int *fin_size);
-void 		setForPrint(char *fmt, FMT *f);
-intmax_t	i_prec(char *length_mod, va_list args);
-void 		print_setlen(FMT *f, int *fin_size);
-void 		print_id(FMT *f);
+intmax_t 	i_prec(char *length_mod, va_list args);
+void		flag_i(va_list args, char *fmt, int *fin_size);
 /*
 **	ft_flagi_ut.c
 */
-
 void 	print_widthPrec(FMT *f);
-
-/*
-**	flag_u.c
-*/
-void 			flag_u(va_list args, char *fmt, int *fin_size);
-intmax_t		u_prec(char *length_mod, va_list args);
-
 /*
 **	ft_whitesp.c«»
 */

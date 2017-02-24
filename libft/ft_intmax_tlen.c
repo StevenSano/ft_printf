@@ -11,13 +11,14 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 
-int	ft_intmax_tlen(intmax_t n)
+intmax_t 		ft_intmax_tlen(intmax_t n)
 {
-	intmax_t len;
+	intmax_t	len;
 
 	len = 0;
-	if (n <= 0)
+	if (n < 0)
 	{
 		n *= -1;
 		len++;

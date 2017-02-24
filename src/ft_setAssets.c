@@ -9,7 +9,7 @@
 /*   Updated: 2017/01/18 10:58:08 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
+#include "../inc/ft_printf.h"
 
 struct fmt *set(void)
 {
@@ -41,11 +41,9 @@ void	get_conversion(FMT *f, va_list args)
 	else if (f->con_spec == 's')
 		f->arg.s = va_arg(args, char*);
 	else if (f->con_spec == 'S')
-		f->arg.wct = va_arg(args, wchar_t*);
+		f->arg.wct = va_arg(args, wchar_t*); //
 	else if (f->con_spec == 'i')
 		f->arg.i = i_prec(f->length_mod, args);
-	else if (f->con_spec == 'u')
-		f->arg.i = u_prec(f->length_mod, args);
 }
 
 void print_conversion(FMT *f)
@@ -58,9 +56,8 @@ void print_conversion(FMT *f)
 		ft_putstr(ft_strndup(f->arg.s, f->precision));
 	if (f->con_spec == 'S')
 		ft_putstr(ft_strndup((char*)f->arg.wct, f->precision)); //convert wide char to mbchar
-	if (f->con_spec == 'i' || f->con_spec == 'u')
+	if (f->con_spec == 'i')
 		ft_putstr(ft_intmax_ttoa(f->arg.i));
-
 }
 
 void print_set(FMT *f)
