@@ -6,11 +6,11 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 18:10:52 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/01/19 00:08:55 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:52:34 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
 size_t		ft_digitInStr(char **fmt)
 {
@@ -37,17 +37,38 @@ size_t		ft_digitInStr(char **fmt)
 	return (i);
 }
 
+int 		ft_uintmax_tlen(uintmax_t n)
+{
+	int		len;
+
+	len = 0;
+	while (n > 0)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
+
 void	ft_putWhtSp(FMT *f)
 {
 	int min_width;
-	min_width = f->min_width -  f->arg_len;
-	min_width -= (f->pos ||  f->arg.i < 0) ? 1 : 0;
+
+	min_width = (f->con_spec != 's') ? f->min_width -  f->arg_len :
+	f->min_width - 	f->arg_len;
+	f->width_prec_len += min_width <= 0 ? 0 : min_width;
+	if (f->pos && f->arg.i >= 0)
+		min_width -= 1;
 	if (f->zero)
 	{
+	//	if ((f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X' ||
+	//	f->con_spec == 'p' ) && f->hash && !f->neg)
+	//		get_lenprint_oxXp(f, 0);
 		if (f->con_spec == 'i' && f->pos && !f->neg && f->arg.i >= 0)
 			ft_putchar('+');
 		while (min_width-- > 0)
-			if (f->con_spec == 'i' && f->neg && f->arg.i > 0)
+			if ((f->con_spec != 'c' || f->con_spec != 's' ) && f->neg)
 				ft_putchar(' ');
 			else
 				ft_putchar('0');
@@ -58,21 +79,36 @@ void	ft_putWhtSp(FMT *f)
 			ft_putchar(' ');
 		if (f->pos && !f->neg && f->arg.i >= 0)
 			ft_putchar('+');
+		if ((f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X' ||
+		f->con_spec == 'p' ) && f->hash && !f->neg)
+			get_lenprint_oxXp(f, 1);
 	}
+	f->min_width = (f->min_width < f->arg_len) ? f->arg_len : f->min_width;
+
 }
 
 void	ft_print(FMT *f)
 {
-
 	if(f->neg)
 	{
 		if (f->con_spec == 'i' && f->pos && f->arg.i >= 0)
 			ft_putchar('+');
+		if (f->con_spec != 's' &&  f->con_spec != 'c')
+			get_lenprint_oxXp(f, 1);
 		print_conversion(f);
 		ft_putWhtSp(f);
 	}
 	else
 	{
+		if (f->zero && (f->con_spec != 'i' || f->con_spec != 'u'))
+		{
+			f->zero = 0;
+			get_lenprint_oxXp(f, 1);
+			f->zero = 1;
+		}
+		if (f->con_spec != 's' &&  f->con_spec != 'c')
+			f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
+			get_lenprint_oxXp(f, 0);
 		ft_putWhtSp(f);
 		print_conversion(f);
 	}

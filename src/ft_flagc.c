@@ -6,41 +6,49 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 09:54:07 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/01/18 10:34:34 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:50:46 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
-void			flag_mod(int *fin_size)
+void flag_mod(char *fmt, int *fin_size, FMT *f)
 {
-	ft_putchar(F);
-	*fin_size += 1;
+	setForPrint(fmt, f);
+	get_prec_min(f, fmt);
+	f->precision = 0;
+	f->arg_len = 1;
+	if (f->neg)
+		ft_putchar('%');
+	if (f->min_width)
+		ft_putWhtSp(f);
+	if (!f->neg)
+		ft_putchar('%');
+	*fin_size += f->min_width ? f->min_width : 1;
 }
 
-void flag_c(va_list args, char *fmt, int *fin_size)
+void get_prec_min(FMT *f, char *fmt)
 {
-	FMT		*f;
-
-	f = set();
 	while (*fmt)
 	{
-		if (*fmt == '-')
-			f->neg = 1;
 		if (ft_isdigit(*fmt) && *fmt != '0')
-			f->min_width = ft_digitInStr(&fmt);
-		if (*fmt == 'c' || *fmt == 'C')
 		{
-			if (*fmt == 'C' || *(fmt - 1) == 'l')
-				ft_strcpy(&f->con_spec, "C");	//add condition to check if within ascii
+			if (*(fmt - 1) == '.')
+				f->precision = ft_digitInStr(&fmt);
 			else
-				ft_strcpy(&f->con_spec, "c");
-			get_conversion(f, args);
+				f->min_width = ft_digitInStr(&fmt);
 		}
 		fmt++;
 	}
-	f->precision = 1;
+}
+
+void flag_c(va_list args, char *fmt, int *fin_size, FMT *f)
+{
+	setForPrint(fmt, f);
+	get_prec_min(f, fmt);
+	get_conversion(f, args);
+	f->arg_len = 1;
 	ft_print(f);
-	*fin_size += f->min_width ? f->min_width : 1;
-	//free((void*)f);
+	*fin_size += f->min_width ? f->min_width : f->arg_len;
+	free((void*)f);
 }

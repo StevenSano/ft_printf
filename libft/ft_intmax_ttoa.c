@@ -44,7 +44,6 @@ char		*ft_intmax_ttoa(intmax_t n)
 		n *= -1;
 		str[0] = '-';
 	}
-	str[len] = '\0';
 	if (n == 0)
 		str[--len] = '0';
 	while (n > 0)

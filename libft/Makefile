@@ -84,6 +84,7 @@ SRC		= ft_strlen.c \
 		  ft_intmax_ttoa.c \
 		  ft_intmax_tlen.c \
 		  ft_itoa_base.c \
+		  ft_uintmax_ttoa.c \
 
 OBJ		= $(SRC:.c=.o)
 
@@ -92,7 +93,7 @@ all: $(NAME)
 $(NAME):
 	$(CC) $(CFLAGS) -c $(SRC)
 	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	#ranlib $(NAME)
 
 clean:
 	rm -rf $(OBJ)

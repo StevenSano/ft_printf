@@ -1,19 +1,19 @@
-#include "libft.h"
+ #include "libft.h"
 
-static int	nbr_base_len(int nbr, int base)
+static int	nbr_base_len(unsigned long nbr, int base)
 {
 	int len;
 
 	len = 0;
-	while (nbr != 0)
+	while (nbr > 0)
 	{
 		nbr /= base;
 		len++;
 	}
 	return (len);
 }
-
-char		*ft_itoa_base(unsigned int nbr, int base)
+//fix this shit!!!
+char		*ft_itoa_base(uintmax_t nbr, int base)
 {
 	char	*str;
 	char	*tab;
@@ -24,14 +24,14 @@ char		*ft_itoa_base(unsigned int nbr, int base)
 		return (ft_strdup("0"));
 	tab = ft_strdup("0123456789abcdef");
 	len = nbr_base_len(nbr, base);
-	str = ft_strnew(nbr);
+	str = ft_strnew(len);
 	i = 1;
-	while (nbr != 0)
+	while (nbr > 0)
 	{
 		str[len - i] = tab[nbr % base];
 		nbr /= base;
 		i++;
 	}
-	str[len] = '\0';
+	free((void*)tab);
 	return (str);
 }

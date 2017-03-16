@@ -97,6 +97,8 @@ char			*ft_strndup(const char *s1, size_t n);
 char			*ft_intmax_ttoa(intmax_t n);
 intmax_t 		ft_intmax_tlen(intmax_t n);
 int 			ft_pow(int nb, int pow);
-char			*ft_itoa_base(unsigned int nbr, int base);
+char			*ft_itoa_base(uintmax_t nbr, int base);
+char			*ft_uintmax_ttoa(uintmax_t n);
+
 
 #endif

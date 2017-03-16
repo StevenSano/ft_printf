@@ -6,50 +6,37 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 20:45:59 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/01/18 20:46:01 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:51:42 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
-
-static int	check_prec(int precision, int slen)
-{
-	if (!precision || precision > slen)
-		precision = slen;
-	return (precision);
-}
-
+#include "ft_printf.h"
 
 /*
 **	create a new function that holds all checks
 **	and pass through ft_striter()
 */
-void			flag_s(va_list args, char *fmt, int *fin_size)
+char	*s_prec(va_list args)
 {
-	FMT 		*f;
+	char *str;
 
-	f = set();
-	while (*fmt)
-	{
-		if (*fmt == '-')
-			f->neg = 1;
-		if (ft_isdigit(*fmt) && *fmt != '0')
-			f->min_width = ft_digitInStr(&fmt);
-		if (*fmt == '.' && ft_isdigit(*(fmt + 1)))
-			f->precision = ft_digitInStr(&fmt);
-		if (*fmt == 's' || *fmt == 'S')
-		{
-			if (*fmt == 'S' || *(fmt - 1) == 'l')
-			{	ft_strcpy(&f->con_spec, "S");	//add condition to check if within ascii
-			}
-			else
-				ft_strcpy(&f->con_spec, "s");
-			get_conversion(f, args);
-		}
-		fmt++;
-	}
-	f->precision = check_prec(f->precision, (int)ft_strlen(f->arg.s));
+	str = va_arg(args, char*);
+	if (str == NULL)
+		str = "(null)";
+	return (str);
+}
+
+void 	flag_s(va_list args, char *fmt, int *fin_size, FMT *f)
+{
+	setForPrint(fmt, f);
+	get_prec_min(f, fmt);
+	get_conversion(f, args);
+	f->arg_len = (int)ft_strlen(f->arg.s) - f->precision;
+	f->arg_len =  (f->arg_len < 0) ? 0 : f->arg_len;
+	f->precision = (!f->precision || f->precision > f->arg_len) ?
+	f->arg_len : f->precision;
+	*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
+	f->precision = f->arg_len <= 0 ? 0 : f->precision;
 	ft_print(f);
-	*fin_size += (f->min_width && f->min_width > f->precision) ? f->min_width : f->precision;
-	//free((void*)f);
+	free((void*)f);
 }

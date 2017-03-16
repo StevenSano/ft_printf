@@ -6,35 +6,31 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 16:55:23 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/01/24 16:55:28 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/03/09 15:51:06 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/ft_printf.h"
+#include "ft_printf.h"
 
 intmax_t		i_prec(char *length_mod, va_list args)
 {
 	intmax_t nb;
 
+
 	nb = va_arg(args, intmax_t);
-	if (!ft_strcmp(length_mod, "hh"))
-		nb = (signed char)nb;
+	if (length_mod == NULL)
+		return ((int)nb);
+	else if (!ft_strcmp(length_mod, "hh"))
+		return ((signed char)nb);
 	else if (!ft_strcmp(length_mod, "h"))
-		nb = (short)nb;
-	else if (!ft_strcmp(length_mod, "l"))
-		nb = (long)nb;
-	else if (!ft_strcmp(length_mod, "ll"))
-		nb = (long long)nb;
-	else if (!ft_strcmp(length_mod, "j"))
-		;
+		return ((short)nb);
 	else if (!ft_strcmp(length_mod, "z"))
-		nb = (size_t)nb;
-	else if (!ft_strcmp(length_mod, "i"))
-		nb = (int)nb;
-	return (nb);
+		return ((size_t)nb);
+	else
+		return (nb);
  }
 
-static void 	setForPrint(char *fmt, FMT *f)
+void 	setForPrint(char *fmt, FMT *f)
 {
 	while (*fmt)
 	{
@@ -44,23 +40,24 @@ static void 	setForPrint(char *fmt, FMT *f)
 			f->pos = 1;
 		else if (*fmt == '0' && !ft_isdigit(*(fmt - 1)) && *(fmt -1) != '.')
 			f->zero = 1;
-		if (*fmt == 'h' && !ft_strcmp(f->length_mod, "00"))
+		if (*fmt == 'h' && f->length_mod == NULL)
 			f->length_mod = (*(fmt + 1) == 'h') ? "hh" : "h";
-		if (*fmt == 'l' && !ft_strcmp(f->length_mod, "00"))
+		if (*fmt == 'l' && f->length_mod == NULL)
 			f->length_mod = (*(fmt + 1) == 'l') ? "ll" : "l";
-		if (*fmt == 'j' && !ft_strcmp(f->length_mod, "00"))
+		if (*fmt == 'j' && f->length_mod == NULL)
 			f->length_mod = "j";
+		if (*fmt == 'z' && f->length_mod == NULL)
+			f->length_mod = "z";
 		fmt++;
 	}
-	f->con_spec = 'i';
+
 }
 
 static void 	print_id(FMT *f)
 {
 	print_widthPrec(f);
-	if (f->arg.i < 0)
+	if (f->arg.i < 0 && f->con_spec == 'i')
 	{
-		f->min_width += 1;
 		if(f->neg)
 		{
 			f->arg.i *= (f->precision) ? -1 : 1;
@@ -70,62 +67,78 @@ static void 	print_id(FMT *f)
 		}
 		else
 		{
+			char *s;
+
 			if(f->zero)
+			{
+				f->width_prec_len += 1;
+				f->min_width -= 1;
 				ft_putchar('-');
+			}
+			s = ft_intmax_ttoa(f->zero ? f->arg.i * -1 : f->arg.i);
+			f->arg_len = (int)ft_strlen(s);
 			ft_putWhtSp(f);
-			ft_putstr(ft_intmax_ttoa(f->zero ? f->arg.i * -1 : f->arg.i));
+			ft_putstr(s);
 		}
-		f->min_width -= 1;
 	}
 	else
 		ft_print(f);
 }
 
-static void 	print_setlen(FMT *f, int *fin_size)
+void 	print_setlen(FMT *f, int *fin_size)
 {
+
 	if (f->min_width == 0 && f->precision == 0)
 	{
-		*fin_size += (f->pos && f->arg.i > -1) ?
-		ft_intmax_tlen(f->arg.i) + 1 : ft_intmax_tlen(f->arg.i);
-		if (f->pos && f->arg.i >= 0) //make macro to return single value
+		if (f->pos && f->arg.i >= 0)
+		{
+			*fin_size += 1;
 			ft_putchar('+');
+		}
 		print_conversion(f);
+		*fin_size += f->arg_len;
 	}
 	else
 	{
-		puts("here");
-		//add a counter to the structure and pass it to every while loop that prints
-		//also create function to hold while loops.
-		f->arg_len = ft_intmax_tlen(f->arg.i);
 		print_id(f);
-		if (f->min_width <= f->arg_len)
-			f->min_width = (f->pos && f->arg.i >= 0) ?
-			f->arg_len + 1 : f->arg_len;
-		if (f->precision <= f->arg_len)
-			f->precision = (f->pos && f->arg.i >= 0) ?
-			f->arg_len + 1 : f->arg_len;
-		*fin_size += (!f->precision) ? f->min_width : f->precision;
+		*fin_size += f->arg_len + f->width_prec_len;
 	}
 }
 
-void			flag_i(va_list args, char *fmt, int *fin_size)
+size_t prec_set_zero(char *fmt)
 {
-	FMT			*f;
+	size_t d;
 
-	f = set();
-	setForPrint(fmt, f);
+	d  = 0;
 	while (*fmt)
 	{
-		if (ft_isdigit(*fmt) && *fmt != '0')
-		{
-			if (*(fmt - 1) == '.')
-				f->precision = ft_digitInStr(&fmt);
-			else
-				f->min_width = ft_digitInStr(&fmt);
-		}
+		if (*fmt == '.')
+			d = 1;
 		fmt++;
 	}
+	return (d);
+}
+
+void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f)
+{
+	if (f->con_spec == 'i')
+		setForPrint(fmt, f);
+	else if (f->con_spec == 'u' || f->con_spec == 'o' ||
+	f->con_spec == 'x' || f->con_spec == 'X' || f->con_spec == 'p')
+		setForPrint_uox(fmt, f);
+	get_prec_min(f, fmt);
 	get_conversion(f, args);
-	print_setlen(f, fin_size);
-//	free(f);
+	if (prec_set_zero(fmt) && ((f->con_spec == 0 || f->arg.u == 0)))//&& !f->min_width && !f->precision))
+	{
+		if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u') && f->arg.u != 0)
+		{
+			get_lenprint_oxXp(f, 1);
+			*fin_size += 1;
+		}
+		else
+			*fin_size += 0;
+	}
+	else
+		print_setlen(f, fin_size);
+	free((void*)f);
 }
