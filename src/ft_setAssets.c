@@ -6,15 +6,15 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/17 11:28:55 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/03/09 15:52:13 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/03/16 17:54:30 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-struct fmt *f_set(void)
+struct fmt	*f_set(void)
 {
-	FMT *f;
+	FMT		*f;
 
 	IFTRUE(!(f = (FMT*)malloc(sizeof(FMT))), 0);
 	f->hash = 0;
@@ -31,29 +31,28 @@ struct fmt *f_set(void)
 	return (f);
 }
 
-void	get_conversion(FMT *f, va_list args)
+void		get_conversion(FMT *f, va_list args)
 {
-
 	if (f->con_spec == 'c')
 		f->arg.c = (unsigned char)va_arg(args, int);
 	else if (f->con_spec == 'C')
-		f->arg.wit = va_arg(args, wint_t); //use unsigned int instead
+		f->arg.wit = va_arg(args, wint_t);
 	else if (f->con_spec == 's')
 		f->arg.s = s_prec(args);
 	else if (f->con_spec == 'S')
-		f->arg.wct = va_arg(args, wchar_t*); //
+		f->arg.wct = va_arg(args, wchar_t*);
 	else if (f->con_spec == 'i' || f->con_spec == 'D')
 		f->arg.i = i_prec(f->length_mod, args);
 	else if (f->con_spec == 'u' || f->con_spec == 'o' ||
-			 f->con_spec == 'x' || f->con_spec == 'X')
+		f->con_spec == 'x' || f->con_spec == 'X')
 		f->arg.u = u_prec(f->length_mod, args);
 	else if (f->con_spec == 'p')
 		f->arg.u = p_prec(args);
 }
 
-static char		*str_to_uper(char *toup) //------put into libft!!!--------
+static char	*str_to_uper(char *toup)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (*toup)
@@ -66,7 +65,7 @@ static char		*str_to_uper(char *toup) //------put into libft!!!--------
 	return (toup - i);
 }
 
-char *get_lenprint_iu(FMT *f)
+char	*get_lenprint_iu(FMT *f)
 {
 	char *str;
 
@@ -78,55 +77,50 @@ char *get_lenprint_iu(FMT *f)
 	return (str);
 }
 
-char *get_lenprint_oxXp(FMT *f, char r)
+char	*get_lenprint_oxXp(FMT *f, char r)
 {
 	char *str;
 
 	if (f->con_spec == 'o')
-		str = ft_itoa_base(f->arg.u , 8);
+		str = ft_itoa_base(f->arg.u, 8);
 	if (f->con_spec == 'x' || f->con_spec == 'p')
-		{str = ft_itoa_base(f->arg.u , 16);}
+		str = ft_itoa_base(f->arg.u, 16);
 	if (f->con_spec == 'X')
-		str = str_to_uper(ft_itoa_base(f->arg.u , 16));
+		str = str_to_uper(ft_itoa_base(f->arg.u, 16));
 	f->arg_len = (int)ft_strlen(str);
-	if ((f->hash || f->con_spec == 'p'))
+	if (f->hash || f->con_spec == 'p')
 	{
 		if ((r == 1 || (f->min_width == 0 && f->precision == 0)))
 		{
 			if (f->con_spec == 'o')
 				ft_putstr("0");
-			else if ((f->con_spec == 'x' || f->con_spec == 'p') && f->arg.u != 0)
+			else if ((f->con_spec == 'x' || f->con_spec == 'p')
+					&& f->arg.u != 0)
 				ft_putstr("0x");
-			else if ((f->con_spec == 'X')  && f->arg.u != 0)
+			else if ((f->con_spec == 'X') && f->arg.u != 0)
 				ft_putstr("0X");
 		}
 		if (f->arg.u > 0)
 			f->arg_len += (f->con_spec == 'x' || f->con_spec == 'X' ||
-			f->con_spec == 'p' ) ? 2 : 1;
+			f->con_spec == 'p') ? 2 : 1;
 	}
 	return (str);
 }
 
-void print_conversion(FMT *f)
+void	print_conversion(FMT *f)
 {
 	if (f->con_spec == 'c')
 		ft_putchar(f->arg.c);
-	if (f->con_spec == 'C')
+	else if (f->con_spec == 'C')
 		ft_putchar(f->arg.wit);
-	if (f->con_spec == 's')
+	else if (f->con_spec == 's')
 		ft_putstr(ft_strndup(f->arg.s, f->arg_len <= 0 ? 0 : f->precision));
-	if (f->con_spec == 'S')
+	else if (f->con_spec == 'S')
 		ft_putstr(ft_strndup((char*)f->arg.wct, f->precision));
-	if (f->con_spec == 'i')
+	else if (f->con_spec == 'i' || f->con_spec == 'u')
 		ft_putstr(get_lenprint_iu(f));
-	if (f->con_spec == 'u')
-		ft_putstr(get_lenprint_iu(f));
-	if (f->con_spec == 'o')
+	else if (f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X')
 		ft_putstr(get_lenprint_oxXp(f, 0));
-	if (f->con_spec == 'x')
-		ft_putstr(get_lenprint_oxXp(f, 0));
-	if (f->con_spec == 'X')
-		ft_putstr(get_lenprint_oxXp(f, 0));
-	if (f->con_spec == 'p')
+	else if (f->con_spec == 'p')
 		ft_putstr(get_lenprint_oxXp(f, 1));
 }

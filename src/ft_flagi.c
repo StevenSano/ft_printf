@@ -6,7 +6,7 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/24 16:55:23 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/03/09 15:51:06 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/03/16 17:33:23 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 intmax_t		i_prec(char *length_mod, va_list args)
 {
 	intmax_t nb;
-
 
 	nb = va_arg(args, intmax_t);
 	if (length_mod == NULL)
@@ -28,17 +27,19 @@ intmax_t		i_prec(char *length_mod, va_list args)
 		return ((size_t)nb);
 	else
 		return (nb);
- }
+}
 
-void 	setForPrint(char *fmt, FMT *f)
+void	setforprint(char *fmt, FMT *f)
 {
 	while (*fmt)
 	{
 		if (*fmt == '-')
 			f->neg = 1;
+//		else if (*fmt == ' ' && f->sp == 0)
+	//		f->sp = 1;
 		else if (*fmt == '+')
 			f->pos = 1;
-		else if (*fmt == '0' && !ft_isdigit(*(fmt - 1)) && *(fmt -1) != '.')
+		else if (*fmt == '0' && !ft_isdigit(*(fmt - 1)) && *(fmt - 1) != '.')
 			f->zero = 1;
 		if (*fmt == 'h' && f->length_mod == NULL)
 			f->length_mod = (*(fmt + 1) == 'h') ? "hh" : "h";
@@ -50,15 +51,14 @@ void 	setForPrint(char *fmt, FMT *f)
 			f->length_mod = "z";
 		fmt++;
 	}
-
 }
 
-static void 	print_id(FMT *f)
+static void	print_id(FMT *f)
 {
-	print_widthPrec(f);
+	print_widthprec(f);
 	if (f->arg.i < 0 && f->con_spec == 'i')
 	{
-		if(f->neg)
+		if (f->neg)
 		{
 			f->arg.i *= (f->precision) ? -1 : 1;
 			print_conversion(f);
@@ -69,7 +69,7 @@ static void 	print_id(FMT *f)
 		{
 			char *s;
 
-			if(f->zero)
+			if (f->zero)
 			{
 				f->width_prec_len += 1;
 				f->min_width -= 1;
@@ -85,9 +85,8 @@ static void 	print_id(FMT *f)
 		ft_print(f);
 }
 
-void 	print_setlen(FMT *f, int *fin_size)
+void	print_setlen(FMT *f, int *fin_size)
 {
-
 	if (f->min_width == 0 && f->precision == 0)
 	{
 		if (f->pos && f->arg.i >= 0)
@@ -105,38 +104,30 @@ void 	print_setlen(FMT *f, int *fin_size)
 	}
 }
 
-size_t prec_set_zero(char *fmt)
-{
-	size_t d;
-
-	d  = 0;
-	while (*fmt)
-	{
-		if (*fmt == '.')
-			d = 1;
-		fmt++;
-	}
-	return (d);
-}
 
 void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f)
 {
 	if (f->con_spec == 'i')
-		setForPrint(fmt, f);
+		setforprint(fmt, f);
 	else if (f->con_spec == 'u' || f->con_spec == 'o' ||
 	f->con_spec == 'x' || f->con_spec == 'X' || f->con_spec == 'p')
 		setForPrint_uox(fmt, f);
 	get_prec_min(f, fmt);
 	get_conversion(f, args);
-	if (prec_set_zero(fmt) && ((f->con_spec == 0 || f->arg.u == 0)))//&& !f->min_width && !f->precision))
+	if (prec_set_zero(fmt) && ((f->arg.i == 0 || f->arg.u == 0)))
 	{
-		if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u') && f->arg.u != 0)
+		if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u')
+				&& f->arg.u != 0)
 		{
 			get_lenprint_oxXp(f, 1);
 			*fin_size += 1;
 		}
 		else
-			*fin_size += 0;
+		{
+			ft_putWhtSp(f);
+			*fin_size += (f->hash && f->con_spec == 'o') ? 1 :
+				f->width_prec_len;
+		}
 	}
 	else
 		print_setlen(f, fin_size);

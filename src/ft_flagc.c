@@ -6,15 +6,15 @@
 /*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 09:54:07 by hvillasa          #+#    #+#             */
-/*   Updated: 2017/03/09 15:50:46 by hvillasa         ###   ########.fr       */
+/*   Updated: 2017/03/16 17:19:07 by hvillasa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void flag_mod(char *fmt, int *fin_size, FMT *f)
+void	flag_mod(char *fmt, int *fin_size, FMT *f)
 {
-	setForPrint(fmt, f);
+	setforprint(fmt, f);
 	get_prec_min(f, fmt);
 	f->precision = 0;
 	f->arg_len = 1;
@@ -27,7 +27,7 @@ void flag_mod(char *fmt, int *fin_size, FMT *f)
 	*fin_size += f->min_width ? f->min_width : 1;
 }
 
-void get_prec_min(FMT *f, char *fmt)
+void	get_prec_min(FMT *f, char *fmt)
 {
 	while (*fmt)
 	{
@@ -42,9 +42,9 @@ void get_prec_min(FMT *f, char *fmt)
 	}
 }
 
-void flag_c(va_list args, char *fmt, int *fin_size, FMT *f)
+void	flag_c(va_list args, char *fmt, int *fin_size, FMT *f)
 {
-	setForPrint(fmt, f);
+	setforprint(fmt, f);
 	get_prec_min(f, fmt);
 	get_conversion(f, args);
 	f->arg_len = 1;

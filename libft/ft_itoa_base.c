@@ -1,4 +1,16 @@
- #include "libft.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hvillasa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/16 18:25:14 by hvillasa          #+#    #+#             */
+/*   Updated: 2017/03/16 18:25:24 by hvillasa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
 
 static int	nbr_base_len(unsigned long nbr, int base)
 {
@@ -12,7 +24,7 @@ static int	nbr_base_len(unsigned long nbr, int base)
 	}
 	return (len);
 }
-//fix this shit!!!
+
 char		*ft_itoa_base(uintmax_t nbr, int base)
 {
 	char	*str;
