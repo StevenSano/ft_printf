@@ -72,7 +72,12 @@ char	*get_lenprint_iu(FMT *f)
 	if (f->con_spec == 'i')
 		str = ft_intmax_ttoa(f->arg.i);
 	else
-		str = ft_uintmax_ttoa(f->arg.u);
+	{
+		if (f->arg.u == 0)
+			str = "0";
+		else
+			str = ft_uintmax_ttoa(f->arg.u);
+	}
 	f->arg_len = (int)ft_strlen(str);
 	return (str);
 }

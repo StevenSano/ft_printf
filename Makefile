@@ -97,13 +97,11 @@ OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
 
-%.o : %.c
-	@$(CC) $(FLAGS) -Iinc -o $@ -c $^
-
-
 $(NAME): $(OBJ)
 	@ar rc $@ $^
 
+%.o : %.c
+	@$(CC) $(FLAGS) -Iinc -o $@ -c $^
 
 clean:
 	@make clean -C libft
