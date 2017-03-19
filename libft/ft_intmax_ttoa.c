@@ -18,11 +18,8 @@ static	int	get_len(intmax_t n)
 
 	len = 0;
 	if (n <= 0)
-	{
-		n *= -1;
 		len++;
-	}
-	while (n > 0)
+	while (n != 0)
 	{
 		n /= 10;
 		len++;
@@ -35,6 +32,8 @@ char		*ft_intmax_ttoa(intmax_t n)
 	size_t	len;
 	char	*str;
 
+	if ((unsigned long)n == -9223372036854775808UL)
+		return ("-9223372036854775808");
 	len = get_len(n);
 	str = ft_strnew(len);
 	if (!str)
@@ -46,7 +45,7 @@ char		*ft_intmax_ttoa(intmax_t n)
 	}
 	if (n == 0)
 		str[--len] = '0';
-	while (n > 0)
+	while (n != 0)
 	{
 		str[--len] = (n % 10) + '0';
 		n /= 10;

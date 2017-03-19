@@ -16,7 +16,7 @@ intmax_t		i_prec(char *length_mod, va_list args)
 {
 	intmax_t nb;
 
-	nb = va_arg(args, intmax_t);
+	nb = (intmax_t)va_arg(args, intmax_t);
 	if (length_mod == NULL)
 		return ((int)nb);
 	else if (!ft_strcmp(length_mod, "hh"))
@@ -35,8 +35,8 @@ void	setforprint(char *fmt, FMT *f)
 	{
 		if (*fmt == '-')
 			f->neg = 1;
-//		else if (*fmt == ' ' && f->sp == 0)
-	//		f->sp = 1;
+		else if (*fmt == ' ' && f->sp == 0)
+			f->sp = 1;
 		else if (*fmt == '+')
 			f->pos = 1;
 		else if (*fmt == '0' && !ft_isdigit(*(fmt - 1)) && *(fmt - 1) != '.')
