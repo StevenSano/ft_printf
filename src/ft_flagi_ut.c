@@ -18,7 +18,7 @@ static void	check_noneg(int min_width, FMT *f)
 	{
 		min_width = (f->precision < f->arg_len) ?
 			f->min_width - f->arg_len : f->min_width - f->precision;
-		min_width -= (f->pos || f->arg.i < 0) ? 1 : 0;
+		min_width -= ((f->pos || f->arg.i < 0) || (f->pos && f->arg.i < 0)) ? 1 : 0;
 		if (f->hash && (f->con_spec != 'i' && f->con_spec != 'u'))
 			f->min_width += (f->con_spec == 'x' || f->con_spec == 'X' ||
 			f->con_spec == 'p') ? 2 : 1;

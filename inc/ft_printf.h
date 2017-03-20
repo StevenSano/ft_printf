@@ -66,7 +66,6 @@ void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f);
 intmax_t		i_prec(char *length_mod, va_list args);
 void			print_setlen(FMT *f, int *fin_size);
 void			setforprint(char *fmt, FMT *f);
-
 /*
 **	ft_flagi_ut.c
 */
@@ -89,7 +88,6 @@ void			ft_print(FMT *f);
 /*
 **	ft_setAssets.c
 */
-
 char			*get_lenprint_iu(FMT *f);
 char			*get_lenprint_oxXp(FMT *f, char r);
 struct fmt		*f_set(void);

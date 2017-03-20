@@ -94,12 +94,18 @@ void	print_setlen(FMT *f, int *fin_size)
 			*fin_size += 1;
 			ft_putchar('+');
 		}
+		if (f->arg.i > 0 && f->sp && f->con_spec == 'i' && !f->pos)
+		{
+			ft_putchar(' ');
+			*fin_size += 1;
+		}
 		print_conversion(f);
 		*fin_size += f->arg_len;
 	}
 	else
 	{
 		print_id(f);
+		f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len; 
 		*fin_size += f->arg_len + f->width_prec_len;
 	}
 }
@@ -124,9 +130,14 @@ void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f)
 		}
 		else
 		{
-			ft_putWhtSp(f);
-			*fin_size += (f->hash && f->con_spec == 'o') ? 1 :
-				f->width_prec_len;
+			if (f->arg.i == 0 && f->con_spec == 'i' && f->precision)
+				print_setlen(f, fin_size);
+			else
+			{
+				ft_putWhtSp(f);
+				*fin_size += (f->hash && f->con_spec == 'o') ? 1 :
+					f->width_prec_len;
+			}
 		}
 	}
 	else
