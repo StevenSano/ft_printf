@@ -32,6 +32,7 @@ typedef union	type_of
 
 typedef struct	fmt
 {
+	char mb[4];
 	char	hash;
 	char	zero;
 	char	sp;
@@ -57,6 +58,7 @@ void			flag_c(va_list args, char *fmt, int *fin_size, FMT *f);
 /*
 **	ft_flags.c
 */
+void	flag_C(va_list args, char *fmt, int *fin_size, FMT *f);
 char			*s_prec(va_list args);
 void			flag_s(va_list args, char *fmt, int *fin_size, FMT *f);
 /*

@@ -42,6 +42,19 @@ void	get_prec_min(FMT *f, char *fmt)
 	}
 }
 
+void	flag_C(va_list args, char *fmt, int *fin_size, FMT *f)
+{
+	setforprint(fmt, f);
+	get_prec_min(f, fmt);
+	get_conversion(f, args);
+	f->arg_len = ft_wctomb(f->mb, f->arg.wit);
+	ft_print(f);
+	*fin_size += f->min_width ? f->min_width : f->arg_len;
+	free((void*)f);
+
+
+}
+
 void	flag_c(va_list args, char *fmt, int *fin_size, FMT *f)
 {
 	setforprint(fmt, f);
