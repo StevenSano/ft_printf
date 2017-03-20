@@ -99,5 +99,7 @@ intmax_t		ft_intmax_tlen(intmax_t n);
 int				ft_pow(int nb, int pow);
 char			*ft_itoa_base(uintmax_t nbr, int base);
 char			*ft_uintmax_ttoa(uintmax_t n);
+void 			ft_putwchar(wchar_t chr);
+
 
 #endif

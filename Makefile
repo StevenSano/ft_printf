@@ -92,7 +92,7 @@ SRC		= 	src/ft_printf.c \
 			libft/ft_intmax_tlen.c \
 			libft/ft_uintmax_ttoa.c \
 			libft/ft_itoa_base.c \
-
+			libft/ft_putwchar.c \
 OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
