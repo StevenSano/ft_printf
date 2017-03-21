@@ -99,8 +99,7 @@ char	*get_lenprint_oxXp(FMT *f, char r)
 		{
 			if (f->con_spec == 'o')
 				ft_putstr("0");
-			else if ((f->con_spec == 'x' || f->con_spec == 'p')
-					&& f->arg.u != 0)
+			else if ((f->con_spec == 'x' || f->con_spec == 'p'))
 				ft_putstr("0x");
 			else if ((f->con_spec == 'X') && f->arg.u != 0)
 				ft_putstr("0X");
