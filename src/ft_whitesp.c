@@ -104,7 +104,7 @@ void	ft_print(FMT *f)
 			get_lenprint_oxXp(f, 1);
 			f->zero = 1;
 		}
-		if (f->con_spec != 's' && f->con_spec != 'c' && f->con_spec != 'C')
+		if (f->con_spec != 'S' && f->con_spec != 's' && f->con_spec != 'c' && f->con_spec != 'C')
 			f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
 			get_lenprint_oxXp(f, 0);
 		ft_putWhtSp(f);
