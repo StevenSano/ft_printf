@@ -29,13 +29,6 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 			flag_mod(s, fin_size, f);
 			break ;
 		}
-		else if (**fmt == 'c')
-		{
-			f->con_spec = **fmt;
-			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
-			flag_c(args, s, fin_size, f);
-			break ;
-		}
 		else if (**fmt == 'C')
 		{
 			f->con_spec = **fmt;
@@ -43,6 +36,18 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 			flag_wc(args, s, fin_size, f);
 			break ;
 		}
+		else if (**fmt == 'S')
+		{
+			break ;
+		}
+		else if (**fmt == 'c')
+		{
+			f->con_spec = **fmt;
+			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
+			flag_c(args, s, fin_size, f);
+			break ;
+		}
+
 		else if (**fmt == 's' || **fmt == 'S')
 		{
 			f->con_spec = **fmt;
