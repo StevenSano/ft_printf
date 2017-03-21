@@ -45,7 +45,6 @@ void	get_prec_min(FMT *f, char *fmt)
 void print_wc(FMT *f)
 {
 	char mb[4];
-	char *m;
 
 	f->arg_len  = ft_wctomb(mb, f->arg.wit);
 	write(1, mb, f->arg_len);

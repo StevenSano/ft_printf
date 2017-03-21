@@ -121,7 +121,7 @@ void	print_conversion(FMT *f)
 	else if (f->con_spec == 's')
 		ft_putstr(ft_strndup(f->arg.s, f->arg_len <= 0 ? 0 : f->precision));
 	else if (f->con_spec == 'S')
-		ft_putstr(ft_strndup((char*)f->arg.wct, f->precision));
+		{}//ft_putstr(ft_strndup((char*)f->arg.wct, f->precision));
 	else if (f->con_spec == 'i' || f->con_spec == 'u')
 		ft_putstr(get_lenprint_iu(f));
 	else if (f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X')
