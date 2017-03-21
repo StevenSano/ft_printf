@@ -87,7 +87,7 @@ static void	print_id(FMT *f)
 
 void	print_setlen(FMT *f, int *fin_size)
 {
-	if (f->min_width == 0 && f->precision == 0)
+	if ((f->min_width == 0 && f->precision == 0))
 	{
 		if (f->pos && f->arg.i >= 0)
 		{
@@ -105,7 +105,8 @@ void	print_setlen(FMT *f, int *fin_size)
 	else
 	{
 		print_id(f);
-		f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len; 
+		f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len;
+
 		*fin_size += f->arg_len + f->width_prec_len;
 	}
 }
