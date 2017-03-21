@@ -71,7 +71,6 @@ static void	print_id(FMT *f)
 
 			if (f->zero)
 			{
-				f->width_prec_len += 1;
 				f->min_width -= 1;
 				ft_putchar('-');
 			}
@@ -106,6 +105,8 @@ void	print_setlen(FMT *f, int *fin_size)
 	{
 		print_id(f);
 		f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len;
+		f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
+		get_lenprint_oxXp(f, 0);
 
 		*fin_size += f->arg_len + f->width_prec_len;
 	}
