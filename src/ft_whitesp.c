@@ -73,6 +73,8 @@ void	ft_putWhtSp(FMT *f)
 	}
 	else
 	{
+		if ((f->con_spec == 'p') && f->hash)
+			min_width -= 2 ;
 		while (min_width-- > 0)
 			ft_putchar(' ');
 		if (f->pos && !f->neg && f->arg.i >= 0)

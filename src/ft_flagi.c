@@ -71,6 +71,7 @@ static void	print_id(FMT *f)
 
 			if (f->zero)
 			{
+				//
 				f->min_width -= 1;
 				ft_putchar('-');
 			}

@@ -88,7 +88,7 @@ char	*get_lenprint_oxXp(FMT *f, char r)
 
 	if (f->con_spec == 'o')
 		str = ft_itoa_base(f->arg.u, 8);
-	if (f->con_spec == 'x' || f->con_spec == 'p')
+	if ((f->con_spec == 'x' || f->con_spec == 'p'))
 		str = ft_itoa_base(f->arg.u, 16);
 	if (f->con_spec == 'X')
 		str = str_to_uper(ft_itoa_base(f->arg.u, 16));
@@ -99,7 +99,7 @@ char	*get_lenprint_oxXp(FMT *f, char r)
 		{
 			if (f->con_spec == 'o')
 				ft_putstr("0");
-			else if ((f->con_spec == 'x' || f->con_spec == 'p'))
+			else if ((f->con_spec == 'x' && f->arg.u != 0) || (f->con_spec == 'p'))
 				ft_putstr("0x");
 			else if ((f->con_spec == 'X') && f->arg.u != 0)
 				ft_putstr("0X");
