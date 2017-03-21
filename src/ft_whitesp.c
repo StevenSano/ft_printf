@@ -73,7 +73,7 @@ void	ft_putWhtSp(FMT *f)
 	}
 	else
 	{
-		if ((f->con_spec == 'p') && f->hash)
+		if (f->con_spec == 'p')
 			min_width -= 2 ;
 		while (min_width-- > 0)
 			ft_putchar(' ');
@@ -92,8 +92,7 @@ void	ft_print(FMT *f)
 	{
 		if (f->con_spec == 'i' && f->pos && f->arg.i >= 0)
 			ft_putchar('+');
-		if (f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X'
-			|| f->con_spec == 'p')
+		if (f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X')
 			get_lenprint_oxXp(f, 1);
 		print_conversion(f);
 		ft_putWhtSp(f);
