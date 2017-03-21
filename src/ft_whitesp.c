@@ -58,7 +58,6 @@ void	ft_putWhtSp(FMT *f)
 	min_width = (f->con_spec != 's') ? f->min_width - f->arg_len :
 		f->min_width - f->arg_len;
 	f->width_prec_len += (min_width <= 0) ? 0 : min_width;
-	//f->width_prec_len = (f->width_prec_len < 0 && f->precision) ? 0 : min_width;
 	if (f->pos && f->arg.i >= 0)
 		min_width -= 1;
 	if (f->zero)
@@ -105,7 +104,7 @@ void	ft_print(FMT *f)
 			get_lenprint_oxXp(f, 1);
 			f->zero = 1;
 		}
-		if (f->con_spec != 's' && f->con_spec != 'c')
+		if (f->con_spec != 's' && f->con_spec != 'c' && f->con_spec != 'C')
 			f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
 			get_lenprint_oxXp(f, 0);
 		ft_putWhtSp(f);

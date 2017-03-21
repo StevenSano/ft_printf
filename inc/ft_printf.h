@@ -23,16 +23,15 @@
 typedef union	type_of
 {
 	unsigned char c;
-	wint_t			wit;
 	char			*s;
 	wchar_t			*wct;
+	wint_t			wit;
 	intmax_t		i;
 	uintmax_t		u;
 }				TYPE_OF;
 
 typedef struct	fmt
 {
-	char mb[4];
 	char	hash;
 	char	zero;
 	char	sp;
@@ -53,12 +52,13 @@ int				ft_printf(const char *format, ...);
 ** %[flag][min width][precision][length modifier][conversion specifier]
 ** flags & c
 */
+char 			*print_wc(FMT *f);
 void			flag_mod(char *fmt, int *fin_size, FMT *f);
 void			flag_c(va_list args, char *fmt, int *fin_size, FMT *f);
 /*
 **	ft_flags.c
 */
-void	flag_C(va_list args, char *fmt, int *fin_size, FMT *f);
+void			flag_wc(va_list args, char *fmt, int *fin_size, FMT *f);
 char			*s_prec(va_list args);
 void			flag_s(va_list args, char *fmt, int *fin_size, FMT *f);
 /*

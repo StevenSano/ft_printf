@@ -40,7 +40,7 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 		{
 			f->con_spec = **fmt;
 			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
-			flag_C(args, s, fin_size, f);
+			flag_wc(args, s, fin_size, f);
 			break ;
 		}
 		else if (**fmt == 's' || **fmt == 'S')
