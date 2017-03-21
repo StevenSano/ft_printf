@@ -100,7 +100,7 @@ void	print_setlen(FMT *f, int *fin_size)
 			*fin_size += 1;
 		}
 		print_conversion(f);
-		*fin_size += f->arg_len;
+		*fin_size += (f->con_spec == 'p' && f->arg.u == 0) ? f->arg_len + 2: f->arg_len;
 	}
 	else
 	{
