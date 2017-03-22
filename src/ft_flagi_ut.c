@@ -14,7 +14,7 @@
 
 static void	check_noneg(int min_width, FMT *f)
 {
-	if (f->min_width > f->precision && (f->precision != f->arg_len))
+	if ((f->min_width > f->precision && (f->precision != f->arg_len)) || (f->precision == f->arg_len && f->min_width > f->precision && f->arg.i > 0))
 	{
 		min_width = (f->precision < f->arg_len) ?
 			f->min_width - f->arg_len : f->min_width - f->precision;
