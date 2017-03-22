@@ -108,6 +108,12 @@ void	ft_print(FMT *f)
 		if (f->con_spec != 'S' && f->con_spec != 's' && f->con_spec != 'c' && f->con_spec != 'C')
 			f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
 			get_lenprint_oxXp(f, 0);
+		if (f->con_spec == 'i' && f->sp && f->zero && f->min_width && !f->precision)
+		{
+			f->width_prec_len += 1;
+			f->min_width -= 1;
+			ft_putchar(' ');
+		}
 		ft_putWhtSp(f);
 		print_conversion(f);
 	}

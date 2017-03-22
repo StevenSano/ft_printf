@@ -109,7 +109,8 @@ void	print_setlen(FMT *f, int *fin_size)
 		f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len;
 		f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
 		get_lenprint_oxXp(f, 0);
-
+		if (f->pos && f->arg.i > 0 && f->min_width < f->arg_len)
+			*fin_size += 1;
 		*fin_size += f->arg_len + f->width_prec_len;
 	}
 }
