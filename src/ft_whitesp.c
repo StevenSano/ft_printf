@@ -92,7 +92,7 @@ void	ft_print(FMT *f)
 	{
 		if (f->con_spec == 'i' && f->pos && f->arg.i >= 0)
 			ft_putchar('+');
-		if (f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X')
+		if ((f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X'))
 			get_lenprint_oxXp(f, 1);
 		print_conversion(f);
 		ft_putWhtSp(f);

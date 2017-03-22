@@ -93,11 +93,11 @@ char	*get_lenprint_oxXp(FMT *f, char r)
 	if (f->con_spec == 'X')
 		str = str_to_uper(ft_itoa_base(f->arg.u, 16));
 	f->arg_len = (int)ft_strlen(str);
-	if (f->hash || f->con_spec == 'p')
+	if (f->hash || (f->con_spec == 'p'))
 	{
 		if ((r == 1 || (f->min_width == 0 && f->precision == 0)))
 		{
-			if (f->con_spec == 'o')
+			if (f->con_spec == 'o' && f->arg.u != 0)
 				ft_putstr("0");
 			else if ((f->con_spec == 'x' && f->arg.u != 0) || (f->con_spec == 'p'))
 				ft_putstr("0x");

@@ -103,12 +103,12 @@ static int	assets(va_list args, const char *format)
 	fin_size = 0;
 	while (*format)
 	{
-		if (*format != F)
+		if (*format != '%')
 		{
 			ft_putchar(*format);
 			fin_size++;
 		}
-		if (*format == F)
+		if (*format == '%')
 		{
 			format++;
 			get_asset(&format, args, &fin_size);

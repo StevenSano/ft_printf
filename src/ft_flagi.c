@@ -100,7 +100,8 @@ void	print_setlen(FMT *f, int *fin_size)
 			*fin_size += 1;
 		}
 		print_conversion(f);
-		*fin_size += (f->con_spec == 'p' && f->arg.u == 0) ? f->arg_len + 2: f->arg_len;
+		*fin_size += (f->con_spec == 'p' && f->arg.u == 0) ?
+		 	f->arg_len + 2: f->arg_len;
 	}
 	else
 	{
@@ -138,6 +139,8 @@ void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f)
 			else
 			{
 				ft_putWhtSp(f);
+				if (f->con_spec == 'o' && f->hash)
+					ft_putchar('0');
 				*fin_size += (f->hash && f->con_spec == 'o') ? 1 :
 					f->width_prec_len;
 			}
