@@ -105,6 +105,11 @@ void	print_setlen(FMT *f, int *fin_size)
 	}
 	else
 	{
+		if (f->con_spec == 'i' && f->sp && !f->neg && f->precision > f->min_width)
+		{
+			f->width_prec_len += 1;
+			ft_putchar(' ');
+		}
 		print_id(f);
 		f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len;
 		f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
