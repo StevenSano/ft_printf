@@ -31,13 +31,16 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 		}
 		else if (**fmt == 'C')
 		{
-			f->con_spec = **fmt;
+			f->con_spec = 'C';
 			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
 			flag_wc(args, s, fin_size, f);
 			break ;
 		}
 		else if (**fmt == 'S')
 		{
+			//f->con_spec = 'S';
+			//s = ft_strndup((*fmt) - flags_len, flags_len + 1);
+			//flag_ls(args, s, fin_size, f);
 			break ;
 		}
 		else if (**fmt == 'c')
