@@ -99,7 +99,7 @@ void	ft_print(FMT *f)
 	}
 	else
 	{
-		if (f->zero && (f->con_spec != 'i' && f->con_spec != 'u'))
+		if (f->zero && (f->con_spec != 'i' && f->con_spec != 'u' && f->con_spec != 'c' && f->con_spec != 's'))
 		{
 			f->zero = 0;
 			get_lenprint_oxXp(f, 1);
