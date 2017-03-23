@@ -52,7 +52,7 @@ int				ft_printf(const char *format, ...);
 ** %[flag][min width][precision][length modifier][conversion specifier]
 ** flags & c
 */
-void 			print_wc(FMT *f);
+void 			print_wc(FMT *f, char p);
 void			flag_mod(char *fmt, int *fin_size, FMT *f);
 void			flag_c(va_list args, char *fmt, int *fin_size, FMT *f);
 /*

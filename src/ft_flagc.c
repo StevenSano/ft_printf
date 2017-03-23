@@ -42,12 +42,13 @@ void	get_prec_min(FMT *f, char *fmt)
 	}
 }
 
-void print_wc(FMT *f)
+void print_wc(FMT *f, char p)
 {
 	char mb[4];
 
 	f->arg_len  = ft_wctomb(mb, f->arg.wit);
-	write(1, mb, f->arg_len);
+	if (p)
+		write(1, mb, f->arg_len);
 }
 
 
@@ -58,6 +59,7 @@ void	flag_wc(va_list args, char *fmt, int *fin_size, FMT *f)
 	get_prec_min(f, fmt);
 	f->precision = 0;
 	get_conversion(f, args);
+	print_wc(f, 0);
 	ft_print(f);
 	*fin_size += f->min_width ? f->min_width : f->arg_len;
 	free((void*)f);

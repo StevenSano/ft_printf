@@ -116,7 +116,7 @@ void	print_conversion(FMT *f)
 	if (f->con_spec == 'c')
 		ft_putchar(f->arg.c);
 	else if (f->con_spec == 'C')
-		print_wc(f);
+		print_wc(f, 1);
 	else if (f->con_spec == 's')
 		ft_putstr(ft_strndup(f->arg.s, f->arg_len <= 0 ? 0 : f->precision));
 	else if (f->con_spec == 'S')
