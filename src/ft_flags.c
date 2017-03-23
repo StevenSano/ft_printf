@@ -27,8 +27,8 @@ wchar_t *ls_prec(va_list args)
 	wchar_t *wstr;
 
 	wstr = va_arg(args, wchar_t*);
-	//if (wstr == NULL)
-		//wstr = (wchar_t*)"(null)";
+	if (wstr == NULL)
+		wstr = (wchar_t*)"(null)";
 	return (wstr);
 }
 
@@ -39,12 +39,17 @@ void print_ls(wchar_t *wct, int len)
 
 	len += 1;
 	size = 0;
-	while(*wct)
+	if (wct == (wchar_t*)"(null)")
+		ft_putstr("(null)");
+	else
 	{
-			size = ft_wctomb(mb, *wct);
-			write(1, mb, size);
-			wct++;
-	}
+		while(*wct)
+		{
+				size = ft_wctomb(mb, *wct);
+				write(1, mb, size);
+				wct++;
+			}
+		}
 }
 
 int ft_wcstrlen(wchar_t *wct)
@@ -66,7 +71,7 @@ void	flag_ls(va_list args, char *fmt, int *fin_size, FMT *f)
 	setforprint(fmt, f);
 	get_prec_min(f, fmt);
 	get_conversion(f, args);
-	f->arg_len = ft_wcstrlen(f->arg.wct);
+	f->arg_len = f->arg.wct == (wchar_t*)"(null)" ? 6 : ft_wcstrlen(f->arg.wct);
 	f->arg_len = (f->arg_len < 0) ? 0 : f->arg_len;
 	f->precision = (!f->precision || f->precision > f->arg_len) ?
 	f->arg_len : f->precision;

@@ -55,7 +55,7 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 			break ;
 		}
 
-		else if (**fmt == 's' || **fmt == 'S')
+		else if (**fmt == 's')
 		{
 			f->con_spec = **fmt;
 			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
@@ -97,6 +97,10 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 			f->con_spec = 'p';
 			flag_i(args, s, fin_size, f);
 			break ;
+		}
+		else if (*((*fmt) + 1) == 0)
+		{
+			break;
 		}
 		(*fmt)++;
 		flags_len++;
