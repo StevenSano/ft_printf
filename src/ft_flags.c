@@ -37,13 +37,13 @@ void print_ls(wchar_t *wct, int len)
 	int size;
 	char mb[4];
 
+	len += 1;
 	size = 0;
-	while(*wct || len)
+	while(*wct)
 	{
 			size = ft_wctomb(mb, *wct);
-			write(1, wct, size);
+			write(1, mb, size);
 			wct++;
-			len--;
 	}
 }
 
@@ -71,9 +71,7 @@ void	flag_ls(va_list args, char *fmt, int *fin_size, FMT *f)
 	f->precision = (!f->precision || f->precision > f->arg_len) ?
 	f->arg_len : f->precision;
 	*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
-
 	f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
-
 	ft_print(f);
 	free((void*)f);
 
