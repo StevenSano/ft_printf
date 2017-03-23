@@ -114,6 +114,12 @@ void	ft_print(FMT *f)
 			f->min_width -= 1;
 			ft_putchar(' ');
 		}
+		if(f->zero && f->sp && f->min_width && !f->precision && f->con_spec == 'i')
+		{
+			f->width_prec_len += 1;
+			f->min_width -= 1;
+			ft_putchar(' ');
+		}
 		ft_putWhtSp(f);
 		print_conversion(f);
 	}
