@@ -29,8 +29,10 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 			flag_mod(s, fin_size, f);
 			break ;
 		}
-		else if (**fmt == 'C')
+		else if ((**fmt == 'l' && *((*fmt) + 1) == 'c') || **fmt == 'C')
 		{
+			if (**fmt == 'l')
+				(*fmt)++;
 			f->con_spec = 'C';
 			s = ft_strndup((*fmt) - flags_len, flags_len + 1);
 			flag_wc(args, s, fin_size, f);
