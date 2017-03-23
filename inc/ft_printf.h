@@ -23,7 +23,7 @@
 typedef union	type_of
 {
 	unsigned char c;
-	char			*s;
+	char				*s;
 	wchar_t			*wct;
 	wint_t			wit;
 	intmax_t		i;
@@ -55,10 +55,16 @@ int				ft_printf(const char *format, ...);
 void 			print_wc(FMT *f, char p);
 void			flag_mod(char *fmt, int *fin_size, FMT *f);
 void			flag_c(va_list args, char *fmt, int *fin_size, FMT *f);
+void			flag_wc(va_list args, char *fmt, int *fin_size, FMT *f);
+
 /*
 **	ft_flags.c
 */
-void			flag_wc(va_list args, char *fmt, int *fin_size, FMT *f);
+void print_ls(wchar_t *wct, int len);
+int ft_wcstrlen(wchar_t *wct);
+void	flag_ls(va_list args, char *fmt, int *fin_size, FMT *f);
+wchar_t *ls_prec(va_list args);
+
 char			*s_prec(va_list args);
 void			flag_s(va_list args, char *fmt, int *fin_size, FMT *f);
 /*

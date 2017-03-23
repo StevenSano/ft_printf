@@ -40,7 +40,7 @@ void		get_conversion(FMT *f, va_list args)
 	else if (f->con_spec == 's')
 		f->arg.s = s_prec(args);
 	else if (f->con_spec == 'S')
-		f->arg.wct = va_arg(args, wchar_t*);
+		f->arg.wct = ls_prec(args);
 	else if (f->con_spec == 'i' || f->con_spec == 'D')
 		f->arg.i = i_prec(f->length_mod, args);
 	else if (f->con_spec == 'u' || f->con_spec == 'o' ||
@@ -120,7 +120,7 @@ void	print_conversion(FMT *f)
 	else if (f->con_spec == 's')
 		ft_putstr(ft_strndup(f->arg.s, f->arg_len <= 0 ? 0 : f->precision));
 	else if (f->con_spec == 'S')
-		{}//ft_putstr(ft_strndup((char*)f->arg.wct, f->precision));
+		print_ls(f->arg.wct, f->precision);
 	else if (f->con_spec == 'i' || f->con_spec == 'u')
 		ft_putstr(get_lenprint_iu(f));
 	else if (f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X')
