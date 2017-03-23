@@ -116,6 +116,8 @@ void	print_setlen(FMT *f, int *fin_size)
 		get_lenprint_oxXp(f, 0);
 		if (f->pos && f->arg.i > 0 && f->min_width < f->arg_len)
 			*fin_size += 1;
+		else if (f->pos && f->zero && f->min_width && !f->precision && f->min_width <= f->arg_len)
+			*fin_size += 1;
 		*fin_size += f->arg_len + f->width_prec_len;
 	}
 }
