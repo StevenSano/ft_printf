@@ -24,6 +24,7 @@ SRC		= 	src/ft_printf.c \
 	  		src/ft_flagu.c \
 	  		src/ft_whitesp.c \
 	  		src/ft_setAssets.c \
+				src/ft_getasset.c \
 			libft/ft_strlen.c \
 			libft/ft_strdup.c \
 			libft/ft_strcpy.c \
@@ -98,13 +99,11 @@ OBJ		= $(SRC:.c=.o)
 
 all: $(NAME)
 
-%.o : %.c
-	@$(CC) $(FLAGS) -Iinc -o $@ -c $^
-
-
 $(NAME): $(OBJ)
 	@ar rc $@ $^
 
+%.o : %.c
+	@$(CC) $(FLAGS) -Iinc -o $@ -c $^
 
 clean:
 	@make clean -C libft

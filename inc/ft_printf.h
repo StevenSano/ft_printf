@@ -47,7 +47,7 @@ typedef struct	fmt
 }				FMT;
 
 int				ft_printf(const char *format, ...);
-
+void			get_asset(const char **fmt, va_list args, int *fin_size);
 /*
 ** %[flag][min width][precision][length modifier][conversion specifier]
 ** flags & c

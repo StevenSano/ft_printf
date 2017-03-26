@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
+/*
 static void	get_asset(const char **fmt, va_list args, int *fin_size)
 {
 	size_t flags_len;
@@ -106,6 +106,7 @@ static void	get_asset(const char **fmt, va_list args, int *fin_size)
 		flags_len++;
 	}
 }
+*/
 
 static int	assets(va_list args, const char *format)
 {
