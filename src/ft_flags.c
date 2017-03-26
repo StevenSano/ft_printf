@@ -93,9 +93,7 @@ void	flag_s(va_list args, char *fmt, int *fin_size, FMT *f)
 	f->precision = (!f->precision || f->precision > f->arg_len) ?
 	f->arg_len : f->precision;
 	*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
-
 	f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
-
 	ft_print(f);
 	free((void*)f);
 }
