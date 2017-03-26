@@ -28,7 +28,8 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 				fin_size, f);
 			break ;
 		}
-		else if (((**fmt == 'l' && *((*fmt) + 1) == 'c') || **fmt == 'C') || **fmt == 'c')
+		else if (((**fmt == 'l' && *((*fmt) + 1) == 'c') ||
+			**fmt == 'C') || **fmt == 'c')
 		{
 			if (**fmt == 'l')
 			{
@@ -45,7 +46,8 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 					fin_size, f);
 			break ;
 		}
-		else if (((**fmt == 'l' && *((*fmt) + 1) == 's') || **fmt == 'S') || **fmt == 's')
+		else if (((**fmt == 'l' && *((*fmt) + 1) == 's') || **fmt == 'S')
+			|| **fmt == 's')
 		{
 			if (**fmt == 'l')
 			{
@@ -62,22 +64,8 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 					fin_size, f);
 			break ;
 		}
-/*		else if (**fmt == 'c')
-		{
-			f->con_spec = **fmt;
-			flag_c(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-				fin_size, f);
-			break ;
-		} */
-/*		else if (**fmt == 's')
-		{
-			f->con_spec = **fmt;
-			flag_s(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-				fin_size, f);
-			break ;
-		}*/
-		else if (**fmt == 'i' || **fmt == 'd' ||
-		**fmt == 'u' || **fmt == 'o' || **fmt == 'x' || **fmt == 'X')
+		else if (**fmt == 'i' || **fmt == 'd' || **fmt == 'p' ||
+			**fmt == 'u' || **fmt == 'o' || **fmt == 'x' || **fmt == 'X')
 		{
 			f->con_spec = (**fmt == 'd') ? 'i' : **fmt;
 			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
@@ -99,13 +87,6 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 				fin_size, f);
 			break ;
 		}
-		else if (**fmt == 'p')
-		{
-			f->con_spec = 'p';
-			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-				fin_size, f);
-			break ;
-		}
 		else if (*((*fmt) + 1) == 0)
 			break;
 
@@ -113,3 +94,38 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 		flags_len++;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*		else if (**fmt == 'c')
+		{
+			f->con_spec = **fmt;
+			flag_c(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
+				fin_size, f);
+			break ;
+		} */
+/*		else if (**fmt == 's')
+		{
+			f->con_spec = **fmt;
+			flag_s(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
+				fin_size, f);
+			break ;
+		}*/
+		/*		else if (**fmt == 'p')
+				{
+					f->con_spec = 'p';
+					flag_i(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
+						fin_size, f);
+					break ;
+				}*/
