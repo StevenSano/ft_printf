@@ -11,6 +11,7 @@ static void sendasset(char **fmt, int *fin_size, size_t flags_len,
 
 }
 */
+
 void	get_asset(const char **fmt, va_list args, int *fin_size)
 {
 	size_t flags_len;
@@ -23,7 +24,6 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 
 		if (**fmt == F)
 		{
-
 			flag_mod( ft_strndup((*fmt) - flags_len, flags_len + 1),
 				fin_size, f);
 			break ;
@@ -42,8 +42,7 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 				flag_wc(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
 					fin_size, f);
 			else
-				flag_c(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-					fin_size, f);
+				flag_c(args, ft_strndup((*fmt) - flags_len, flags_len + 1), fin_size, f);
 			break ;
 		}
 		else if (((**fmt == 'l' && *((*fmt) + 1) == 's') || **fmt == 'S')
@@ -57,19 +56,16 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 			else
 				f->con_spec = **fmt;
 			if (f->con_spec == 'S')
-				flag_ls(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-					fin_size, f);
+				flag_ls(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 			else
-				flag_s(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-					fin_size, f);
+				flag_s(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 			break ;
 		}
 		else if (**fmt == 'i' || **fmt == 'd' || **fmt == 'p' ||
 			**fmt == 'u' || **fmt == 'o' || **fmt == 'x' || **fmt == 'X')
 		{
 			f->con_spec = (**fmt == 'd') ? 'i' : **fmt;
-			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-				fin_size, f);
+			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 			break ;
 		}
 		else if (**fmt == 'D' || **fmt == 'O' || **fmt == 'U')
@@ -83,8 +79,7 @@ void	get_asset(const char **fmt, va_list args, int *fin_size)
 			else if (**fmt == 'U')
 				f->con_spec = 'u';
 
-			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len + 1),
-				fin_size, f);
+			flag_i(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 			break ;
 		}
 		else if (*((*fmt) + 1) == 0)
