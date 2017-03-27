@@ -94,7 +94,7 @@ all: $(NAME)
 $(NAME):
 	$(CC) $(CFLAGS) -c $(SRC)
 	ar rc $(NAME) $(OBJ)
-	#ranlib $(NAME)
+	ranlib $(NAME)
 
 clean:
 	rm -rf $(OBJ)

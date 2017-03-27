@@ -18,8 +18,8 @@ static void set_lcc(const char **fmt, FMT *f, size_t flags_len, va_list args,
 {
 	if (**fmt == 'l')
 	{
-			(*fmt)++;
-			f->con_spec = 'C';
+		(*fmt)++;
+		f->con_spec = 'C';
 	}
 	else
 		f->con_spec = **fmt;

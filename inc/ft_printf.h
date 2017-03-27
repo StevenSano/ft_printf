@@ -22,8 +22,8 @@
 
 typedef union	type_of
 {
-	unsigned char c;
-	char				*s;
+	unsigned char	c;
+	char			*s;
 	wchar_t			*wct;
 	wint_t			wit;
 	intmax_t		i;
