@@ -10,12 +10,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all, clean, fclean, re
-
-NAME	= libftprintf.a
-CC		= gcc
-FLAGS	= -Wall -Wextra -Werror
-
 SRC		= 	src/ft_printf.c \
 			src/ft_print.c \
 			src/ft_flagc.c \
@@ -97,11 +91,13 @@ SRC		= 	src/ft_printf.c \
 			libft/ft_wctomb.c \
 			libft/ft_strtouper.c \
 
+.PHONY: all, clean, fclean, re
+
+NAME	= libftprintf.a
+CC		= gcc
+FLAGS	= -Wall -Wextra -Werror
 
 OBJ		= $(SRC:.c=.o)
-OBJLIB = $(SRCLIB:.c=.o)
-
-
 
 all: $(NAME)
 
