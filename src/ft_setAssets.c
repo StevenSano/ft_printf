@@ -50,21 +50,6 @@ void		get_conversion(FMT *f, va_list args)
 		f->arg.u = p_prec(args);
 }
 
-static char	*str_to_uper(char *toup)
-{
-	int		i;
-
-	i = 0;
-	while (*toup)
-	{
-		if (*toup >= 'a' && *toup <= 'z')
-			*toup = ft_toupper(*toup);
-		toup++;
-		i++;
-	}
-	return (toup - i);
-}
-
 char	*get_lenprint_iu(FMT *f)
 {
 	char *str;
@@ -91,7 +76,7 @@ char	*get_lenprint_oxXp(FMT *f, char r)
 	if ((f->con_spec == 'x' || f->con_spec == 'p'))
 		str = ft_itoa_base(f->arg.u, 16);
 	if (f->con_spec == 'X')
-		str = str_to_uper(ft_itoa_base(f->arg.u, 16));
+		str = ft_strtouper(ft_itoa_base(f->arg.u, 16));
 	f->arg_len = (int)ft_strlen(str);
 	if (f->hash || (f->con_spec == 'p'))
 	{

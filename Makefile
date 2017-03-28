@@ -95,6 +95,7 @@ SRC		= 	src/ft_printf.c \
 			libft/ft_uintmax_ttoa.c \
 			libft/ft_itoa_base.c \
 			libft/ft_wctomb.c \
+			libft/ft_strtouper.c \
 
 
 OBJ		= $(SRC:.c=.o)

@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 
+
 static void print_noneg(FMT *f)
 {
 	if (f->zero && (f->con_spec != 'i' && f->con_spec != 'u' && f->con_spec != 'c' && f->con_spec != 's'))

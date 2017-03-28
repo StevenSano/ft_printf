@@ -100,5 +100,6 @@ int				ft_pow(int nb, int pow);
 char			*ft_itoa_base(uintmax_t nbr, int base);
 char			*ft_uintmax_ttoa(uintmax_t n);
 int 			ft_wctomb(char *mb, wchar_t wc);
+char			*ft_strtouper(char *toup);
 
 #endif
