@@ -60,11 +60,9 @@ void			flag_wc(va_list args, char *fmt, int *fin_size, FMT *f);
 /*
 **	ft_flags.c
 */
-void print_ls(wchar_t *wct, int len);
-int ft_wcstrlen(wchar_t *wct);
-void	flag_ls(va_list args, char *fmt, int *fin_size, FMT *f);
-wchar_t *ls_prec(va_list args);
-
+void 			print_ls(wchar_t *wct, int len);
+int 			ft_wcstrlen(wchar_t *wct);
+wchar_t 		*ls_prec(va_list args);
 char			*s_prec(va_list args);
 void			flag_s(va_list args, char *fmt, int *fin_size, FMT *f);
 /*
@@ -89,7 +87,7 @@ intmax_t		D_prec(char *length_mod, va_list args);
 /*
 **	ft_whitesp.c«»
 */
-size_t	prec_set_zero(char *fmt);
+size_t			prec_set_zero(char *fmt);
 size_t			ft_digitInStr(char **fmt);
 void			ft_putWhtSp(FMT *f);
 void			ft_print(FMT *f);

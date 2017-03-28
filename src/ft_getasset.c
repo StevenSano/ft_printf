@@ -39,10 +39,7 @@ static void set_lss(const char **fmt, FMT *f, size_t flags_len, va_list args,
 	}
 	else
 		f->con_spec = **fmt;
-	if (f->con_spec == 'S')
-		flag_ls(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
-	else
-		flag_s(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
+	flag_s(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 }
 
 void	get_asset(const char **fmt, va_list args, int *fin_size)

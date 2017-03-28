@@ -66,34 +66,24 @@ int ft_wcstrlen(wchar_t *wct)
 	return (len);
 }
 
-void	flag_ls(va_list args, char *fmt, int *fin_size, FMT *f)
-{
-	setforprint(fmt, f);
-	get_prec_min(f, fmt);
-	get_conversion(f, args);
-	f->arg_len = f->arg.wct == (wchar_t*)"(null)" ? 6 : ft_wcstrlen(f->arg.wct);
-	f->arg_len = (f->arg_len < 0) ? 0 : f->arg_len;
-	f->precision = (!f->precision || f->precision > f->arg_len) ?
-	f->arg_len : f->precision;
-	*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
-	f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
-	ft_print(f);
-	free((void*)f);
-
-}
-
-
 void	flag_s(va_list args, char *fmt, int *fin_size, FMT *f)
 {
 	setforprint(fmt, f);
 	get_prec_min(f, fmt);
 	get_conversion(f, args);
 	f->arg_len = (int)ft_strlen(f->arg.s);
-	f->arg_len = (f->arg_len < 0) ? 0 : f->arg_len;
+	if (f->con_spec == 'S')
+		f->arg_len = f->arg.wct == (wchar_t*)"(null)" ? 6 : ft_wcstrlen(f->arg.wct);
+	else
+		f->arg_len = (f->arg_len < 0) ? 0 : f->arg_len;
+
 	f->precision = (!f->precision || f->precision > f->arg_len) ?
 	f->arg_len : f->precision;
 	*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
-	f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
+	if (f->con_spec == 'S')
+		f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
+	else
+		f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
 	ft_print(f);
 	free((void*)f);
 }
