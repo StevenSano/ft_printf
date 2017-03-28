@@ -20,11 +20,29 @@ uintmax_t		p_prec(va_list args)
 	return (nb);
 }
 
+intmax_t		i_prec(char *length_mod, va_list args)
+{
+	intmax_t nb;
+
+	nb = (intmax_t)va_arg(args, intmax_t);
+	if (length_mod == NULL)
+		return ((int)nb);
+	else if (!ft_strcmp(length_mod, "hh"))
+		return ((signed char)nb);
+	else if (!ft_strcmp(length_mod, "h"))
+		return ((short)nb);
+	else if (!ft_strcmp(length_mod, "z"))
+		return ((size_t)nb);
+	else
+		return (nb);
+}
+
+
 uintmax_t		u_prec(char *length_mod, va_list args)
 {
 	uintmax_t	nb;
 
-	nb = (uintmax_t)va_arg(args, uintmax_t);	
+	nb = (uintmax_t)va_arg(args, uintmax_t);
 	if (length_mod == NULL)
 		return ((unsigned)nb);
 	else if (!ft_strcmp(length_mod, "hh"))

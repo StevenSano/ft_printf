@@ -14,11 +14,14 @@
 
 static void	check_noneg(int min_width, FMT *f)
 {
-	if ((f->min_width > f->precision && (f->precision != f->arg_len)) || (f->precision == f->arg_len && f->min_width > f->precision && f->arg.i > 0))
+	if ((f->min_width > f->precision && (f->precision != f->arg_len)) ||
+		(f->precision == f->arg_len &&
+		f->min_width > f->precision && f->arg.i > 0))
 	{
 		min_width = (f->precision < f->arg_len) ?
 			f->min_width - f->arg_len : f->min_width - f->precision;
-		min_width -= ((f->pos || ((f->precision > f->arg_len) && f->arg.i < 0)) || (f->pos && f->arg.i < 0)) ? 1 : 0;
+		min_width -= ((f->pos || ((f->precision > f->arg_len) && f->arg.i < 0))
+			|| (f->pos && f->arg.i < 0)) ? 1 : 0;
 		if (f->hash && (f->con_spec != 'i' && f->con_spec != 'u'))
 			f->min_width += (f->con_spec == 'x' || f->con_spec == 'X' ||
 			f->con_spec == 'p') ? 2 : 1;
@@ -50,6 +53,25 @@ static void check_neg(int min_width, FMT *f)
 
 }
 
+
+static void elseneg(int min_width, FMT *f)
+{
+	if (f->pos && f->arg.i >= 0)
+	{
+		f->width_prec_len += 1;
+		ft_putchar('+');
+	}
+	if (f->min_width > f->precision)
+		check_neg(min_width, f);
+	else
+	{
+		f->min_width = f->precision;
+		f->zero = 1;
+		f->pos = 0;
+		f->neg = 0;
+	}
+}
+
 void	print_widthprec(FMT *f)
 {
 	int min_width;
@@ -62,21 +84,6 @@ void	print_widthprec(FMT *f)
 		if (!f->neg)
 			check_noneg(min_width, f);
 		else
-		{
-			if (f->pos && f->arg.i >= 0)
-			{
-				f->width_prec_len += 1;
-				ft_putchar('+');
-			}
-			if (f->min_width > f->precision)
-				check_neg(min_width, f);
-			else
-			{
-				f->min_width = f->precision;
-				f->zero = 1;
-				f->pos = 0;
-				f->neg = 0;
-			}
-		}
+			elseneg(min_width, f);
 	}
 }

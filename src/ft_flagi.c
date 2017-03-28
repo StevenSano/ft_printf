@@ -12,22 +12,7 @@
 
 #include "ft_printf.h"
 
-intmax_t		i_prec(char *length_mod, va_list args)
-{
-	intmax_t nb;
 
-	nb = (intmax_t)va_arg(args, intmax_t);
-	if (length_mod == NULL)
-		return ((int)nb);
-	else if (!ft_strcmp(length_mod, "hh"))
-		return ((signed char)nb);
-	else if (!ft_strcmp(length_mod, "h"))
-		return ((short)nb);
-	else if (!ft_strcmp(length_mod, "z"))
-		return ((size_t)nb);
-	else
-		return (nb);
-}
 
 void	setforprint(char *fmt, FMT *f)
 {
