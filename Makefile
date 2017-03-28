@@ -183,10 +183,10 @@ OBJ	= 	ft_printf.o \
 all: $(NAME)
 
 $(NAME):
-	make -C libft/ fclean && make -C libft/
-	$(CC) -c $(FLAGS) $(SRC) -Iinc/
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+	@make -C libft/ fclean && make -C libft/
+	@$(CC) -c $(FLAGS) $(SRC) -Iinc/
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
 	@make clean -C libft

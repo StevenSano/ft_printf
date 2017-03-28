@@ -73,7 +73,8 @@ void	flag_s(va_list args, char *fmt, int *fin_size, FMT *f)
 	get_conversion(f, args);
 	f->arg_len = (int)ft_strlen(f->arg.s);
 	if (f->con_spec == 'S')
-		f->arg_len = f->arg.wct == (wchar_t*)"(null)" ? 6 : ft_wcstrlen(f->arg.wct);
+		f->arg_len = f->arg.wct == (wchar_t*)"(null)" ?
+			6 : ft_wcstrlen(f->arg.wct);
 	else
 		f->arg_len = (f->arg_len < 0) ? 0 : f->arg_len;
 
