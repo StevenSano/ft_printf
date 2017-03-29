@@ -64,6 +64,20 @@ int ft_wcstrlen(wchar_t *wct)
 	return (len);
 }
 
+size_t	prec_set_zerostr(char *fmt)
+{
+	size_t d;
+
+	d = 0;
+	while (*fmt)
+	{
+		if (*fmt == '.' && (!ft_isdigit(*(fmt + 1)) || *(fmt + 1) == '0'))
+			d = 1;
+		fmt++;
+	}
+	return (d);
+}
+
 void	flag_s(va_list args, char *fmt, int *fin_size, FMT *f)
 {
 	setforprint(fmt, f);
@@ -83,6 +97,12 @@ void	flag_s(va_list args, char *fmt, int *fin_size, FMT *f)
 		f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
 	else
 		f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
-	ft_print(f);
+	if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len) && !f->zero)
+	{
+		f->min_width += f->precision;
+		ft_putWhtSp(f);
+	}
+	else
+		ft_print(f);
 	free((void*)f);
 }

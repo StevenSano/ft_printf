@@ -26,6 +26,7 @@ size_t	prec_set_zero(char *fmt)
 	return (d);
 }
 
+
 size_t		ft_digitInStr(char **fmt)
 {
 	char	*i_str;
