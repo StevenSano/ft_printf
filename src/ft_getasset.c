@@ -23,7 +23,7 @@ static void set_lcc(const char **fmt, FMT *f, size_t flags_len, va_list args,
 	}
 	else
 		f->con_spec = **fmt;
-	if (**fmt == 'C')
+	if (f->con_spec == 'C')
 		flag_wc(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 	else
 		flag_c(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
