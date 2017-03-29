@@ -12,6 +12,10 @@
 
 #include "ft_printf.h"
 
+
+//make fx to check for VALID FLAGS BEFORE GOING INTO GET_ASSET!
+
+
 static int	assets(va_list args, const char *format)
 {
 	int			fin_size;
@@ -19,15 +23,15 @@ static int	assets(va_list args, const char *format)
 	fin_size = 0;
 	while (*format)
 	{
-		if (*format != '%')
-		{
-			ft_putchar(*format);
-			fin_size++;
-		}
-		if (*format == '%')
+		if (*format == '%' && *(format + 1) != 0)
 		{
 			format++;
 			get_asset(&format, args, &fin_size);
+		}
+		else
+		{
+			ft_putchar(*format);
+			fin_size++;
 		}
 		format++;
 	}
