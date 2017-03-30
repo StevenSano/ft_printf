@@ -15,6 +15,16 @@
 
 //make fx to check for VALID FLAGS BEFORE GOING INTO GET_ASSET!
 
+int static vallid_asset(const char *fmt)
+{
+	while (*fmt)
+	{
+		if (*fmt == '*')
+			return (0);
+		fmt++;
+	}
+	return (1);
+}
 
 static int	assets(va_list args, const char *format)
 {
@@ -26,7 +36,10 @@ static int	assets(va_list args, const char *format)
 		if (*format == '%' && *(format + 1) != 0)
 		{
 			format++;
-			get_asset(&format, args, &fin_size);
+			if (!vallid_asset(format))
+				return (-1);
+			else
+				get_asset(&format, args, &fin_size);
 		}
 		else
 		{
