@@ -12,8 +12,6 @@
 
 #include "ft_printf.h"
 
-
-
 void	setforprint(char *fmt, FMT *f)
 {
 	while (*fmt)
