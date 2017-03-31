@@ -112,5 +112,10 @@ void	print_conversion(FMT *f)
 	else if (f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X')
 		ft_putstr(get_lenprint_oxXp(f, 0));
 	else if (f->con_spec == 'p')
-		ft_putstr(get_lenprint_oxXp(f, 1));
+	{
+		if (f->zero)
+			ft_putstr(get_lenprint_oxXp(f, 0));
+		else
+			ft_putstr(get_lenprint_oxXp(f, 1));
+	}
 }

@@ -4,13 +4,13 @@
 static void print_noneg(FMT *f)
 {
 	if (f->zero && (f->con_spec != 'i' && f->con_spec != 'u' &&
-		f->con_spec != 'c' && f->con_spec != 's'&& f->con_spec != 'S' && f->con_spec != 'p'))
+		f->con_spec != 'c' && f->con_spec != 's'&& f->con_spec != 'S' ))
 	{
 		f->zero = 0;
 		get_lenprint_oxXp(f, 1);
 		f->zero = 1;
 	}
-	if (f->con_spec != 'S' && f->con_spec != 's' && f->con_spec != 'c' && f->con_spec != 'C')
+	else if (f->con_spec != 'S' && f->con_spec != 's' && f->con_spec != 'c' && f->con_spec != 'C')
 		f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
 		get_lenprint_oxXp(f, 0);
 	if (f->con_spec == 'i' && f->sp && f->zero && (f->min_width && f->precision > f->min_width))
@@ -19,7 +19,7 @@ static void print_noneg(FMT *f)
 		f->min_width -= 1;
 		ft_putchar(' ');
 	}
-	if(f->zero && f->sp && f->min_width && !f->precision && f->con_spec == 'i')
+	else if(f->zero && f->sp && f->min_width && !f->precision && f->con_spec == 'i')
 	{
 		f->width_prec_len += 1;
 		f->min_width -= 1;
