@@ -35,16 +35,18 @@ void print_ls(wchar_t *wct, int len)
 	int size;
 	char mb[4];
 
-	len += 1;
 	size = 0;
 	if (wct == NULL)
 		ft_putstr("(null)");
 	else
 	{
-		while(*wct)
+		while(*wct && len > 0)
 		{
 				size = ft_wctomb(mb, *wct);
+				if (size > len)
+					break;
 				write(1, mb, size);
+				len -= size;
 				wct++;
 			}
 		}
@@ -52,18 +54,35 @@ void print_ls(wchar_t *wct, int len)
 
 int ft_wcstrlen(wchar_t *wct)
 {
-	int len;
+	int size;
 	char mb[4];
 
-	len = 0;
+	size = 0;
 	while (*wct)
 	{
-		len += ft_wctomb(mb, *wct);
+		size += ft_wctomb(mb, *wct);
 		wct++;
 	}
-	return (len);
+	return (size);
 }
 
+static int ft_wcstrlenpr(wchar_t *wct, int len)
+{
+	int size;
+	char mb[4];
+
+	size = 0;
+	while (*wct && len > 0)
+	{
+
+		size += ft_wctomb(mb, *wct);
+		if (size < len)
+			break;
+		wct++;
+		len -= size;
+	}
+	return (size);
+}
 size_t	prec_set_zerostr(char *fmt)
 {
 	size_t d;
@@ -92,8 +111,8 @@ void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 	f->precision = (!f->precision || f->precision > f->arg_len) ?
 	f->arg_len : f->precision;
 
-	if (f->con_spec == 'S')
-		*fin_size += (f->min_width > f->arg_len) ? f->min_width : f->arg_len;
+	if (f->con_spec == 'S' && f->precision < f->arg_len)
+		*fin_size += (f->min_width > f->precision) ? f->min_width : ft_wcstrlenpr(f->arg.wct, f->precision);
 	else
 		*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
 
