@@ -12,6 +12,15 @@
 
 #include "ft_printf.h"
 
+char ifnumber(char c)
+{
+	if (c == 'i' || c == 'd' || c == 'p' || c == 'u' ||	c == 'o' ||
+		c == 'x' || c == 'X' || c == 'D' || c == 'O' || c == 'U')
+		return (1);
+	else
+		return (0);
+}
+
 size_t	prec_set_zero(char *fmt)
 {
 	size_t d;

@@ -38,6 +38,9 @@ void	setforprint(char *fmt, t_fmt *f)
 
 static void	print_id(t_fmt *f)
 {
+	char *s;
+
+	s = NULL;
 	print_widthprec(f);
 	if (f->arg.i < 0 && f->con_spec == 'i')
 	{
@@ -50,11 +53,8 @@ static void	print_id(t_fmt *f)
 		}
 		else
 		{
-			char *s;
-
 			if (f->zero)
 			{
-				//
 				f->min_width -= 1;
 				ft_putchar('-');
 			}

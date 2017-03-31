@@ -63,8 +63,6 @@ void	flag_wc(va_list args, char *fmt, int *fin_size, t_fmt *f)
 	ft_print(f);
 	*fin_size += f->min_width ? f->min_width : f->arg_len;
 	free((void*)f);
-
-
 }
 
 void	flag_c(va_list args, char *fmt, int *fin_size, t_fmt *f)

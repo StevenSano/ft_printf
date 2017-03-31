@@ -48,10 +48,6 @@ static int	assets(va_list args, const char *format)
 	return (fin_size);
 }
 
-/*
-** %[flag][min width][precision][length modifier][conversion specifier]
-*/
-
 int	ft_printf(const char *format, ...)
 {
 	int		asset;

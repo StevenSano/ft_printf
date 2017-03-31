@@ -87,6 +87,7 @@ intmax_t		D_prec(char *length_mod, va_list args);
 /*
 **	ft_whitesp.c«»
 */
+char			ifnumber(char c);
 size_t			prec_set_zero(char *fmt);
 size_t			ft_digitInStr(char **fmt);
 void			ft_putWhtSp(t_fmt *f);
