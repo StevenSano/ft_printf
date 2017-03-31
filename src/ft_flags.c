@@ -66,7 +66,7 @@ int ft_wcstrlen(wchar_t *wct)
 	return (size);
 }
 
-static int ft_wcstrlenpr(wchar_t *wct, int len)
+int ft_wcstrlenpr(wchar_t *wct, int len)
 {
 	int size;
 	char mb[4];

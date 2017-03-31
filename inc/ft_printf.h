@@ -56,7 +56,7 @@ void 			print_wc(t_fmt *f, char p);
 void			flag_mod(char *fmt, int *fin_size, t_fmt *f);
 void			flag_c(va_list args, char *fmt, int *fin_size, t_fmt *f);
 void			flag_wc(va_list args, char *fmt, int *fin_size, t_fmt *f);
-
+int 			ft_wcstrlenpr(wchar_t *wct, int len);
 /*
 **	ft_flags.c
 */
