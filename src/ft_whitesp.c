@@ -79,6 +79,8 @@ void	ft_putWhtSp(FMT *f)
 		if (f->con_spec == 'i' && f->pos && !f->neg && f->arg.i >= 0
 				&& !f->precision)
 			ft_putchar('+');
+		if (f->con_spec == 'p')
+			min_width -= 2;
 		while (min_width-- > 0)
 			if ((f->con_spec != 'c' || f->con_spec != 's') && f->neg)
 				ft_putchar(' ');
