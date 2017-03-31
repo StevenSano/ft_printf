@@ -52,7 +52,7 @@ size_t		ft_digitInStr(char **fmt)
 	return (i);
 }
 
-static void whtspnozero(FMT *f, int min_width)
+static void whtspnozero(t_fmt *f, int min_width)
 {
 	if (f->con_spec == 'p')
 		min_width -= 2 ;
@@ -65,7 +65,7 @@ static void whtspnozero(FMT *f, int min_width)
 		get_lenprint_oxXp(f, 1);
 }
 
-void	ft_putWhtSp(FMT *f)
+void	ft_putWhtSp(t_fmt *f)
 {
 	int min_width;
 

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	check_noneg(int min_width, FMT *f)
+static void	check_noneg(int min_width, t_fmt *f)
 {
 	if ((f->min_width > f->precision && (f->precision != f->arg_len)) ||
 		(f->precision == f->arg_len &&
@@ -39,7 +39,7 @@ static void	check_noneg(int min_width, FMT *f)
 	f->min_width += f->precision;
 }
 
-static void check_neg(int min_width, FMT *f)
+static void check_neg(int min_width, t_fmt *f)
 {
 	min_width = (f->precision <= f->arg_len) ?
 	0 : f->precision - f->arg_len;
@@ -54,7 +54,7 @@ static void check_neg(int min_width, FMT *f)
 }
 
 
-static void elseneg(int min_width, FMT *f)
+static void elseneg(int min_width, t_fmt *f)
 {
 	if (f->pos && f->arg.i >= 0)
 	{
@@ -72,7 +72,7 @@ static void elseneg(int min_width, FMT *f)
 	}
 }
 
-void	print_widthprec(FMT *f)
+void	print_widthprec(t_fmt *f)
 {
 	int min_width;
 

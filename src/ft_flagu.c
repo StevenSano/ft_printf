@@ -55,7 +55,7 @@ uintmax_t		u_prec(char *length_mod, va_list args)
 		return (nb);
 }
 
-void			setForPrint_uox(char *fmt, FMT *f)
+void			setForPrint_uox(char *fmt, t_fmt *f)
 {
 	while (*fmt)
 	{

@@ -78,7 +78,7 @@ size_t	prec_set_zerostr(char *fmt)
 	return (d);
 }
 
-void	flag_s(va_list args, char *fmt, int *fin_size, FMT *f)
+void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	setforprint(fmt, f);
 	get_prec_min(f, fmt);

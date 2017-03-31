@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	flag_mod(char *fmt, int *fin_size, FMT *f)
+void	flag_mod(char *fmt, int *fin_size, t_fmt *f)
 {
 	setforprint(fmt, f);
 	get_prec_min(f, fmt);
@@ -27,7 +27,7 @@ void	flag_mod(char *fmt, int *fin_size, FMT *f)
 	*fin_size += f->min_width ? f->min_width : 1;
 }
 
-void	get_prec_min(FMT *f, char *fmt)
+void	get_prec_min(t_fmt *f, char *fmt)
 {
 	while (*fmt)
 	{
@@ -42,7 +42,7 @@ void	get_prec_min(FMT *f, char *fmt)
 	}
 }
 
-void print_wc(FMT *f, char p)
+void print_wc(t_fmt *f, char p)
 {
 	char mb[4];
 
@@ -53,7 +53,7 @@ void print_wc(FMT *f, char p)
 
 
 
-void	flag_wc(va_list args, char *fmt, int *fin_size, FMT *f)
+void	flag_wc(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	setforprint(fmt, f);
 	get_prec_min(f, fmt);
@@ -67,7 +67,7 @@ void	flag_wc(va_list args, char *fmt, int *fin_size, FMT *f)
 
 }
 
-void	flag_c(va_list args, char *fmt, int *fin_size, FMT *f)
+void	flag_c(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	setforprint(fmt, f);
 	get_prec_min(f, fmt);

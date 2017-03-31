@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	setforprint(char *fmt, FMT *f)
+void	setforprint(char *fmt, t_fmt *f)
 {
 	while (*fmt)
 	{
@@ -36,7 +36,7 @@ void	setforprint(char *fmt, FMT *f)
 	}
 }
 
-static void	print_id(FMT *f)
+static void	print_id(t_fmt *f)
 {
 	print_widthprec(f);
 	if (f->arg.i < 0 && f->con_spec == 'i')
@@ -68,7 +68,7 @@ static void	print_id(FMT *f)
 		ft_print(f);
 }
 
-void	print_setlen(FMT *f, int *fin_size)
+void	print_setlen(t_fmt *f, int *fin_size)
 {
 	if ((f->min_width == 0 && f->precision == 0))
 	{
@@ -106,7 +106,7 @@ void	print_setlen(FMT *f, int *fin_size)
 }
 
 
-void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f)
+void			flag_i(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	if (f->con_spec == 'i')
 		setforprint(fmt, f);
@@ -117,8 +117,7 @@ void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f)
 	get_conversion(f, args);
 	if (prec_set_zero(fmt) && ((f->arg.i == 0 || f->arg.u == 0)))
 	{
-		if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u')
-				&& f->arg.u != 0)
+		if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u') && f->arg.u != 0)
 		{
 			get_lenprint_oxXp(f, 1);
 			*fin_size += 1;
@@ -132,6 +131,11 @@ void			flag_i(va_list args, char *fmt, int *fin_size, FMT *f)
 				ft_putWhtSp(f);
 				if (f->con_spec == 'o' && f->hash)
 					ft_putchar('0');
+				if (f->con_spec == 'p')
+				{
+					ft_putstr("0x");
+					f->width_prec_len += 2;
+				}
 				*fin_size += (f->hash && f->con_spec == 'o') ? 1 :
 					f->width_prec_len;
 			}

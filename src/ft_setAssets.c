@@ -12,11 +12,11 @@
 
 #include "ft_printf.h"
 
-struct fmt	*f_set(void)
+struct s_fmt	*f_set(void)
 {
-	FMT		*f;
+	t_fmt		*f;
 
-	IFTRUE(!(f = (FMT*)malloc(sizeof(FMT))), 0);
+	IFTRUE(!(f = (t_fmt*)malloc(sizeof(t_fmt))), 0);
 	f->hash = 0;
 	f->zero = 0;
 	f->sp = 0;
@@ -31,7 +31,7 @@ struct fmt	*f_set(void)
 	return (f);
 }
 
-void		get_conversion(FMT *f, va_list args)
+void		get_conversion(t_fmt *f, va_list args)
 {
 	if (f->con_spec == 'c')
 		f->arg.c = (unsigned char)va_arg(args, int);
@@ -50,7 +50,7 @@ void		get_conversion(FMT *f, va_list args)
 		f->arg.u = p_prec(args);
 }
 
-char	*get_lenprint_iu(FMT *f)
+char	*get_lenprint_iu(t_fmt *f)
 {
 	char *str;
 
@@ -67,7 +67,7 @@ char	*get_lenprint_iu(FMT *f)
 	return (str);
 }
 
-char	*get_lenprint_oxXp(FMT *f, char r)
+char	*get_lenprint_oxXp(t_fmt *f, char r)
 {
 	char *str;
 
@@ -97,7 +97,7 @@ char	*get_lenprint_oxXp(FMT *f, char r)
 	return (str);
 }
 
-void	print_conversion(FMT *f)
+void	print_conversion(t_fmt *f)
 {
 	if (f->con_spec == 'c')
 		ft_putchar(f->arg.c);

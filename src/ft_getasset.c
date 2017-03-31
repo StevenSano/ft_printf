@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-static void set_ulong(const char **fmt, FMT *f, size_t flags_len, va_list args,
+static void set_ulong(const char **fmt, t_fmt *f, size_t flags_len, va_list args,
 	int *fin_size)
 {
 	f->length_mod = "l";
@@ -13,7 +13,7 @@ static void set_ulong(const char **fmt, FMT *f, size_t flags_len, va_list args,
 	flag_i(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 }
 
-static void set_lcc(const char **fmt, FMT *f, size_t flags_len, va_list args,
+static void set_lcc(const char **fmt, t_fmt *f, size_t flags_len, va_list args,
 	int *fin_size)
 {
 	if (**fmt == 'l')
@@ -29,7 +29,7 @@ static void set_lcc(const char **fmt, FMT *f, size_t flags_len, va_list args,
 		flag_c(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 }
 
-static void set_lss(const char **fmt, FMT *f, size_t flags_len, va_list args,
+static void set_lss(const char **fmt, t_fmt *f, size_t flags_len, va_list args,
 	int *fin_size)
 {
 	if (**fmt == 'l')
@@ -45,7 +45,7 @@ static void set_lss(const char **fmt, FMT *f, size_t flags_len, va_list args,
 void	get_asset(const char **fmt, va_list args, int *fin_size)
 {
 	size_t flags_len;
- 	FMT * f;
+ 	t_fmt * f;
 
 	f = f_set();
 	flags_len = 0;

@@ -12,9 +12,6 @@
 
 #include "ft_printf.h"
 
-
-//make fx to check for VALID FLAGS BEFORE GOING INTO GET_ASSET!
-
 int static vallid_asset(const char *fmt)
 {
 	while (*fmt)

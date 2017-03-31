@@ -1,7 +1,7 @@
 #include "ft_printf.h"
 
 
-static void print_noneg(FMT *f)
+static void print_noneg(t_fmt *f)
 {
 	if (f->zero && (f->con_spec != 'i' && f->con_spec != 'u' &&
 		f->con_spec != 'c' && f->con_spec != 's'&& f->con_spec != 'S' ))
@@ -27,7 +27,7 @@ static void print_noneg(FMT *f)
 	}
 }
 
-void	ft_print(FMT *f)
+void	ft_print(t_fmt *f)
 {
 	if (f->neg)
 	{
