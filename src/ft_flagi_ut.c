@@ -12,6 +12,23 @@
 
 #include "ft_printf.h"
 
+char	*get_lenprint_iu(t_fmt *f)
+{
+	char *str;
+
+	if (f->con_spec == 'i')
+			str = ft_intmax_ttoa(f->arg.i);
+	else
+	{
+		if (f->arg.u == 0)
+			str = "0";
+		else
+			str = ft_uintmax_ttoa(f->arg.u);
+	}
+	f->arg_len = (int)ft_strlen(str);
+	return (str);
+}
+
 static void	check_noneg(int min_width, t_fmt *f)
 {
 	if ((f->min_width > f->precision && (f->precision != f->arg_len)) ||

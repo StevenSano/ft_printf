@@ -67,7 +67,7 @@ static void whtspnozero(t_fmt *f, int min_width)
 		min_width -= 2 ;
 	while (min_width-- > 0)
 		ft_putchar(' ');
-	if (f->pos && !f->neg && f->arg.i >= 0)
+	if (f->pos && !f->neg && f->arg.i >= 0 && f->con_spec != 's')
 		ft_putchar('+');
 	if ((f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X' ||
 	f->con_spec == 'p') && f->hash && !f->neg)
@@ -86,7 +86,7 @@ void	ft_putWhtSp(t_fmt *f)
 	if (f->zero)
 	{
 		if (f->con_spec == 'i' && f->pos && !f->neg && f->arg.i >= 0
-				&& !f->precision)
+				&& !f->precision && f->con_spec != 's')
 			ft_putchar('+');
 		if (f->con_spec == 'p')
 			min_width -= 2;

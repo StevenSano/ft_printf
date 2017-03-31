@@ -50,24 +50,7 @@ void		get_conversion(t_fmt *f, va_list args)
 		f->arg.u = p_prec(args);
 }
 
-char	*get_lenprint_iu(t_fmt *f)
-{
-	char *str;
-
-	if (f->con_spec == 'i')
-			str = ft_intmax_ttoa(f->arg.i);
-	else
-	{
-		if (f->arg.u == 0)
-			str = "0";
-		else
-			str = ft_uintmax_ttoa(f->arg.u);
-	}
-	f->arg_len = (int)ft_strlen(str);
-	return (str);
-}
-
-char	*get_lenprint_oxXp(t_fmt *f, char r)
+static char  *get_lenoxXp(t_fmt *f)
 {
 	char *str;
 
@@ -79,13 +62,21 @@ char	*get_lenprint_oxXp(t_fmt *f, char r)
 	else if (f->con_spec == 'X')
 		str = ft_strtouper(ft_itoa_base(f->arg.u, 16));
 	f->arg_len = (int)ft_strlen(str);
+	return (str);
+}
+
+char	*get_lenprint_oxXp(t_fmt *f, char r)
+{
+	char *str;
+	str = get_lenoxXp(f);
 	if (f->hash || (f->con_spec == 'p'))
 	{
 		if ((r == 1 || (f->min_width == 0 && f->precision == 0)))
 		{
 			if (f->con_spec == 'o' && f->arg.u != 0)
 				ft_putstr("0");
-			else if ((f->con_spec == 'x' && f->arg.u != 0) || (f->con_spec == 'p'))
+			else if ((f->con_spec == 'x' && f->arg.u != 0) ||
+					(f->con_spec == 'p'))
 				ft_putstr("0x");
 			else if ((f->con_spec == 'X') && f->arg.u != 0)
 				ft_putstr("0X");
