@@ -20,7 +20,7 @@
 
 # define F '%'
 
-typedef union	type_of
+typedef union	s_tof
 {
 	unsigned char	c;
 	char			*s;
@@ -28,7 +28,7 @@ typedef union	type_of
 	wint_t			wit;
 	intmax_t		i;
 	uintmax_t		u;
-}				TYPE_OF;
+}				t_tof;
 
 typedef struct	s_fmt
 {
@@ -41,7 +41,7 @@ typedef struct	s_fmt
 	int		precision;
 	char	*length_mod;
 	char	con_spec;
-	TYPE_OF	arg;
+	t_tof	arg;
 	int		arg_len;
 	int		width_prec_len;
 }				t_fmt;
