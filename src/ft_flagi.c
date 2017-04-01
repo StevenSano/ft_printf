@@ -134,8 +134,8 @@ void			flag_i(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	if (f->con_spec == 'i')
 		setforprint(fmt, f);
-	else if (f->con_spec == 'u' || f->con_spec == 'o' ||
-	f->con_spec == 'x' || f->con_spec == 'X' || f->con_spec == 'p')
+	else if (f->con_spec == 'u' || f->con_spec == 'o' || f->con_spec == 'x' ||
+			f->con_spec == 'X' || f->con_spec == 'p')
 		setForPrint_uox(fmt, f);
 	get_prec_min(f, fmt);
 	get_conversion(f, args);
