@@ -104,8 +104,32 @@ void	print_setlen(t_fmt *f, int *fin_size)
 		*fin_size += f->arg_len + f->width_prec_len;
 	}
 }
-
-
+static void ifsetzero(int *fin_size, t_fmt *f)
+{
+	if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u') && f->arg.u != 0)
+	{
+		get_lenprint_oxXp(f, 1);
+		*fin_size += 1;
+	}
+	else
+	{
+		if (f->arg.i == 0 && f->con_spec == 'i' && f->precision)
+			print_setlen(f, fin_size);
+		else
+		{
+			ft_putWhtSp(f);
+			if (f->con_spec == 'o' && f->hash)
+				ft_putchar('0');
+			if (f->con_spec == 'p')
+			{
+				ft_putstr("0x");
+				f->width_prec_len += 2;
+			}
+			*fin_size += (f->hash && f->con_spec == 'o') ? 1 :
+				f->width_prec_len;
+		}
+	}
+}
 void			flag_i(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	if (f->con_spec == 'i')
@@ -116,31 +140,7 @@ void			flag_i(va_list args, char *fmt, int *fin_size, t_fmt *f)
 	get_prec_min(f, fmt);
 	get_conversion(f, args);
 	if (prec_set_zero(fmt) && ((f->arg.i == 0 || f->arg.u == 0)))
-	{
-		if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u') && f->arg.u != 0)
-		{
-			get_lenprint_oxXp(f, 1);
-			*fin_size += 1;
-		}
-		else
-		{
-			if (f->arg.i == 0 && f->con_spec == 'i' && f->precision)
-				print_setlen(f, fin_size);
-			else
-			{
-				ft_putWhtSp(f);
-				if (f->con_spec == 'o' && f->hash)
-					ft_putchar('0');
-				if (f->con_spec == 'p')
-				{
-					ft_putstr("0x");
-					f->width_prec_len += 2;
-				}
-				*fin_size += (f->hash && f->con_spec == 'o') ? 1 :
-					f->width_prec_len;
-			}
-		}
-	}
+		ifsetzero(fin_size, f);
 	else
 		print_setlen(f, fin_size);
 	free((void*)f);
