@@ -79,8 +79,8 @@ void	ft_putWhtSp(t_fmt *f)
 	int min_width;
 
 	min_width = (f->con_spec == 'S' && f->arg.wct != NULL) ?
-		f->min_width - ft_wcstrlenpr(f->arg.wct, f->precision)
-		: f->min_width - f->arg_len;
+		f->min_width - f->precision://ft_wcstrlenpr(f->arg.wct, f->precision) :
+		f->min_width - f->arg_len;
 	f->width_prec_len += (min_width <= 0) ? 0 : min_width;
 	if (f->pos && f->arg.i >= 0)
 		min_width -= 1;

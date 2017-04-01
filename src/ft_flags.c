@@ -109,13 +109,15 @@ void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 	else
 		f->arg_len = (f->arg_len < 0) ? 0 : f->arg_len;
 	f->precision = (!f->precision || f->precision > f->arg_len) ? f->arg_len : f->precision;
-	if (f->con_spec == 'S' && f->precision < f->arg_len && f->arg.wct != NULL)
+	if (!prec_set_zerostr(fmt) && f->con_spec == 'S' && f->precision < f->arg_len && f->arg.wct != NULL)
 	{
 		if (!f->min_width && f->precision < f->arg_len)
 			*fin_size = ft_wcstrlenpr(f->arg.wct, f->precision);
 		else
-			*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;//ft_wcstrlenpr(f->arg.wct, f->precision);
+			*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
 	}
+	else if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len) && !f->zero)
+		*fin_size += f->min_width;
 	else
 		*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
 //print
