@@ -51,8 +51,6 @@ void print_wc(t_fmt *f, char p)
 		write(1, mb, f->arg_len);
 }
 
-
-
 void	flag_wc(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	setforprint(fmt, f);

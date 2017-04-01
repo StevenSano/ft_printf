@@ -20,6 +20,7 @@ SRC		= 	src/ft_printf.c \
 			src/ft_print.c \
 			src/ft_flagc.c \
 	  		src/ft_flags.c \
+			src/ft_flagls.c \
 	  		src/ft_flagi.c \
 	  		src/ft_flagi_ut.c \
 	  		src/ft_flagu.c \
@@ -101,6 +102,7 @@ OBJ	= 	ft_printf.o \
 		ft_print.o \
 		ft_flagc.o \
 	 	ft_flags.o \
+		ft_flagls.o \
 	 	ft_flagi.o \
 	 	ft_flagi_ut.o \
 	 	ft_flagu.o \
