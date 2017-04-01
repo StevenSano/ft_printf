@@ -22,6 +22,45 @@ char	*s_prec(va_list args)
 	return (str);
 }
 
+static int ls_getfinlen(t_fmt *f, char *fmt)
+{
+	if (!prec_set_zerostr(fmt) && f->con_spec == 'S' &&
+		f->precision < f->arg_len && f->arg.wct != NULL)
+	{
+		if (!f->min_width && f->precision < f->arg_len)
+			return (ft_wcstrlenpr(f->arg.wct, f->precision));
+		else
+			return (f->min_width > f->precision ? f->min_width : f->precision);
+	}
+	else if (prec_set_zerostr(fmt) && f->min_width &&
+		(f->precision == f->arg_len))
+		return (f->min_width);
+	else
+		return ((f->min_width > f->precision) ? f->min_width : f->precision);
+}
+
+static void ls_getprint(t_fmt *f, char *fmt)
+{
+	int min_width;
+
+	min_width = 0;
+	if (f->con_spec == 'S')
+		f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
+	else
+		f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
+	if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len))
+	{
+		min_width = f->min_width;
+		while (min_width-- > 0)
+			if (!f->zero)
+				ft_putchar(' ');
+			else
+				ft_putchar('0');
+	}
+	else
+		ft_print(f);
+}
+
 void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	setforprint(fmt, f);
@@ -33,35 +72,9 @@ void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 		f->arg_len = f->arg.wct == NULL ? 6 : ft_wcstrlen(f->arg.wct);
 	else
 		f->arg_len = (f->arg_len < 0) ? 0 : f->arg_len;
-	f->precision = (!f->precision || f->precision > f->arg_len) ? f->arg_len : f->precision;
-	if (!prec_set_zerostr(fmt) && f->con_spec == 'S' && f->precision < f->arg_len && f->arg.wct != NULL)
-	{
-		if (!f->min_width && f->precision < f->arg_len)
-			*fin_size = ft_wcstrlenpr(f->arg.wct, f->precision);
-		else
-			*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
-	}
-	else if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len))
-		*fin_size += f->min_width;
-	else
-		*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
-	if (f->con_spec == 'S')
-		f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
-	else
-		f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
-	if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len))
-	{
-		int min_width;
-		//f->min_width += f->precision;
-		min_width = f->min_width;
-		while (min_width-- > 0)
-			if (!f->zero)
-				ft_putchar(' ');
-			else
-				ft_putchar('0');
-		//ft_putWhtSp(f);
-	}
-	else
-		ft_print(f);
+	f->precision = (!f->precision || f->precision > f->arg_len) ?
+	f->arg_len : f->precision;
+	*fin_size += ls_getfinlen(f, fmt);
+	ls_getprint(f, fmt);
 	free((void*)f);
 }

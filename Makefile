@@ -180,8 +180,6 @@ OBJ	= 	ft_printf.o \
 		ft_wctomb.o \
 		ft_strtouper.o \
 
-
-
 all: $(NAME)
 
 $(NAME):
