@@ -116,22 +116,24 @@ void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 		else
 			*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
 	}
-	else if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len) && !f->zero)
+	else if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len))
 		*fin_size += f->min_width;
 	else
 		*fin_size += (f->min_width > f->precision) ? f->min_width : f->precision;
-//print
 	if (f->con_spec == 'S')
 		f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
 	else
 		f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
-	if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len) && !f->zero)
+	if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len))
 	{
 		int min_width;
-	
+		//f->min_width += f->precision;
 		min_width = f->min_width;
 		while (min_width-- > 0)
-			ft_putchar(' ');
+			if (!f->zero)
+				ft_putchar(' ');
+			else
+				ft_putchar('0');
 		//ft_putWhtSp(f);
 	}
 	else
