@@ -48,6 +48,8 @@ static void	check_noneg(int min_width, t_fmt *f)
 		if (f->pos && f->arg.i >= 0)
 			ft_putchar('+');
 	}
+	if (f->con_spec == 'o' && !f->min_width && f->precision && f->hash)
+		f->precision -= 1;
 	f->zero = 1;
 	f->min_width = (f->pos || f->arg.i < 0) ? 1 : 0;
 	if (f->hash)
