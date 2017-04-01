@@ -65,6 +65,8 @@ static void whtspnozero(t_fmt *f, int min_width)
 {
 	if (f->con_spec == 'p')
 		min_width -= 2 ;
+	if (f->con_spec == 'S' && f->precision &&f->min_width > f->precision )
+		min_width = f->min_width - ft_wcstrlenpr(f->arg.wct, f->precision);
 	while (min_width-- > 0)
 		ft_putchar(' ');
 	if (f->pos && !f->neg && f->arg.i >= 0 && f->con_spec != 's')
@@ -79,8 +81,7 @@ void	ft_putWhtSp(t_fmt *f)
 	int min_width;
 
 	min_width = (f->con_spec == 'S' && f->arg.wct != NULL) ?
-		f->min_width - f->precision://ft_wcstrlenpr(f->arg.wct, f->precision) :
-		f->min_width - f->arg_len;
+		f->min_width - f->precision: f->min_width - f->arg_len;
 	f->width_prec_len += (min_width <= 0) ? 0 : min_width;
 	if (f->pos && f->arg.i >= 0)
 		min_width -= 1;

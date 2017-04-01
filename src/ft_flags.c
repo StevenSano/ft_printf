@@ -127,8 +127,12 @@ void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 		f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
 	if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len) && !f->zero)
 	{
-		f->min_width += f->precision;
-		ft_putWhtSp(f);
+		int min_width;
+	
+		min_width = f->min_width;
+		while (min_width-- > 0)
+			ft_putchar(' ');
+		//ft_putWhtSp(f);
 	}
 	else
 		ft_print(f);
