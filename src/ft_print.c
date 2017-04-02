@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void print_idelse(t_fmt *f, char *s)
+void 		print_idelse(t_fmt *f, char *s)
 {
 	if (f->zero)
 	{
@@ -25,7 +25,7 @@ void print_idelse(t_fmt *f, char *s)
 	ft_putstr(s);
 }
 
-void	setforprint(char *fmt, t_fmt *f)
+void		setforprint(char *fmt, t_fmt *f)
 {
 	while (*fmt)
 	{
@@ -49,7 +49,7 @@ void	setforprint(char *fmt, t_fmt *f)
 	}
 }
 
-static void print_noneg_ifisp(t_fmt *f)
+static void	print_noneg_ifisp(t_fmt *f)
 {
 	if (f->con_spec == 'i' && f->sp && f->zero && (f->min_width &&
 		f->precision > f->min_width))
@@ -67,7 +67,7 @@ static void print_noneg_ifisp(t_fmt *f)
 	}
 }
 
-static void print_noneg(t_fmt *f)
+static void	print_noneg(t_fmt *f)
 {
 	if (f->zero && (f->con_spec != 'i' && f->con_spec != 'u' &&
 		f->con_spec != 'c' && f->con_spec != 's'&& f->con_spec != 'S' ))
@@ -83,7 +83,7 @@ static void print_noneg(t_fmt *f)
 	print_noneg_ifisp(f);
 }
 
-void	ft_print(t_fmt *f)
+void		ft_print(t_fmt *f)
 {
 	if (f->neg)
 	{

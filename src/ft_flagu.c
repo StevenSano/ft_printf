@@ -22,7 +22,7 @@ uintmax_t		p_prec(va_list args)
 
 intmax_t		i_prec(char *length_mod, va_list args)
 {
-	intmax_t nb;
+	intmax_t	nb;
 
 	nb = (intmax_t)va_arg(args, intmax_t);
 	if (length_mod == NULL)

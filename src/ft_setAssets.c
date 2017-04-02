@@ -31,7 +31,7 @@ struct s_fmt	*f_set(void)
 	return (f);
 }
 
-void		get_conversion(t_fmt *f, va_list args)
+void			get_conversion(t_fmt *f, va_list args)
 {
 	if (f->con_spec == 'c')
 		f->arg.c = (unsigned char)va_arg(args, int);
@@ -50,9 +50,9 @@ void		get_conversion(t_fmt *f, va_list args)
 		f->arg.u = p_prec(args);
 }
 
-static char  *get_lenoxXp(t_fmt *f)
+static char		*get_lenoxXp(t_fmt *f)
 {
-	char *str;
+	char		*str;
 
 	str = NULL;
 	if (f->con_spec == 'o')
@@ -65,9 +65,9 @@ static char  *get_lenoxXp(t_fmt *f)
 	return (str);
 }
 
-char	*get_lenprint_oxXp(t_fmt *f, char r)
+char			*get_lenprint_oxXp(t_fmt *f, char r)
 {
-	char *str;
+	char		*str;
 	str = get_lenoxXp(f);
 	if (f->hash || (f->con_spec == 'p'))
 	{
@@ -88,7 +88,7 @@ char	*get_lenprint_oxXp(t_fmt *f, char r)
 	return (str);
 }
 
-void	print_conversion(t_fmt *f)
+void			print_conversion(t_fmt *f)
 {
 	if (f->con_spec == 'c')
 		ft_putchar(f->arg.c);

@@ -91,6 +91,9 @@ char			ifnumber(char c);
 size_t			prec_set_zero(char *fmt);
 size_t			ft_digitInStr(char **fmt);
 void			ft_putwhtsp(t_fmt *f);
+/*
+**	ft_print.c
+*/
 void			ft_print(t_fmt *f);
 void			setforprint(char *fmt, t_fmt *f);
 void 			print_idelse(t_fmt *f, char *s);

@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-char	*get_lenprint_iu(t_fmt *f)
+char		*get_lenprint_iu(t_fmt *f)
 {
-	char *str;
+	char	*str;
 
 	if (f->con_spec == 'i')
 			str = ft_intmax_ttoa(f->arg.i);
@@ -58,7 +58,7 @@ static void	check_noneg(int min_width, t_fmt *f)
 	f->min_width += f->precision;
 }
 
-static void check_neg(int min_width, t_fmt *f)
+static void	check_neg(int min_width, t_fmt *f)
 {
 	min_width = (f->precision <= f->arg_len) ?
 	0 : f->precision - f->arg_len;
@@ -72,7 +72,7 @@ static void check_neg(int min_width, t_fmt *f)
 
 }
 
-static void elseneg(int min_width, t_fmt *f)
+static void	elseneg(int min_width, t_fmt *f)
 {
 	if (f->pos && f->arg.i >= 0)
 	{
@@ -90,9 +90,9 @@ static void elseneg(int min_width, t_fmt *f)
 	}
 }
 
-void	print_widthprec(t_fmt *f)
+void		print_widthprec(t_fmt *f)
 {
-	int min_width;
+	int		min_width;
 
 	min_width = 0;
 	if (f->precision)

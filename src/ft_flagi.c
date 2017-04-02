@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	print_id(t_fmt *f)
+static void		print_id(t_fmt *f)
 {
 	char *s;
 
@@ -34,7 +34,7 @@ static void	print_id(t_fmt *f)
 		ft_print(f);
 }
 
-static void print_setlenelse(t_fmt *f, int *fin_size)
+static void		print_setlenelse(t_fmt *f, int *fin_size)
 {
 	if (f->con_spec == 'i' && f->sp && !f->neg && f->precision > f->min_width)
 	{
@@ -53,7 +53,7 @@ static void print_setlenelse(t_fmt *f, int *fin_size)
 	*fin_size += f->arg_len + f->width_prec_len;
 }
 
-void	print_setlen(t_fmt *f, int *fin_size)
+void			print_setlen(t_fmt *f, int *fin_size)
 {
 	if ((f->min_width == 0 && f->precision == 0))
 	{
@@ -75,7 +75,7 @@ void	print_setlen(t_fmt *f, int *fin_size)
 		print_setlenelse(f, fin_size);
 }
 
-static void ifsetzero(int *fin_size, t_fmt *f)
+static void		ifsetzero(int *fin_size, t_fmt *f)
 {
 	if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u') && f->arg.u != 0)
 	{

@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-static	int	get_len(uintmax_t n)
+static int		get_len(uintmax_t n)
 {
-	intmax_t		len;
+	intmax_t	len;
 
 	len = 0;
 	while (n != 0)

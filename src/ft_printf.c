@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int static vallid_asset(const char *fmt)
+int static	vallid_asset(const char *fmt)
 {
 	while (*fmt)
 	{
@@ -25,7 +25,7 @@ int static vallid_asset(const char *fmt)
 
 static int	assets(va_list args, const char *format)
 {
-	int			fin_size;
+	int		fin_size;
 
 	fin_size = 0;
 	while (*format)
@@ -48,10 +48,10 @@ static int	assets(va_list args, const char *format)
 	return (fin_size);
 }
 
-int	ft_printf(const char *format, ...)
+int			ft_printf(const char *format, ...)
 {
 	int		asset;
-	va_list args;
+	va_list	args;
 
 	va_start(args, format);
 	asset = assets(args, format);

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char ifnumber(char c)
+char		ifnumber(char c)
 {
 	if (c == 'i' || c == 'd' || c == 'p' || c == 'u' ||	c == 'o' ||
 		c == 'x' || c == 'X' || c == 'D' || c == 'O' || c == 'U')
@@ -21,9 +21,9 @@ char ifnumber(char c)
 		return (0);
 }
 
-size_t	prec_set_zero(char *fmt)
+size_t		prec_set_zero(char *fmt)
 {
-	size_t d;
+	size_t	d;
 
 	d = 0;
 	while (*fmt)
@@ -60,7 +60,7 @@ size_t		ft_digitInStr(char **fmt)
 	return (i);
 }
 
-static void whtspnozero(t_fmt *f, int min_width)
+static void	whtspnozero(t_fmt *f, int min_width)
 {
 	if (f->con_spec == 'p')
 		min_width -= 2 ;
@@ -75,7 +75,7 @@ static void whtspnozero(t_fmt *f, int min_width)
 		get_lenprint_oxXp(f, 1);
 }
 
-void	ft_putwhtsp(t_fmt *f)
+void		ft_putwhtsp(t_fmt *f)
 {
 	int min_width;
 

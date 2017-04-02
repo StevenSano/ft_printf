@@ -42,7 +42,7 @@ void	get_prec_min(t_fmt *f, char *fmt)
 	}
 }
 
-void print_wc(t_fmt *f, char p)
+void	print_wc(t_fmt *f, char p)
 {
 	char mb[4];
 

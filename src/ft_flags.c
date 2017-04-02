@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-char	*s_prec(va_list args)
+char		*s_prec(va_list args)
 {
-	char *str;
+	char	*str;
 
 	str = va_arg(args, char*);
 	if (str == NULL)
@@ -22,7 +22,7 @@ char	*s_prec(va_list args)
 	return (str);
 }
 
-static int flags_lslen(t_fmt *f, char *fmt)
+static int	flags_lslen(t_fmt *f, char *fmt)
 {
 	if (!prec_set_zerostr(fmt) && f->con_spec == 'S' &&
 	 	f->precision < f->arg_len && f->arg.wct != NULL)
@@ -39,9 +39,9 @@ static int flags_lslen(t_fmt *f, char *fmt)
 		return ((f->min_width > f->precision) ? f->min_width : f->precision);
 }
 
-static void flag_lsprint(t_fmt *f, char *fmt)
+static void	flag_lsprint(t_fmt *f, char *fmt)
 {
-	int min_width;
+	int		min_width;
 
 	min_width = 0;
 	if (f->con_spec == 'S')
@@ -61,7 +61,7 @@ static void flag_lsprint(t_fmt *f, char *fmt)
 		ft_print(f);
 }
 
-void	flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
+void		flag_s(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	setforprint(fmt, f);
 	get_prec_min(f, fmt);

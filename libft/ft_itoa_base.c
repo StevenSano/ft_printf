@@ -14,7 +14,7 @@
 
 static int	nbr_base_len(unsigned long nbr, int base)
 {
-	int len;
+	int		len;
 
 	len = 0;
 	while (nbr > 0)

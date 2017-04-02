@@ -12,8 +12,8 @@
 
 #include "ft_printf.h"
 
-static void set_lcc(const char **fmt, t_fmt *f, size_t flags_len, va_list args,
-	int *fin_size)
+static void	set_lcc(const char **fmt, t_fmt *f, size_t flags_len,
+		va_list args, int *fin_size)
 {
 	if (**fmt == 'l')
 	{
@@ -28,8 +28,8 @@ static void set_lcc(const char **fmt, t_fmt *f, size_t flags_len, va_list args,
 		flag_c(args, ft_strndup((*fmt) - flags_len, flags_len), fin_size, f);
 }
 
-static void get_asset_numbers(const char **fmt, va_list args, int *fin_size,
-	t_fmt *f, int flags_len)
+static void	get_asset_numbers(const char **fmt, va_list args, int *fin_size,
+		t_fmt *f, int flags_len)
 {
 	if (**fmt == 'i' || **fmt == 'd' || **fmt == 'p' || **fmt == 'u' ||
 		**fmt == 'o' || **fmt == 'x' || **fmt == 'X')
@@ -50,7 +50,7 @@ static void get_asset_numbers(const char **fmt, va_list args, int *fin_size,
 	}
 }
 
-static void get_asset_chars(const char **fmt, va_list args, int *fin_size,
+static void	get_asset_chars(const char **fmt, va_list args, int *fin_size,
 	t_fmt *f, int flags_len)
 {
 	if (**fmt == '%')
@@ -76,7 +76,7 @@ static void get_asset_chars(const char **fmt, va_list args, int *fin_size,
 	}
 }
 
-static char ifchar(const char **fmt)
+static char	ifchar(const char **fmt)
 {
 	if (**fmt == '%' || (((**fmt == 'l' && *((*fmt) + 1) == 'c') ||
 		**fmt == 'C') || **fmt == 'c') || (((**fmt == 'l'
@@ -86,10 +86,10 @@ static char ifchar(const char **fmt)
 		return (0);
 }
 
-void	get_asset(const char **fmt, va_list args, int *fin_size)
+void		get_asset(const char **fmt, va_list args, int *fin_size)
 {
-	size_t flags_len;
- 	t_fmt * f;
+	size_t	flags_len;
+ 	t_fmt	*f;
 
 	f = f_set();
 	flags_len = 0;

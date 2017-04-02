@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-wchar_t *ls_prec(va_list args)
+wchar_t		*ls_prec(va_list args)
 {
 	wchar_t *wstr;
 
@@ -20,10 +20,10 @@ wchar_t *ls_prec(va_list args)
 	return (wstr);
 }
 
-void print_ls(wchar_t *wct, int len)
+void		print_ls(wchar_t *wct, int len)
 {
-	int size;
-	char mb[4];
+	int		size;
+	char	mb[4];
 
 	size = 0;
 	if (wct == NULL)
@@ -42,10 +42,10 @@ void print_ls(wchar_t *wct, int len)
 	}
 }
 
-int ft_wcstrlen(wchar_t *wct)
+int			ft_wcstrlen(wchar_t *wct)
 {
-	int size;
-	char mb[4];
+	int		size;
+	char	mb[4];
 
 	size = 0;
 	while (*wct)
@@ -56,10 +56,10 @@ int ft_wcstrlen(wchar_t *wct)
 	return (size);
 }
 
-int ft_wcstrlenpr(wchar_t *wct, int len)
+int			ft_wcstrlenpr(wchar_t *wct, int len)
 {
-	int size;
-	char mb[4];
+	int		size;
+	char	mb[4];
 
 	size = 0;
 	while (*wct && len > 0)
@@ -74,9 +74,9 @@ int ft_wcstrlenpr(wchar_t *wct, int len)
 	return (size);
 }
 
-size_t	prec_set_zerostr(char *fmt)
+size_t		prec_set_zerostr(char *fmt)
 {
-	size_t d;
+	size_t	d;
 
 	d = 0;
 	while (*fmt)

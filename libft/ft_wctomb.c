@@ -12,9 +12,9 @@
 
 #include <wchar.h>
 
-int ft_wctomb(char *mb, wchar_t wc)
+int		ft_wctomb(char *mb, wchar_t wc)
 {
-  char *tmp;
+  char	*tmp;
 
   tmp = mb;
   if (wc < (1 << 7))
