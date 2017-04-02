@@ -32,16 +32,15 @@ void print_ls(wchar_t *wct, int len)
 	{
 		while(*wct && len > 0)
 		{
-				size = ft_wctomb(mb, *wct);
-				if (size > len)
-					break;
-				write(1, mb, size);
-				len -= size;
-				wct++;
-			}
+			size = ft_wctomb(mb, *wct);
+			if (size > len)
+				break;
+			write(1, mb, size);
+			len -= size;
+			wct++;
 		}
+	}
 }
-
 
 int ft_wcstrlen(wchar_t *wct)
 {
@@ -74,7 +73,6 @@ int ft_wcstrlenpr(wchar_t *wct, int len)
 	}
 	return (size);
 }
-
 
 size_t	prec_set_zerostr(char *fmt)
 {
