@@ -93,6 +93,7 @@ size_t			ft_digitInStr(char **fmt);
 void			ft_putwhtsp(t_fmt *f);
 void			ft_print(t_fmt *f);
 void			setforprint(char *fmt, t_fmt *f);
+void 			print_idelse(t_fmt *f, char *s);
 /*
 **	ft_setAssets.c
 */

@@ -28,17 +28,7 @@ static void	print_id(t_fmt *f)
 			ft_putwhtsp(f);
 		}
 		else
-		{
-			if (f->zero)
-			{
-				f->min_width -= 1;
-				ft_putchar('-');
-			}
-			s = ft_intmax_ttoa(f->zero ? f->arg.i * -1 : f->arg.i);
-			f->arg_len = (int)ft_strlen(s);
-			ft_putwhtsp(f);
-			ft_putstr(s);
-		}
+			print_idelse(f, s);
 	}
 	else
 		ft_print(f);
@@ -57,7 +47,8 @@ static void print_setlenelse(t_fmt *f, int *fin_size)
 	get_lenprint_oxXp(f, 0);
 	if (f->pos && f->arg.i > 0 && f->min_width < f->arg_len)
 		*fin_size += 1;
-	else if (f->pos && f->zero && f->min_width && !f->precision && f->min_width <= f->arg_len)
+	else if (f->pos && f->zero && f->min_width && !f->precision &&
+		f->min_width <= f->arg_len)
 		*fin_size += 1;
 	*fin_size += f->arg_len + f->width_prec_len;
 }

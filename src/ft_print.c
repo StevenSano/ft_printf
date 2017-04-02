@@ -12,6 +12,19 @@
 
 #include "ft_printf.h"
 
+void print_idelse(t_fmt *f, char *s)
+{
+	if (f->zero)
+	{
+		f->min_width -= 1;
+		ft_putchar('-');
+	}
+	s = ft_intmax_ttoa(f->zero ? f->arg.i * -1 : f->arg.i);
+	f->arg_len = (int)ft_strlen(s);
+	ft_putwhtsp(f);
+	ft_putstr(s);
+}
+
 void	setforprint(char *fmt, t_fmt *f)
 {
 	while (*fmt)
