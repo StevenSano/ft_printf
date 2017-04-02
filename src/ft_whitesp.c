@@ -64,8 +64,8 @@ static void	whtspnozero(t_fmt *f, int min_width)
 {
 	if (f->con_spec == 'p')
 		min_width -= 2 ;
-	if (f->con_spec == 'S' && f->precision &&f->min_width > f->precision )
-		min_width = f->min_width - ft_wcstrlenpr(f->arg.wct, f->precision);
+	if (f->con_spec == 'S' && f->precision &&f->min_width > f->precision)
+		min_width = f->min_width - f->precision;
 	while (min_width-- > 0)
 		ft_putchar(' ');
 	if (f->pos && !f->neg && f->arg.i >= 0 && f->con_spec != 's')

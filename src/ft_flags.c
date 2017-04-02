@@ -45,7 +45,7 @@ static void	flag_lsprint(t_fmt *f, char *fmt)
 
 	min_width = 0;
 	if (f->con_spec == 'S')
-		f->arg_len = f->precision ? f->precision : ft_wcstrlen(f->arg.wct);
+		f->arg_len = f->precision;
 	else
 		f->arg_len = f->precision ? f->precision : (int)ft_strlen(f->arg.s);
 	if (prec_set_zerostr(fmt) && f->min_width && (f->precision == f->arg_len))
