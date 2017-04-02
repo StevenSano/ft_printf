@@ -75,7 +75,7 @@ static void whtspnozero(t_fmt *f, int min_width)
 		get_lenprint_oxXp(f, 1);
 }
 
-void	ft_putWhtSp(t_fmt *f)
+void	ft_putwhtsp(t_fmt *f)
 {
 	int min_width;
 

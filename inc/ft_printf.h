@@ -83,15 +83,14 @@ void			print_widthprec(t_fmt *f);
 void			get_prec_min(t_fmt *f, char *fmt);
 unsigned long	p_prec(va_list args);
 unsigned long	u_prec(char *length_mod, va_list args);
-void			setForPrint_uox(char *fmt, t_fmt *f);
-intmax_t		D_prec(char *length_mod, va_list args);
+void			setforprint_uox(char *fmt, t_fmt *f);
 /*
 **	ft_whitesp.c«»
 */
 char			ifnumber(char c);
 size_t			prec_set_zero(char *fmt);
 size_t			ft_digitInStr(char **fmt);
-void			ft_putWhtSp(t_fmt *f);
+void			ft_putwhtsp(t_fmt *f);
 void			ft_print(t_fmt *f);
 void			setforprint(char *fmt, t_fmt *f);
 /*

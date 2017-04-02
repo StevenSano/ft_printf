@@ -21,7 +21,7 @@ void	flag_mod(char *fmt, int *fin_size, t_fmt *f)
 	if (f->neg)
 		ft_putchar('%');
 	if (f->min_width)
-		ft_putWhtSp(f);
+		ft_putwhtsp(f);
 	if (!f->neg)
 		ft_putchar('%');
 	*fin_size += f->min_width ? f->min_width : 1;

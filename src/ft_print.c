@@ -79,12 +79,12 @@ void	ft_print(t_fmt *f)
 		if ((f->con_spec == 'o' || f->con_spec == 'x' || f->con_spec == 'X'))
 			get_lenprint_oxXp(f, 1);
 		print_conversion(f);
-		ft_putWhtSp(f);
+		ft_putwhtsp(f);
 	}
 	else
 	{
 		print_noneg(f);
-		ft_putWhtSp(f);
+		ft_putwhtsp(f);
 		print_conversion(f);
 	}
 }

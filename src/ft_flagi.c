@@ -25,7 +25,7 @@ static void	print_id(t_fmt *f)
 			f->arg.i *= (f->precision) ? -1 : 1;
 			print_conversion(f);
 			f->zero = 0;
-			ft_putWhtSp(f);
+			ft_putwhtsp(f);
 		}
 		else
 		{
@@ -36,7 +36,7 @@ static void	print_id(t_fmt *f)
 			}
 			s = ft_intmax_ttoa(f->zero ? f->arg.i * -1 : f->arg.i);
 			f->arg_len = (int)ft_strlen(s);
-			ft_putWhtSp(f);
+			ft_putwhtsp(f);
 			ft_putstr(s);
 		}
 	}
@@ -97,7 +97,7 @@ static void ifsetzero(int *fin_size, t_fmt *f)
 			print_setlen(f, fin_size);
 		else
 		{
-			ft_putWhtSp(f);
+			ft_putwhtsp(f);
 			if (f->con_spec == 'o' && f->hash)
 				ft_putchar('0');
 			if (f->con_spec == 'p')
@@ -117,7 +117,7 @@ void			flag_i(va_list args, char *fmt, int *fin_size, t_fmt *f)
 		setforprint(fmt, f);
 	else if (f->con_spec == 'u' || f->con_spec == 'o' || f->con_spec == 'x' ||
 			f->con_spec == 'X' || f->con_spec == 'p')
-		setForPrint_uox(fmt, f);
+		setforprint_uox(fmt, f);
 	get_prec_min(f, fmt);
 	get_conversion(f, args);
 	if (prec_set_zero(fmt) && ((f->arg.i == 0 || f->arg.u == 0)))
