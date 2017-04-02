@@ -72,7 +72,6 @@ static void check_neg(int min_width, t_fmt *f)
 
 }
 
-
 static void elseneg(int min_width, t_fmt *f)
 {
 	if (f->pos && f->arg.i >= 0)

@@ -18,8 +18,6 @@
 # include <wchar.h>
 # include <stdint.h>
 
-# define F '%'
-
 typedef union	s_tof
 {
 	unsigned char	c;
@@ -74,7 +72,7 @@ size_t			prec_set_zerostr(char *fmt);
 void			flag_i(va_list args, char *fmt, int *fin_size, t_fmt *f);
 intmax_t		i_prec(char *length_mod, va_list args);
 void			print_setlen(t_fmt *f, int *fin_size);
-void			setforprint(char *fmt, t_fmt *f);
+
 /*
 **	ft_flagi_ut.c
 */
@@ -95,6 +93,7 @@ size_t			prec_set_zero(char *fmt);
 size_t			ft_digitInStr(char **fmt);
 void			ft_putWhtSp(t_fmt *f);
 void			ft_print(t_fmt *f);
+void			setforprint(char *fmt, t_fmt *f);
 /*
 **	ft_setAssets.c
 */

@@ -12,30 +12,6 @@
 
 #include "ft_printf.h"
 
-void	setforprint(char *fmt, t_fmt *f)
-{
-	while (*fmt)
-	{
-		if (*fmt == '-')
-			f->neg = 1;
-		else if (*fmt == ' ' && f->sp == 0)
-			f->sp = 1;
-		else if (*fmt == '+')
-			f->pos = 1;
-		else if (*fmt == '0' && !ft_isdigit(*(fmt - 1)) && *(fmt - 1) != '.')
-			f->zero = 1;
-		if (*fmt == 'h' && f->length_mod == NULL)
-			f->length_mod = (*(fmt + 1) == 'h') ? "hh" : "h";
-		if (*fmt == 'l' && f->length_mod == NULL)
-			f->length_mod = (*(fmt + 1) == 'l') ? "ll" : "l";
-		if (*fmt == 'j' && f->length_mod == NULL)
-			f->length_mod = "j";
-		if (*fmt == 'z' && f->length_mod == NULL)
-			f->length_mod = "z";
-		fmt++;
-	}
-}
-
 static void	print_id(t_fmt *f)
 {
 	char *s;
@@ -68,6 +44,24 @@ static void	print_id(t_fmt *f)
 		ft_print(f);
 }
 
+static void print_setlenelse(t_fmt *f, int *fin_size)
+{
+	if (f->con_spec == 'i' && f->sp && !f->neg && f->precision > f->min_width)
+	{
+		f->width_prec_len += 1;
+		ft_putchar(' ');
+	}
+	print_id(f);
+	f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len;
+	f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
+	get_lenprint_oxXp(f, 0);
+	if (f->pos && f->arg.i > 0 && f->min_width < f->arg_len)
+		*fin_size += 1;
+	else if (f->pos && f->zero && f->min_width && !f->precision && f->min_width <= f->arg_len)
+		*fin_size += 1;
+	*fin_size += f->arg_len + f->width_prec_len;
+}
+
 void	print_setlen(t_fmt *f, int *fin_size)
 {
 	if ((f->min_width == 0 && f->precision == 0))
@@ -87,23 +81,9 @@ void	print_setlen(t_fmt *f, int *fin_size)
 		 	f->arg_len + 2: f->arg_len;
 	}
 	else
-	{
-		if (f->con_spec == 'i' && f->sp && !f->neg && f->precision > f->min_width)
-		{
-			f->width_prec_len += 1;
-			ft_putchar(' ');
-		}
-		print_id(f);
-		f->width_prec_len = f->width_prec_len <= -1 ? 0 : f->width_prec_len;
-		f->con_spec == 'i' || f->con_spec == 'u' ? get_lenprint_iu(f) :
-		get_lenprint_oxXp(f, 0);
-		if (f->pos && f->arg.i > 0 && f->min_width < f->arg_len)
-			*fin_size += 1;
-		else if (f->pos && f->zero && f->min_width && !f->precision && f->min_width <= f->arg_len)
-			*fin_size += 1;
-		*fin_size += f->arg_len + f->width_prec_len;
-	}
+		print_setlenelse(f, fin_size);
 }
+
 static void ifsetzero(int *fin_size, t_fmt *f)
 {
 	if (f->hash && (f->con_spec != 'i' || f->con_spec != 'u') && f->arg.u != 0)
@@ -130,6 +110,7 @@ static void ifsetzero(int *fin_size, t_fmt *f)
 		}
 	}
 }
+
 void			flag_i(va_list args, char *fmt, int *fin_size, t_fmt *f)
 {
 	if (f->con_spec == 'i')

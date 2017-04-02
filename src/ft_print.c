@@ -12,6 +12,30 @@
 
 #include "ft_printf.h"
 
+void	setforprint(char *fmt, t_fmt *f)
+{
+	while (*fmt)
+	{
+		if (*fmt == '-')
+			f->neg = 1;
+		else if (*fmt == ' ' && f->sp == 0)
+			f->sp = 1;
+		else if (*fmt == '+')
+			f->pos = 1;
+		else if (*fmt == '0' && !ft_isdigit(*(fmt - 1)) && *(fmt - 1) != '.')
+			f->zero = 1;
+		if (*fmt == 'h' && f->length_mod == NULL)
+			f->length_mod = (*(fmt + 1) == 'h') ? "hh" : "h";
+		if (*fmt == 'l' && f->length_mod == NULL)
+			f->length_mod = (*(fmt + 1) == 'l') ? "ll" : "l";
+		if (*fmt == 'j' && f->length_mod == NULL)
+			f->length_mod = "j";
+		if (*fmt == 'z' && f->length_mod == NULL)
+			f->length_mod = "z";
+		fmt++;
+	}
+}
+
 static void print_noneg_ifisp(t_fmt *f)
 {
 	if (f->con_spec == 'i' && f->sp && f->zero && (f->min_width &&
