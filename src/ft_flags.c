@@ -21,6 +21,7 @@ char	*s_prec(va_list args)
 		str = "(null)";
 	return (str);
 }
+
 static int flags_lslen(t_fmt *f, char *fmt)
 {
 	if (!prec_set_zerostr(fmt) && f->con_spec == 'S' &&
@@ -36,7 +37,6 @@ static int flags_lslen(t_fmt *f, char *fmt)
 		return (f->min_width);
 	else
 		return ((f->min_width > f->precision) ? f->min_width : f->precision);
-
 }
 
 static void flag_lsprint(t_fmt *f, char *fmt)

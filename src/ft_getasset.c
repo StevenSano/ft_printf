@@ -45,11 +45,13 @@ static void get_asset_chars(const char **fmt, va_list args, int *fin_size,
 	{
 		flag_mod( ft_strndup((*fmt) - flags_len, flags_len + 1), fin_size, f);
 	}
-	else if (((**fmt == 'l' && *((*fmt) + 1) == 'c') || **fmt == 'C') || **fmt == 'c')
+	else if (((**fmt == 'l' && *((*fmt) + 1) == 'c') || **fmt == 'C') ||
+		**fmt == 'c')
 	{
 		set_lcc(fmt, f, flags_len, args, fin_size);
 	}
-	else if (((**fmt == 'l' && *((*fmt) + 1) == 's') || **fmt == 'S') || **fmt == 's')
+	else if (((**fmt == 'l' && *((*fmt) + 1) == 's') || **fmt == 'S') ||
+		**fmt == 's')
 	{
 		if (**fmt == 'l')
 		{
@@ -71,6 +73,7 @@ static char ifchar(const char **fmt)
 	else
 		return (0);
 }
+
 void	get_asset(const char **fmt, va_list args, int *fin_size)
 {
 	size_t flags_len;
